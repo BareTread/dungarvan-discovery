@@ -58,10 +58,10 @@ export function CardHand({
             className="mb-8 text-center"
           >
             <h2 className="text-2xl font-bold text-white mb-2">
-              Revealing Your Adventure...
+              ✨ Revealing Your Adventure...
             </h2>
             <p className="text-slate-400">
-              Get ready for your Dungarvan discovery!
+              Take a moment to explore your chosen discovery!
             </p>
           </motion.div>
         )}
@@ -75,45 +75,69 @@ export function CardHand({
             {/* Selected Card (Large) */}
             <motion.div
               layout
-              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-              className="mb-8"
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mb-12"
             >
-              <GameCard
-                activity={cards[selectedIndex]}
-                index={selectedIndex}
-                isFlipped={flipStates[selectedIndex]}
-                isSelected={true}
-                isHovered={false}
-                canSelect={false}
-                onSelect={() => {}}
-                onHover={() => {}}
-              />
+              <motion.div
+                initial={{ scale: 1.15 }}
+                animate={{ scale: 1.2 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <GameCard
+                  activity={cards[selectedIndex]}
+                  index={selectedIndex}
+                  isFlipped={flipStates[selectedIndex]}
+                  isSelected={true}
+                  isHovered={false}
+                  canSelect={false}
+                  onSelect={() => {}}
+                  onHover={() => {}}
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Success Message */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="text-center mb-8"
+            >
+              <h3 className="text-2xl font-bold text-white mb-2">
+                🎉 Your Adventure Awaits!
+              </h3>
+              <p className="text-slate-300 text-lg">
+                Perfect choice! Here&apos;s what you didn&apos;t pick:
+              </p>
             </motion.div>
 
             {/* Other Cards (Smaller, in a row) */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.4 }}
-              className="text-center mb-6"
+              transition={{ delay: 1, duration: 0.6 }}
+              className="text-center"
             >
-              <h3 className="text-lg font-semibold text-white mb-4">
-                What you didn&apos;t choose:
-              </h3>
-              <div className="flex gap-4 justify-center">
+              <div className="flex gap-3 justify-center flex-wrap max-w-4xl">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
-                  
+
                   return (
                     <motion.div
                       key={card.id}
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 0.6, opacity: 0.8 }}
-                      transition={{ 
-                        delay: 1 + (index * 0.1), 
-                        duration: 0.3 
+                      initial={{ scale: 0.5, opacity: 0, rotateY: 180 }}
+                      animate={{ scale: 0.65, opacity: 0.9, rotateY: 0 }}
+                      transition={{
+                        delay: 1.2 + (index * 0.15),
+                        duration: 0.5,
+                        ease: [0.25, 0.46, 0.45, 0.94]
                       }}
                       className="transform-gpu"
+                      whileHover={{
+                        scale: 0.7,
+                        opacity: 1,
+                        transition: { duration: 0.2 }
+                      }}
                     >
                       <GameCard
                         activity={card}

@@ -42,20 +42,25 @@ export function GameCard({
         className={cn(
           "relative w-64 h-80 cursor-pointer card-flip",
           isFlipped && "flipped",
-          !canSelect && "cursor-default"
+          !canSelect && "cursor-default",
+          isSelected && "z-10"
         )}
         onClick={canSelect ? onSelect : undefined}
         onMouseEnter={() => canSelect && onHover(true)}
         onMouseLeave={() => onHover(false)}
-        whileHover={canSelect ? { 
-          scale: 1.05, 
+        whileHover={canSelect ? {
+          scale: 1.05,
           y: -8,
           transition: { duration: 0.2 }
         } : {}}
         animate={{
-          scale: isSelected ? 1.1 : 1,
-          y: isSelected ? -16 : 0,
-          transition: { duration: 0.3 }
+          scale: isSelected ? 1.15 : 1,
+          y: isSelected ? -20 : 0,
+          zIndex: isSelected ? 10 : 1,
+          transition: {
+            duration: 0.4,
+            ease: [0.25, 0.46, 0.45, 0.94]
+          }
         }}
       >
         {/* Card Front (Mystery Side) */}
@@ -63,18 +68,47 @@ export function GameCard({
           "card-face rounded-xl border-2 p-6 card-glow",
           "bg-gradient-to-br from-slate-800 to-slate-900",
           "border-slate-700 shadow-2xl",
-          isHovered && "shadow-purple-500/20"
+          isHovered && "shadow-purple-500/30 border-purple-500/50",
+          isSelected && "border-yellow-400/70 shadow-yellow-400/30"
         )}>
-          <div className="flex flex-col items-center justify-center h-full text-center">
-            <div className="text-6xl mb-4">🎲</div>
-            <h3 className="text-xl font-bold text-white mb-2">
-              Mystery Adventure
+          <div className="flex flex-col items-center justify-center h-full text-center relative">
+            {isSelected && (
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-purple-500/10 rounded-lg"
+              />
+            )}
+            <motion.div
+              className="text-6xl mb-4"
+              animate={isSelected ? {
+                scale: [1, 1.2, 1],
+                rotate: [0, 10, -10, 0]
+              } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              🎲
+            </motion.div>
+            <h3 className="text-xl font-bold text-white mb-2 relative z-10">
+              {isSelected ? "✨ Chosen!" : "Mystery Adventure"}
             </h3>
-            <p className="text-slate-300 text-sm">
-              Click to reveal your<br />Dungarvan discovery
+            <p className="text-slate-300 text-sm relative z-10">
+              {isSelected ? "Revealing your discovery..." : "Click to reveal your Dungarvan discovery"}
             </p>
             <div className="absolute bottom-4 left-4 right-4">
-              <div className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60" />
+              <motion.div
+                className={cn(
+                  "h-1 rounded-full",
+                  isSelected
+                    ? "bg-gradient-to-r from-yellow-400 to-purple-500"
+                    : "bg-gradient-to-r from-purple-500 to-pink-500 opacity-60"
+                )}
+                animate={isSelected ? {
+                  opacity: [0.6, 1, 0.6],
+                  scale: [1, 1.05, 1]
+                } : {}}
+                transition={{ duration: 1, repeat: isSelected ? Infinity : 0 }}
+              />
             </div>
           </div>
         </div>

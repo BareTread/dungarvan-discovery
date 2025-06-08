@@ -110,16 +110,18 @@ export class CardDealer {
 export const cardDealer = new CardDealer();
 
 /**
- * Animation timing constants
+ * Animation timing constants - Improved for better UX
  */
 export const ANIMATION_TIMINGS = {
-  DEAL_STAGGER: 100, // ms between each card appearing
-  DEAL_DURATION: 600, // ms for each card to animate in
-  FLIP_DURATION: 600, // ms for card flip animation
-  SELECTION_DELAY: 200, // ms before starting flip sequence
-  REVEAL_STAGGER: 100, // ms between revealing other cards
-  TOTAL_DEAL_TIME: 1200, // Total time for dealing animation
-  TOTAL_REVEAL_TIME: 2000, // Total time for reveal sequence
+  DEAL_STAGGER: 150, // ms between each card appearing
+  DEAL_DURATION: 800, // ms for each card to animate in
+  FLIP_DURATION: 800, // ms for card flip animation (slower to see content)
+  SELECTION_DELAY: 300, // ms before starting flip sequence
+  REVEAL_STAGGER: 200, // ms between revealing other cards
+  PAUSE_AFTER_FLIP: 2000, // ms to pause and show selected card
+  LAYOUT_TRANSITION: 800, // ms for final layout transition
+  TOTAL_DEAL_TIME: 1500, // Total time for dealing animation
+  TOTAL_REVEAL_TIME: 4000, // Total time for reveal sequence
 } as const;
 
 /**

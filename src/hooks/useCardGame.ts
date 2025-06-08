@@ -54,6 +54,7 @@ export function useCardGame() {
   const selectCard = useCallback((index: number) => {
     if (gameState.isRevealing || gameState.selectedIndex !== null) return;
 
+    // Phase 1: Mark card as selected and start revealing
     setGameState(prev => ({
       ...prev,
       selectedIndex: index,
@@ -61,30 +62,39 @@ export function useCardGame() {
       gamePhase: 'revealing'
     }));
 
-    // Start the reveal sequence
+    // Phase 2: Flip the selected card after a brief delay
     setTimeout(() => {
-      // First flip the selected card
       setAnimationState(prev => ({
         ...prev,
         flipStates: prev.flipStates.map((state, i) => i === index ? true : state)
       }));
 
-      // Then flip the other cards with stagger
+      // Phase 3: Pause to let user see the selected card content
       setTimeout(() => {
-        setAnimationState(prev => ({
-          ...prev,
-          flipStates: prev.flipStates.map((state, i) => i === index ? state : true)
-        }));
+        // Phase 4: Flip the other cards one by one
+        const otherIndices = [0, 1, 2, 3, 4].filter(i => i !== index);
 
-        // Mark as complete
+        otherIndices.forEach((cardIndex, staggerIndex) => {
+          setTimeout(() => {
+            setAnimationState(prev => ({
+              ...prev,
+              flipStates: prev.flipStates.map((state, i) =>
+                i === cardIndex ? true : state
+              )
+            }));
+          }, staggerIndex * ANIMATION_TIMINGS.REVEAL_STAGGER);
+        });
+
+        // Phase 5: After all cards are flipped, transition to final layout
         setTimeout(() => {
           setGameState(prev => ({
             ...prev,
             isRevealing: false,
             gamePhase: 'complete'
           }));
-        }, ANIMATION_TIMINGS.FLIP_DURATION);
-      }, ANIMATION_TIMINGS.FLIP_DURATION + ANIMATION_TIMINGS.REVEAL_STAGGER);
+        }, otherIndices.length * ANIMATION_TIMINGS.REVEAL_STAGGER + ANIMATION_TIMINGS.LAYOUT_TRANSITION);
+
+      }, ANIMATION_TIMINGS.PAUSE_AFTER_FLIP);
     }, ANIMATION_TIMINGS.SELECTION_DELAY);
   }, [gameState.isRevealing, gameState.selectedIndex]);
 
