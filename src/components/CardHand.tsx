@@ -98,7 +98,7 @@ export function CardHand({
               className="text-center mb-6"
             >
               <h3 className="text-lg font-semibold text-white mb-4">
-                What you didn't choose:
+                What you didn&apos;t choose:
               </h3>
               <div className="flex gap-4 justify-center">
                 {cards.map((card, index) => {

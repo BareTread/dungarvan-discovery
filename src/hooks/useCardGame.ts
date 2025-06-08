@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import { Activity } from '@/lib/activities';
 import { cardDealer, GameState, ANIMATION_TIMINGS } from '@/lib/dealer';
 
 export function useCardGame() {

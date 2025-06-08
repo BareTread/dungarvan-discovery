@@ -19,7 +19,6 @@ interface GameCardProps {
 
 export function GameCard({
   activity,
-  index,
   isFlipped,
   isSelected,
   isHovered,

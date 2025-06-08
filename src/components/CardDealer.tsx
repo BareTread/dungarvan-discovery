@@ -16,14 +16,9 @@ export function CardDealer() {
     resetGame,
     setHoveredCard,
     canSelectCard,
-    isCardFlipped,
-    isCardHovered,
     hasCards,
     isDealing,
-    isSelecting,
-    isRevealing,
-    isComplete,
-    canDealNewHand
+    isComplete
   } = useCardGame();
 
   return (
@@ -39,7 +34,7 @@ export function CardDealer() {
           Dungarvan Discovery
         </h1>
         <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-          Discover hidden gems, local secrets, and unforgettable experiences in Ireland's Ancient East
+          Discover hidden gems, local secrets, and unforgettable experiences in Ireland&apos;s Ancient East
         </p>
       </motion.div>
 
@@ -74,7 +69,7 @@ export function CardDealer() {
                 Ready for an Adventure?
               </h2>
               <p className="text-slate-400 mb-8 max-w-md mx-auto">
-                We'll deal you 5 cards from over 60 amazing Dungarvan experiences. 
+                We&apos;ll deal you 5 cards from over 60 amazing Dungarvan experiences.
                 Choose one and let serendipity guide your day!
               </p>
               <Button
@@ -158,7 +153,7 @@ export function CardDealer() {
                 Your Adventure Awaits!
               </h3>
               <p className="text-slate-300 text-sm">
-                Ready to explore <strong>{selectedActivity.title}</strong> in {selectedActivity.location}? 
+                Ready to explore <strong>{selectedActivity.title}</strong> in {selectedActivity.location}?
                 This {selectedActivity.duration} experience is perfect for creating unforgettable memories.
               </p>
             </div>
@@ -173,7 +168,7 @@ export function CardDealer() {
         transition={{ delay: 1, duration: 0.5 }}
         className="mt-12 text-center text-slate-500 text-sm"
       >
-        <p>Discover the magic of Dungarvan • Ireland's Ancient East</p>
+        <p>Discover the magic of Dungarvan • Ireland&apos;s Ancient East</p>
       </motion.div>
     </div>
   );
