@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Activity } from '@/lib/activities';
 import { getCategoryColor, formatDuration, getTimeEmoji, getDifficultyEmoji } from '@/lib/dealer';
@@ -40,37 +41,49 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-64 h-80 cursor-pointer card-flip",
-          isFlipped && "flipped",
+          "relative w-64 h-80 cursor-pointer",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}
         onClick={canSelect ? onSelect : undefined}
-        onMouseEnter={() => canSelect && onHover(true)}
+        onMouseEnter={() => canSelect && !isFlipped && onHover(true)}
         onMouseLeave={() => onHover(false)}
-        whileHover={canSelect ? {
+        style={{
+          transformStyle: 'preserve-3d',
+          perspective: '1000px'
+        }}
+        animate={{
+          scale: isSelected ? 1.15 : 1,
+          y: isSelected ? -20 : 0,
+          rotateY: isFlipped ? 180 : 0,
+          zIndex: isSelected ? 10 : 1
+        }}
+        transition={{
+          scale: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+          y: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+          rotateY: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
+          zIndex: { duration: 0 }
+        }}
+        whileHover={canSelect && !isFlipped ? {
           scale: 1.05,
           y: -8,
           transition: { duration: 0.2 }
         } : {}}
-        animate={{
-          scale: isSelected ? 1.15 : 1,
-          y: isSelected ? -20 : 0,
-          zIndex: isSelected ? 10 : 1,
-          transition: {
-            duration: 0.4,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }
-        }}
       >
         {/* Card Front (Mystery Side) */}
-        <div className={cn(
-          "card-face rounded-xl border-2 p-6 card-glow",
-          "bg-gradient-to-br from-slate-800 to-slate-900",
-          "border-slate-700 shadow-2xl",
-          isHovered && "shadow-purple-500/30 border-purple-500/50",
-          isSelected && "border-yellow-400/70 shadow-yellow-400/30"
-        )}>
+        <div
+          className={cn(
+            "absolute inset-0 rounded-xl border-2 p-6 card-glow",
+            "bg-gradient-to-br from-slate-800 to-slate-900",
+            "border-slate-700 shadow-2xl",
+            isHovered && "shadow-purple-500/30 border-purple-500/50",
+            isSelected && "border-yellow-400/70 shadow-yellow-400/30"
+          )}
+          style={{
+            backfaceVisibility: 'hidden',
+            transform: 'rotateY(0deg)'
+          }}
+        >
           <div className="flex flex-col items-center justify-center h-full text-center relative">
             {isSelected && (
               <motion.div
@@ -114,12 +127,18 @@ export function GameCard({
         </div>
 
         {/* Card Back (Activity Details) */}
-        <div className={cn(
-          "card-face card-back rounded-xl border-2 p-6",
-          "bg-gradient-to-br",
-          getCategoryColor(activity.category),
-          "border-white/20 shadow-2xl text-white"
-        )}>
+        <div
+          className={cn(
+            "absolute inset-0 rounded-xl border-2 p-6",
+            "bg-gradient-to-br",
+            getCategoryColor(activity.category),
+            "border-white/20 shadow-2xl text-white"
+          )}
+          style={{
+            backfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)'
+          }}
+        >
           <div className="flex flex-col h-full">
             {/* Header */}
             <div className="flex items-start justify-between mb-4">

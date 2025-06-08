@@ -39,13 +39,19 @@ body {
   overflow-x: hidden;
 }
 
-/* Card flip animation - Improved */
+/* Card flip animation - Fixed */
 .card-flip {
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   perspective: 1000px;
+  will-change: transform;
 }
 
+/* Only apply flip transition when flipping */
+.card-flip.flipping {
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Flipped state - stays flipped */
 .card-flip.flipped {
   transform: rotateY(180deg);
 }
@@ -56,19 +62,16 @@ body {
   inset: 0;
   border-radius: inherit;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .card-back {
   transform: rotateY(180deg);
 }
 
-/* Smooth scale transitions */
-.card-flip {
-  will-change: transform;
-}
-
-/* Enhanced hover effects */
-.card-flip:not(.flipped):hover {
+/* Enhanced hover effects - only when not flipped */
+.card-flip:not(.flipped):not(.flipping):hover {
   transform: translateY(-4px) scale(1.02);
   transition: transform 0.2s ease-out;
 }
