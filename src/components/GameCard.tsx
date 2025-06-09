@@ -429,7 +429,7 @@ export function GameCard({
 
             {/* Description */}
             <motion.p
-              className="text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 flex-grow relative z-10 opacity-95"
+              className="text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 relative z-10 opacity-95 line-clamp-3"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
@@ -466,7 +466,7 @@ export function GameCard({
                   <div className="text-xs font-bold text-yellow-300 mb-1 sm:mb-2 tracking-wide uppercase">
                     Local Secret
                   </div>
-                  <p className="text-xs leading-relaxed text-white/95 font-medium">
+                  <p className="text-xs leading-relaxed text-white/95 font-medium line-clamp-2">
                     {activity.localSecret}
                   </p>
                 </div>
