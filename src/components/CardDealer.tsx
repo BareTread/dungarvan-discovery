@@ -59,10 +59,10 @@ export function CardDealer() {
           ease: [0.175, 0.885, 0.32, 1.275],
           filter: { duration: 0.8 }
         }}
-        className="text-center mb-8 md:mb-12 relative z-10"
+        className="text-center mb-6 md:mb-10 lg:mb-12 relative z-10"
       >
         <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-5 lg:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative"
           animate={{
             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
           }}
@@ -93,7 +93,7 @@ export function CardDealer() {
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed px-4"
+          className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
@@ -126,12 +126,12 @@ export function CardDealer() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="text-8xl mb-8 relative"
+                className="text-6xl sm:text-7xl md:text-8xl mb-6 md:mb-8 relative"
               >
                 🎴
                 {/* Card glow effect */}
                 <motion.div
-                  className="absolute inset-0 text-8xl blur-xl opacity-30"
+                  className="absolute inset-0 text-6xl sm:text-7xl md:text-8xl blur-xl opacity-30"
                   animate={{
                     scale: [1, 1.2, 1],
                     opacity: [0.3, 0.6, 0.3]
@@ -147,7 +147,7 @@ export function CardDealer() {
               </motion.div>
 
               <motion.h2
-                className="text-3xl md:text-4xl font-bold text-white mb-6"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
@@ -156,7 +156,7 @@ export function CardDealer() {
               </motion.h2>
 
               <motion.p
-                className="text-slate-400 mb-8 max-w-md mx-auto leading-relaxed text-lg"
+                className="text-slate-400 mb-6 md:mb-8 max-w-md mx-auto leading-relaxed text-base sm:text-lg px-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
@@ -174,7 +174,7 @@ export function CardDealer() {
                   onClick={dealNewHand}
                   disabled={isDealing}
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-700 hover:via-purple-800 hover:to-pink-700 text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group"
+                  className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-700 hover:via-purple-800 hover:to-pink-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group"
                   aria-label={isDealing ? 'Dealing cards, please wait' : 'Deal 5 random adventure cards'}
                 >
                   {/* Button shimmer effect */}

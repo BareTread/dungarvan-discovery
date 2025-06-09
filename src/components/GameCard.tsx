@@ -57,7 +57,7 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 cursor-pointer focus-ring",
+          "relative w-44 h-60 sm:w-52 sm:h-68 md:w-64 md:h-80 cursor-pointer focus-ring",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}
@@ -228,7 +228,7 @@ export function GameCard({
           /* Card Front (Mystery Side) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 p-6 card-glow",
+              "absolute inset-0 rounded-xl border-2 p-3 sm:p-4 md:p-5 lg:p-6 card-glow",
               "bg-gradient-to-br from-slate-800/95 via-slate-850/95 to-slate-900/95",
               "backdrop-blur-sm border-slate-700/80",
               "transition-all duration-500 ease-out",
@@ -272,7 +272,7 @@ export function GameCard({
             )}
 
             <motion.div
-              className="text-4xl sm:text-5xl md:text-6xl mb-3 md:mb-4 relative z-10"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 md:mb-4 relative z-10"
               animate={isSelected ? {
                 scale: [1, 1.3, 1.1],
                 rotate: [0, 15, -10, 5, 0],
@@ -290,7 +290,7 @@ export function GameCard({
             </motion.div>
 
             <motion.h3
-              className="text-lg sm:text-xl font-bold text-white mb-2 relative z-10"
+              className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 relative z-10"
               animate={isSelected ? {
                 scale: [1, 1.05, 1],
                 y: [0, -2, 0]
@@ -301,7 +301,7 @@ export function GameCard({
             </motion.h3>
 
             <motion.p
-              className="text-slate-300 text-xs sm:text-sm relative z-10 leading-relaxed px-2 sm:px-0"
+              className="text-slate-300 text-xs sm:text-sm relative z-10 leading-relaxed px-1 sm:px-0"
               animate={isSelected ? {
                 opacity: [0.7, 1, 0.9],
                 y: [0, -1, 0]
@@ -312,10 +312,10 @@ export function GameCard({
             </motion.p>
 
             {/* Enhanced progress indicator */}
-            <div className="absolute bottom-4 left-4 right-4">
+            <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
               <motion.div
                 className={cn(
-                  "h-1.5 rounded-full relative overflow-hidden",
+                  "h-1 sm:h-1.5 rounded-full relative overflow-hidden",
                   isSelected
                     ? "bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500"
                     : "bg-gradient-to-r from-purple-500 to-pink-500 opacity-60"
@@ -351,7 +351,7 @@ export function GameCard({
           /* Card Back (Activity Details) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 p-4 sm:p-5 md:p-6",
+              "absolute inset-0 rounded-xl border-2 p-3 sm:p-4 md:p-5 lg:p-6",
               "bg-gradient-to-br backdrop-blur-sm",
               getCategoryColor(activity.category),
               "border-white/30 shadow-2xl text-white",
@@ -370,13 +370,13 @@ export function GameCard({
 
             {/* Header */}
             <motion.div
-              className="flex items-start justify-between mb-4 relative z-10"
+              className="flex items-start justify-between mb-2 sm:mb-3 md:mb-4 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <motion.div
-                className="text-3xl sm:text-4xl"
+                className="text-2xl sm:text-3xl md:text-4xl"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.2 }}
               >
@@ -384,14 +384,14 @@ export function GameCard({
               </motion.div>
               <div className="flex gap-2">
                 <motion.span
-                  className="text-xs bg-white/25 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20 font-medium"
+                  className="text-xs bg-white/25 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 font-medium"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
                   {getTimeEmoji(activity.bestTime)}
                 </motion.span>
                 <motion.span
-                  className="text-xs bg-white/25 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20 font-medium"
+                  className="text-xs bg-white/25 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 font-medium"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -402,7 +402,7 @@ export function GameCard({
 
             {/* Title */}
             <motion.h3
-              className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 leading-tight relative z-10"
+              className="text-base sm:text-lg md:text-xl font-bold mb-2 leading-tight relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -412,16 +412,16 @@ export function GameCard({
 
             {/* Location & Duration */}
             <motion.div
-              className="text-xs sm:text-sm opacity-90 mb-3 sm:mb-4 space-y-1.5 sm:space-y-2 relative z-10"
+              className="text-xs sm:text-sm opacity-90 mb-2 sm:mb-3 space-y-1 sm:space-y-1.5 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2 backdrop-blur-sm">
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 backdrop-blur-sm">
                 <span className="text-base">📍</span>
                 <span className="font-medium">{activity.location}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2 backdrop-blur-sm">
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 backdrop-blur-sm">
                 <span className="text-base">⏱️</span>
                 <span className="font-medium">{formatDuration(activity.duration)}</span>
               </div>
@@ -429,7 +429,7 @@ export function GameCard({
 
             {/* Description */}
             <motion.p
-              className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 flex-grow relative z-10 opacity-95"
+              className="text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 flex-grow relative z-10 opacity-95"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
@@ -439,7 +439,7 @@ export function GameCard({
 
             {/* Enhanced Local Secret */}
             <motion.div
-              className="bg-gradient-to-r from-white/15 to-white/10 rounded-xl p-3 sm:p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden"
+              className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
@@ -447,9 +447,9 @@ export function GameCard({
               {/* Subtle glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-xl" />
 
-              <div className="flex items-start gap-3 relative z-10">
+              <div className="flex items-start gap-2 sm:gap-3 relative z-10">
                 <motion.span
-                  className="text-yellow-300 text-lg mt-0.5"
+                  className="text-yellow-300 text-base sm:text-lg mt-0.5"
                   animate={{
                     rotate: [0, 10, -10, 0],
                     scale: [1, 1.1, 1]
@@ -463,7 +463,7 @@ export function GameCard({
                   💡
                 </motion.span>
                 <div className="flex-1">
-                  <div className="text-xs font-bold text-yellow-300 mb-2 tracking-wide uppercase">
+                  <div className="text-xs font-bold text-yellow-300 mb-1 sm:mb-2 tracking-wide uppercase">
                     Local Secret
                   </div>
                   <p className="text-xs leading-relaxed text-white/95 font-medium">

@@ -108,11 +108,11 @@ export function CardHand({
             <motion.div
               layout
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-6 md:mb-8"
+              className="mb-4 md:mb-6"
             >
               <motion.div
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1.05 }}
+                initial={{ scale: 1.05 }}
+                animate={{ scale: 1.0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <GameCard
@@ -137,10 +137,10 @@ export function CardHand({
                 duration: 0.8,
                 ease: [0.175, 0.885, 0.32, 1.275]
               }}
-              className="text-center mb-6 md:mb-8 z-10 relative px-4"
+              className="text-center mb-4 md:mb-6 z-10 relative px-4"
             >
               <motion.h3
-                className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-3"
+                className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2"
                 animate={{
                   scale: [1, 1.02, 1],
                   textShadow: [
@@ -163,7 +163,7 @@ export function CardHand({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
               >
-                Perfect choice! Here&apos;s what you didn&apos;t pick:
+                Here&apos;s what you didn&apos;t choose:
               </motion.p>
             </motion.div>
 
@@ -172,9 +172,9 @@ export function CardHand({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
-              className="text-center w-full"
+              className="text-center w-full px-2"
             >
-              <div className="flex gap-2 md:gap-4 justify-center flex-wrap max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-1.5 sm:gap-2 md:gap-3 justify-center max-w-6xl mx-auto">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -189,7 +189,7 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 0.5,
+                        scale: 0.4,
                         opacity: 0.9,
                         rotateY: 0,
                         y: 0,
@@ -203,7 +203,7 @@ export function CardHand({
                       }}
                       className="transform-gpu"
                       whileHover={{
-                        scale: 0.55,
+                        scale: 0.45,
                         opacity: 1,
                         y: -4,
                         rotateX: 2,
@@ -232,7 +232,7 @@ export function CardHand({
         ) : (
           // Enhanced Initial Layout: 5 cards in a row
           <motion.div
-            className="flex gap-3 md:gap-6 justify-center flex-wrap max-w-7xl mx-auto"
+            className="flex gap-2 sm:gap-4 md:gap-6 justify-center flex-wrap max-w-7xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
