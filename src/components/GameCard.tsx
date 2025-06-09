@@ -28,8 +28,8 @@ export function GameCard({
   onHover,
   delay = 0
 }: GameCardProps) {
-  // Debug logging
-  console.log(`Card ${activity.id}: isFlipped=${isFlipped}, isSelected=${isSelected}`);
+  // Force flip for testing - remove this later
+  const forceFlipped = isSelected;
   return (
     <motion.div
       initial={{
@@ -61,14 +61,14 @@ export function GameCard({
           isSelected && "z-10"
         )}
         onClick={canSelect ? onSelect : undefined}
-        onMouseEnter={() => canSelect && !isFlipped && onHover(true)}
+        onMouseEnter={() => canSelect && !forceFlipped && onHover(true)}
         onMouseLeave={() => onHover(false)}
         role={canSelect ? "button" : "img"}
         tabIndex={canSelect ? 0 : -1}
         aria-label={
           canSelect
             ? `Select mystery adventure card ${activity.id}`
-            : isFlipped
+            : forceFlipped
               ? `${activity.title} in ${activity.location}. Duration: ${activity.duration}. ${activity.description}`
               : "Mystery adventure card"
         }
@@ -79,12 +79,13 @@ export function GameCard({
           }
         }}
         style={{
-          transformStyle: 'preserve-3d'
+          transformStyle: 'preserve-3d',
+          perspective: '1000px'
         }}
         animate={{
           scale: isSelected ? 1.15 : 1,
           y: isSelected ? -24 : 0,
-          rotateY: isFlipped ? 180 : 0,
+          rotateY: forceFlipped ? 180 : 0,
           rotateX: isSelected ? -2 : 0,
           zIndex: isSelected ? 10 : 1,
           filter: isSelected ? "brightness(1.1)" : "brightness(1)"
@@ -132,21 +133,20 @@ export function GameCard({
           transition: { duration: 0.1 }
         } : {}}
       >
-        {/* Card Front (Mystery Side) */}
-        <div
-          className={cn(
-            "absolute inset-0 rounded-xl border-2 p-6 card-glow",
-            "bg-gradient-to-br from-slate-800/95 via-slate-850/95 to-slate-900/95",
-            "backdrop-blur-sm border-slate-700/80",
-            "transition-all duration-500 ease-out",
-            isHovered && !isSelected && "shadow-elegant-hover border-purple-500/60 bg-gradient-to-br from-slate-800/98 via-slate-850/98 to-slate-900/98",
-            isSelected && "shadow-elegant-selected border-yellow-400/80 bg-gradient-to-br from-slate-800 via-slate-850 to-slate-900",
-            !isHovered && !isSelected && "shadow-elegant"
-          )}
-          style={{
-            backfaceVisibility: 'hidden'
-          }}
-        >
+        {/* Conditional rendering based on flip state */}
+        {!forceFlipped ? (
+          /* Card Front (Mystery Side) */
+          <div
+            className={cn(
+              "absolute inset-0 rounded-xl border-2 p-6 card-glow",
+              "bg-gradient-to-br from-slate-800/95 via-slate-850/95 to-slate-900/95",
+              "backdrop-blur-sm border-slate-700/80",
+              "transition-all duration-500 ease-out",
+              isHovered && !isSelected && "shadow-elegant-hover border-purple-500/60 bg-gradient-to-br from-slate-800/98 via-slate-850/98 to-slate-900/98",
+              isSelected && "shadow-elegant-selected border-yellow-400/80 bg-gradient-to-br from-slate-800 via-slate-850 to-slate-900",
+              !isHovered && !isSelected && "shadow-elegant"
+            )}
+          >
           <div className="flex flex-col items-center justify-center h-full text-center relative overflow-hidden">
             {/* Animated background effects */}
             {isSelected && (
@@ -257,22 +257,18 @@ export function GameCard({
             </div>
           </div>
         </div>
-
-        {/* Card Back (Activity Details) */}
-        <div
-          className={cn(
-            "absolute inset-0 rounded-xl border-2 p-6",
-            "bg-gradient-to-br backdrop-blur-sm",
-            getCategoryColor(activity.category),
-            "border-white/30 shadow-2xl text-white",
-            "focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2",
-            "transition-all duration-300"
-          )}
-          style={{
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)'
-          }}
-        >
+        ) : (
+          /* Card Back (Activity Details) */
+          <div
+            className={cn(
+              "absolute inset-0 rounded-xl border-2 p-6",
+              "bg-gradient-to-br backdrop-blur-sm",
+              getCategoryColor(activity.category),
+              "border-white/30 shadow-2xl text-white",
+              "focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2",
+              "transition-all duration-300"
+            )}
+          >
           <div className="flex flex-col h-full relative overflow-hidden">
             {/* Subtle background pattern */}
             <div className="absolute inset-0 opacity-5">
@@ -391,6 +387,7 @@ export function GameCard({
             </motion.div>
           </div>
         </div>
+        )}
       </motion.div>
     </motion.div>
   );

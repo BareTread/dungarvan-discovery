@@ -54,7 +54,7 @@ export function useCardGame() {
   const selectCard = useCallback((index: number) => {
     if (gameState.isRevealing || gameState.selectedIndex !== null) return;
 
-    // Phase 1: Mark card as selected and start revealing
+    // Phase 1: Mark card as selected, start revealing, and flip immediately
     setGameState(prev => ({
       ...prev,
       selectedIndex: index,
@@ -62,40 +62,38 @@ export function useCardGame() {
       gamePhase: 'revealing'
     }));
 
-    // Phase 2: Flip the selected card after a brief delay
+    // Phase 2: Flip the selected card immediately (no delay)
+    setAnimationState(prev => ({
+      ...prev,
+      flipStates: prev.flipStates.map((state, i) => i === index ? true : state)
+    }));
+
+    // Phase 3: Pause to let user see the selected card content
     setTimeout(() => {
-      setAnimationState(prev => ({
-        ...prev,
-        flipStates: prev.flipStates.map((state, i) => i === index ? true : state)
-      }));
+      // Phase 4: Flip the other cards one by one
+      const otherIndices = [0, 1, 2, 3, 4].filter(i => i !== index);
 
-      // Phase 3: Pause to let user see the selected card content
-      setTimeout(() => {
-        // Phase 4: Flip the other cards one by one
-        const otherIndices = [0, 1, 2, 3, 4].filter(i => i !== index);
-
-        otherIndices.forEach((cardIndex, staggerIndex) => {
-          setTimeout(() => {
-            setAnimationState(prev => ({
-              ...prev,
-              flipStates: prev.flipStates.map((state, i) =>
-                i === cardIndex ? true : state
-              )
-            }));
-          }, staggerIndex * ANIMATION_TIMINGS.REVEAL_STAGGER);
-        });
-
-        // Phase 5: After all cards are flipped, transition to final layout
+      otherIndices.forEach((cardIndex, staggerIndex) => {
         setTimeout(() => {
-          setGameState(prev => ({
+          setAnimationState(prev => ({
             ...prev,
-            isRevealing: false,
-            gamePhase: 'complete'
+            flipStates: prev.flipStates.map((state, i) =>
+              i === cardIndex ? true : state
+            )
           }));
-        }, otherIndices.length * ANIMATION_TIMINGS.REVEAL_STAGGER + ANIMATION_TIMINGS.LAYOUT_TRANSITION);
+        }, staggerIndex * ANIMATION_TIMINGS.REVEAL_STAGGER);
+      });
 
-      }, ANIMATION_TIMINGS.PAUSE_AFTER_FLIP);
-    }, ANIMATION_TIMINGS.SELECTION_DELAY);
+      // Phase 5: After all cards are flipped, transition to final layout
+      setTimeout(() => {
+        setGameState(prev => ({
+          ...prev,
+          isRevealing: false,
+          gamePhase: 'complete'
+        }));
+      }, otherIndices.length * ANIMATION_TIMINGS.REVEAL_STAGGER + ANIMATION_TIMINGS.LAYOUT_TRANSITION);
+
+    }, ANIMATION_TIMINGS.PAUSE_AFTER_FLIP);
   }, [gameState.isRevealing, gameState.selectedIndex]);
 
   /**
