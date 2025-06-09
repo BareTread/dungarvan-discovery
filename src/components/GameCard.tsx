@@ -58,7 +58,7 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-52 h-72 sm:w-60 sm:h-80 md:w-72 md:h-96 cursor-pointer focus-ring",
+          "relative w-52 h-80 sm:w-60 sm:h-88 md:w-72 md:h-104 cursor-pointer focus-ring",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}
@@ -361,13 +361,16 @@ export function GameCard({
             )}
           >
           <div className="flex flex-col h-full relative overflow-hidden">
-            {/* Subtle background pattern */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute inset-0" style={{
-                backgroundImage: `radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                                 radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)`
-              }} />
-            </div>
+            {/* Scrollable content area */}
+            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
+                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              {/* Subtle background pattern */}
+              <div className="absolute inset-0 opacity-5">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                                   radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)`
+                }} />
+              </div>
 
             {/* Header */}
             <motion.div
@@ -515,6 +518,7 @@ export function GameCard({
               {/* Decorative corner accent */}
               <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-yellow-400/20 to-transparent rounded-bl-xl" />
             </motion.div>
+            </div>
           </div>
         </div>
         )}
