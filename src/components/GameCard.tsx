@@ -58,7 +58,7 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-44 h-60 sm:w-52 sm:h-68 md:w-64 md:h-80 cursor-pointer focus-ring",
+          "relative w-52 h-72 sm:w-60 sm:h-80 md:w-72 md:h-96 cursor-pointer focus-ring",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}
@@ -352,7 +352,7 @@ export function GameCard({
           /* Card Back (Activity Details) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 p-3 sm:p-4 md:p-5 lg:p-6",
+              "absolute inset-0 rounded-xl border-2 p-4 sm:p-5 md:p-6 lg:p-7",
               "bg-gradient-to-br backdrop-blur-sm",
               getCategoryColor(activity.category),
               "border-white/30 shadow-2xl text-white",
@@ -371,7 +371,7 @@ export function GameCard({
 
             {/* Header */}
             <motion.div
-              className="flex items-start justify-between mb-2 sm:mb-3 md:mb-4 relative z-10"
+              className="flex items-start justify-between mb-3 sm:mb-4 md:mb-5 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -416,7 +416,7 @@ export function GameCard({
 
             {/* Title */}
             <motion.h3
-              className="text-base sm:text-lg md:text-xl font-bold mb-2 leading-tight relative z-10"
+              className="text-base sm:text-lg md:text-xl font-bold mb-3 leading-tight relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -426,7 +426,7 @@ export function GameCard({
 
             {/* Location & Duration */}
             <motion.div
-              className="text-xs sm:text-sm opacity-90 mb-2 sm:mb-3 space-y-1 sm:space-y-1.5 relative z-10"
+              className="text-xs sm:text-sm opacity-90 mb-3 sm:mb-4 space-y-1.5 sm:space-y-2 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -443,7 +443,7 @@ export function GameCard({
 
             {/* Description */}
             <motion.p
-              className="text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 relative z-10 opacity-95 line-clamp-3"
+              className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 relative z-10 opacity-95"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
@@ -493,9 +493,7 @@ export function GameCard({
                     </motion.span>
                   </div>
                   <motion.p
-                    className={`text-xs leading-relaxed text-white/95 font-medium ${
-                      isSecretExpanded ? '' : 'line-clamp-2'
-                    }`}
+                    className="text-xs leading-relaxed text-white/95 font-medium"
                     animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
                     transition={{ duration: 0.3 }}
                   >

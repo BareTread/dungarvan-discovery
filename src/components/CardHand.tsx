@@ -189,7 +189,7 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 0.55,
+                        scale: 0.65,
                         opacity: 0.95,
                         rotateY: 0,
                         y: 0,
@@ -203,7 +203,7 @@ export function CardHand({
                       }}
                       className="transform-gpu"
                       whileHover={{
-                        scale: 0.65,
+                        scale: 0.75,
                         opacity: 1,
                         y: -8,
                         rotateX: 3,
