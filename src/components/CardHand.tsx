@@ -167,14 +167,14 @@ export function CardHand({
               </motion.p>
             </motion.div>
 
-            {/* Other Cards (Smaller, in a row) */}
+            {/* Other Cards (Smaller, in a compact horizontal row) */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
               className="text-center w-full px-2"
             >
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-2 sm:gap-3 md:gap-4 justify-center max-w-6xl mx-auto">
+              <div className="flex gap-1 sm:gap-2 justify-center max-w-4xl mx-auto overflow-x-auto scrollbar-hide">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -189,24 +189,24 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 0.65,
-                        opacity: 0.95,
+                        scale: 0.5, // Even smaller for more compact layout
+                        opacity: 0.9,
                         rotateY: 0,
                         y: 0,
                         filter: "blur(0px)"
                       }}
                       transition={{
-                        delay: 1.2 + (index * 0.15),
+                        delay: 1.2 + (index * 0.1),
                         duration: 0.8,
                         ease: [0.175, 0.885, 0.32, 1.275],
                         filter: { duration: 0.6 }
                       }}
-                      className="transform-gpu"
+                      className="transform-gpu flex-shrink-0"
                       whileHover={{
-                        scale: 0.75,
+                        scale: 0.6,
                         opacity: 1,
-                        y: -8,
-                        rotateX: 3,
+                        y: -12,
+                        rotateX: 5,
                         filter: "brightness(1.1) saturate(1.1)",
                         transition: {
                           duration: 0.3,
@@ -231,61 +231,74 @@ export function CardHand({
             </motion.div>
           </div>
         ) : (
-          // Enhanced Initial Layout: 5 cards with much tighter spacing
+          // Enhanced Initial Layout: 5 cards in tight horizontal fan
           <motion.div
-            className="flex justify-center items-center max-w-6xl mx-auto px-1 sm:px-2"
-            style={{
-              gap: 'clamp(-2rem, -3vw, -1rem)', // Negative gap for overlapping
-            }}
+            className="flex justify-center items-center max-w-5xl mx-auto px-2 sm:px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {cards.map((card, index) => (
-              <motion.div
-                key={card.id}
-                className="relative"
-                style={{
-                  zIndex: cards.length - index, // Stack cards with proper z-index
-                  marginLeft: index > 0 ? 'clamp(-8rem, -12vw, -6rem)' : '0', // Overlap cards significantly
-                }}
-                initial={{
-                  opacity: 0,
-                  scale: 0.7,
-                  x: index * 20,
-                  rotateY: -15
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  x: 0,
-                  rotateY: 0
-                }}
-                transition={{
-                  delay: index * 0.1,
-                  duration: 0.6,
-                  ease: [0.175, 0.885, 0.32, 1.275]
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  zIndex: 50,
-                  x: index === 0 ? 10 : index === cards.length - 1 ? -10 : 0,
-                  transition: { duration: 0.2 }
-                }}
-              >
-                <GameCard
-                  activity={card}
-                  index={index}
-                  isFlipped={flipStates[index]}
-                  isSelected={selectedIndex === index}
-                  isHovered={hoveredIndex === index}
-                  canSelect={canSelectCard(index)}
-                  onSelect={() => onSelectCard(index)}
-                  onHover={(hovered) => onHoverCard(hovered ? index : null)}
-                  delay={index * ANIMATION_TIMINGS.DEAL_STAGGER / 1000}
-                />
-              </motion.div>
-            ))}
+            <div className="relative flex items-center justify-center">
+              {cards.map((card, index) => {
+                // Calculate fan positioning
+                const totalCards = cards.length;
+                const centerIndex = Math.floor(totalCards / 2);
+                const offsetFromCenter = index - centerIndex;
+
+                // Tighter spacing and rotation for fan effect
+                const xOffset = offsetFromCenter * 45; // Much closer horizontal spacing
+                const rotation = offsetFromCenter * 8; // Subtle rotation for fan effect
+                const zIndex = totalCards - Math.abs(offsetFromCenter); // Center cards higher
+
+                return (
+                  <motion.div
+                    key={card.id}
+                    className="absolute"
+                    style={{
+                      zIndex: zIndex,
+                    }}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.8,
+                      x: index * 100,
+                      y: 50,
+                      rotate: 0
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: 0.85, // Slightly smaller for tighter fit
+                      x: xOffset,
+                      y: Math.abs(offsetFromCenter) * 5, // Slight vertical offset for depth
+                      rotate: rotation
+                    }}
+                    transition={{
+                      delay: index * 0.1,
+                      duration: 0.8,
+                      ease: [0.175, 0.885, 0.32, 1.275]
+                    }}
+                    whileHover={{
+                      scale: 1.0,
+                      zIndex: 50,
+                      y: -20,
+                      rotate: 0,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    <GameCard
+                      activity={card}
+                      index={index}
+                      isFlipped={flipStates[index]}
+                      isSelected={selectedIndex === index}
+                      isHovered={hoveredIndex === index}
+                      canSelect={canSelectCard(index)}
+                      onSelect={() => onSelectCard(index)}
+                      onHover={(hovered) => onHoverCard(hovered ? index : null)}
+                      delay={index * ANIMATION_TIMINGS.DEAL_STAGGER / 1000}
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
           </motion.div>
         )}
       </div>

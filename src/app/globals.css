@@ -39,11 +39,11 @@
   --spacing-card-gap: clamp(0.125rem, 0.5vw, 0.375rem);
   --spacing-section-gap: clamp(0.25rem, 1vw, 0.5rem);
 
-  /* Enhanced Card Dimensions - More Compact */
-  --card-width-sm: clamp(11rem, 28vw, 13rem);
-  --card-height-sm: clamp(16rem, 42vw, 20rem);
-  --card-width-md: clamp(13rem, 32vw, 16rem);
-  --card-height-md: clamp(20rem, 48vw, 24rem);
+  /* Enhanced Card Dimensions - More Compact and Mobile Optimized */
+  --card-width-sm: clamp(9rem, 24vw, 11rem);
+  --card-height-sm: clamp(14rem, 36vw, 17rem);
+  --card-width-md: clamp(11rem, 28vw, 14rem);
+  --card-height-md: clamp(17rem, 42vw, 21rem);
 
   /* Animation easing curves */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
