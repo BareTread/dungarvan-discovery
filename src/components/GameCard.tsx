@@ -32,6 +32,7 @@ export function GameCard({
   // Show activity details when flipped (either selected or revealed)
   const showActivityDetails = isFlipped;
   const [isSecretExpanded, setIsSecretExpanded] = React.useState(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = React.useState(false);
   return (
     <motion.div
       initial={{
@@ -58,7 +59,7 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-52 h-80 sm:w-60 sm:h-88 md:w-72 md:h-104 cursor-pointer focus-ring",
+          "relative w-52 h-80 sm:w-60 sm:h-96 md:w-72 md:h-[28rem] cursor-pointer focus-ring",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}
@@ -352,7 +353,7 @@ export function GameCard({
           /* Card Back (Activity Details) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 p-4 sm:p-5 md:p-6 lg:p-7",
+              "absolute inset-0 rounded-xl border-2 p-3 sm:p-4 md:p-5",
               "bg-gradient-to-br backdrop-blur-sm",
               getCategoryColor(activity.category),
               "border-white/30 shadow-2xl text-white",
@@ -361,41 +362,41 @@ export function GameCard({
             )}
           >
           <div className="flex flex-col h-full relative overflow-hidden">
-            {/* Scrollable content area */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
+            {/* Scrollable content area with improved spacing */}
+            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide space-y-2 sm:space-y-3"
                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               {/* Subtle background pattern */}
-              <div className="absolute inset-0 opacity-5">
+              <div className="absolute inset-0 opacity-5 pointer-events-none">
                 <div className="absolute inset-0" style={{
                   backgroundImage: `radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
                                    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)`
                 }} />
               </div>
 
-            {/* Header */}
+            {/* Compact Header */}
             <motion.div
-              className="flex items-start justify-between mb-3 sm:mb-4 md:mb-5 relative z-10"
+              className="flex items-start justify-between mb-2 sm:mb-3 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <motion.div
-                className="text-2xl sm:text-3xl md:text-4xl"
+                className="text-xl sm:text-2xl md:text-3xl flex-shrink-0"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.2 }}
               >
                 {activity.emoji}
               </motion.div>
-              <div className="flex gap-2">
+              <div className="flex gap-1 sm:gap-1.5 flex-wrap">
                 <motion.span
-                  className="text-xs bg-white/25 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 font-medium"
+                  className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
                   {getTimeEmoji(activity.bestTime)}
                 </motion.span>
                 <motion.span
-                  className="text-xs bg-white/25 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 font-medium"
+                  className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -403,7 +404,7 @@ export function GameCard({
                 </motion.span>
                 {activity.cost && (
                   <motion.span
-                    className={`text-xs backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border font-medium ${
+                    className={`text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-medium leading-tight ${
                       activity.cost === 'free'
                         ? 'bg-green-500/25 border-green-400/30 text-green-200'
                         : 'bg-white/25 border-white/20'
@@ -417,9 +418,9 @@ export function GameCard({
               </div>
             </motion.div>
 
-            {/* Title */}
+            {/* Compact Title */}
             <motion.h3
-              className="text-base sm:text-lg md:text-xl font-bold mb-3 leading-tight relative z-10"
+              className="text-responsive-sm font-bold mb-2 leading-tight relative z-10 line-clamp-2 card-text-compact"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -427,49 +428,66 @@ export function GameCard({
               {activity.title}
             </motion.h3>
 
-            {/* Location & Duration */}
+            {/* Compact Location & Duration */}
             <motion.div
-              className="text-xs sm:text-sm opacity-90 mb-3 sm:mb-4 space-y-1.5 sm:space-y-2 relative z-10"
+              className="text-responsive-xs opacity-90 mb-2 sm:mb-3 space-y-1 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 backdrop-blur-sm">
-                <span className="text-base">📍</span>
-                <span className="font-medium">{activity.location}</span>
+              <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
+                <span className="text-sm">📍</span>
+                <span className="font-medium text-responsive-xs card-text-tight truncate">{activity.location}</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 backdrop-blur-sm">
-                <span className="text-base">⏱️</span>
-                <span className="font-medium">{formatDuration(activity.duration)}</span>
+              <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
+                <span className="text-sm">⏱️</span>
+                <span className="font-medium text-responsive-xs card-text-tight">{formatDuration(activity.duration)}</span>
               </div>
             </motion.div>
 
-            {/* Description */}
-            <motion.p
-              className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 relative z-10 opacity-95"
+            {/* Compact Description with expand/collapse */}
+            <motion.div
+              className="mb-2 sm:mb-3 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              {activity.description}
-            </motion.p>
+              <motion.p
+                className={cn(
+                  "text-responsive-xs card-text-compact opacity-95 cursor-pointer",
+                  !isDescriptionExpanded && "line-clamp-3"
+                )}
+                onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+              >
+                {activity.description}
+              </motion.p>
+              {activity.description.length > 120 && !isDescriptionExpanded && (
+                <motion.button
+                  className="text-responsive-xs text-white/60 hover:text-white/80 mt-1 font-medium"
+                  onClick={() => setIsDescriptionExpanded(true)}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  Read more...
+                </motion.button>
+              )}
+            </motion.div>
 
-            {/* Enhanced Local Secret */}
+            {/* Compact Local Secret */}
             <motion.div
-              className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer"
+              className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg p-2 sm:p-3 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
               onClick={() => setIsSecretExpanded(!isSecretExpanded)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
             >
               {/* Subtle glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-xl" />
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-lg" />
 
-              <div className="flex items-start gap-2 sm:gap-3 relative z-10">
+              <div className="flex items-start gap-2 relative z-10">
                 <motion.span
-                  className="text-yellow-300 text-base sm:text-lg mt-0.5"
+                  className="text-yellow-300 text-sm mt-0.5 flex-shrink-0"
                   animate={{
                     rotate: [0, 10, -10, 0],
                     scale: [1, 1.1, 1]
@@ -482,13 +500,13 @@ export function GameCard({
                 >
                   💡
                 </motion.span>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-1 sm:mb-2">
-                    <div className="text-xs font-bold text-yellow-300 tracking-wide uppercase">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="text-responsive-xs font-bold text-yellow-300 tracking-wide uppercase">
                       Local Secret
                     </div>
                     <motion.span
-                      className="text-yellow-300/70 text-xs"
+                      className="text-yellow-300/70 text-xs flex-shrink-0"
                       animate={{ rotate: isSecretExpanded ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -496,15 +514,18 @@ export function GameCard({
                     </motion.span>
                   </div>
                   <motion.p
-                    className="text-xs leading-relaxed text-white/95 font-medium"
+                    className={cn(
+                      "text-responsive-xs card-text-compact text-white/95 font-medium",
+                      !isSecretExpanded && "line-clamp-2"
+                    )}
                     animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
                     transition={{ duration: 0.3 }}
                   >
                     {activity.localSecret}
                   </motion.p>
-                  {!isSecretExpanded && (
+                  {!isSecretExpanded && activity.localSecret.length > 80 && (
                     <motion.div
-                      className="text-xs text-yellow-300/60 mt-1 font-medium"
+                      className="text-responsive-xs text-yellow-300/60 mt-1 font-medium"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
@@ -516,7 +537,7 @@ export function GameCard({
               </div>
 
               {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-yellow-400/20 to-transparent rounded-bl-xl" />
+              <div className="absolute top-0 right-0 w-6 h-6 bg-gradient-to-bl from-yellow-400/20 to-transparent rounded-bl-lg" />
             </motion.div>
             </div>
           </div>

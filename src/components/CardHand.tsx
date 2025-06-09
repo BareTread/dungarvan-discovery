@@ -174,7 +174,7 @@ export function CardHand({
               transition={{ delay: 1, duration: 0.6 }}
               className="text-center w-full px-2"
             >
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-3 sm:gap-4 md:gap-6 justify-center max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-2 sm:gap-3 md:gap-4 justify-center max-w-6xl mx-auto">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -231,9 +231,9 @@ export function CardHand({
             </motion.div>
           </div>
         ) : (
-          // Enhanced Initial Layout: 5 cards in a row
+          // Enhanced Initial Layout: 5 cards with better responsive spacing
           <motion.div
-            className="flex gap-2 sm:gap-4 md:gap-6 justify-center flex-wrap max-w-7xl mx-auto"
+            className="flex gap-1 sm:gap-2 md:gap-4 lg:gap-6 justify-center flex-wrap max-w-7xl mx-auto px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}

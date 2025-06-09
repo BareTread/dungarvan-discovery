@@ -250,12 +250,21 @@ body {
   }
 }
 
-/* Text truncation utilities */
+/* Enhanced text truncation utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  word-break: break-word;
 }
 
 .line-clamp-3 {
@@ -263,6 +272,48 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  word-break: break-word;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* Better text wrapping */
+.text-wrap-balance {
+  text-wrap: balance;
+}
+
+.text-wrap-pretty {
+  text-wrap: pretty;
+}
+
+/* Improved text spacing for cards */
+.card-text-compact {
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.card-text-tight {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Better responsive text sizing */
+.text-responsive-xs {
+  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+}
+
+.text-responsive-sm {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+}
+
+.text-responsive-base {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
 
 /* Hide scrollbars */
