@@ -236,7 +236,7 @@ export function CardHand({
             className="flex justify-center flex-wrap max-w-7xl mx-auto px-2 md:px-4"
             style={{
               gap: 'clamp(0.125rem, 1vw, 1rem)',
-              rowGap: 'clamp(0.0625rem, 0.25vw, 0.25rem)'
+              rowGap: '0rem'
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -245,6 +245,7 @@ export function CardHand({
             {cards.map((card, index) => (
               <motion.div
                 key={card.id}
+                className="-mb-2"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{
