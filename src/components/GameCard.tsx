@@ -78,14 +78,10 @@ export function GameCard({
             onSelect();
           }
         }}
-        style={{
-          transformStyle: 'preserve-3d',
-          perspective: '1000px'
-        }}
+
         animate={{
           scale: isSelected ? 1.15 : 1,
           y: isSelected ? -24 : 0,
-          rotateY: forceFlipped ? 180 : 0,
           rotateX: isSelected ? -2 : 0,
           zIndex: isSelected ? 10 : 1,
           filter: isSelected ? "brightness(1.1)" : "brightness(1)"
@@ -104,10 +100,6 @@ export function GameCard({
             type: "spring",
             stiffness: 300,
             damping: 30
-          },
-          rotateY: {
-            duration: 0.8,
-            ease: [0.25, 0.46, 0.45, 0.94]
           },
           rotateX: {
             duration: 0.5,
