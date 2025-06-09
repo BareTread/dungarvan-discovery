@@ -21,7 +21,7 @@ export function CardDealer() {
   } = useCardGame();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center justify-center p-4 md:p-8 relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center justify-start pt-4 pb-4 px-4 md:px-8 relative overflow-hidden">
       {/* Enhanced background effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-slate-900/50" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-slate-900/5 to-transparent" />
@@ -59,10 +59,10 @@ export function CardDealer() {
           ease: [0.175, 0.885, 0.32, 1.275],
           filter: { duration: 0.8 }
         }}
-        className="text-center mb-6 md:mb-10 lg:mb-12 relative z-10"
+        className="text-center mb-3 md:mb-4 lg:mb-6 relative z-10"
       >
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-5 lg:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-3 lg:mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative"
           animate={{
             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
           }}
@@ -103,7 +103,7 @@ export function CardDealer() {
       </motion.header>
 
       {/* Main Game Area */}
-      <section className="flex-1 flex flex-col items-center justify-center w-full max-w-7xl relative z-10 px-2 md:px-4" aria-label="Interactive card game">
+      <section className="flex-1 flex flex-col items-center justify-start w-full max-w-7xl relative z-10 px-2 md:px-4" aria-label="Interactive card game">
         <AnimatePresence mode="wait">
           {!hasCards ? (
             // Enhanced Welcome State
@@ -126,7 +126,7 @@ export function CardDealer() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="text-6xl sm:text-7xl md:text-8xl mb-6 md:mb-8 relative"
+                className="text-6xl sm:text-7xl md:text-8xl mb-3 md:mb-4 relative"
               >
                 🎴
                 {/* Card glow effect */}
@@ -147,7 +147,7 @@ export function CardDealer() {
               </motion.div>
 
               <motion.h2
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
@@ -156,7 +156,7 @@ export function CardDealer() {
               </motion.h2>
 
               <motion.p
-                className="text-slate-400 mb-6 md:mb-8 max-w-md mx-auto leading-relaxed text-base sm:text-lg px-4"
+                className="text-slate-400 mb-4 md:mb-5 max-w-md mx-auto leading-relaxed text-base sm:text-lg px-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
@@ -233,7 +233,7 @@ export function CardDealer() {
               duration: 0.8,
               ease: [0.175, 0.885, 0.32, 1.275]
             }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10 px-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-3 md:mt-4 relative z-10 px-4"
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -279,7 +279,7 @@ export function CardDealer() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="mt-8 md:mt-12 text-center text-slate-500 text-sm px-4"
+        className="mt-4 md:mt-6 text-center text-slate-500 text-sm px-4"
       >
         <p>Discover the magic of Dungarvan • Ireland&apos;s Ancient East</p>
       </motion.footer>
