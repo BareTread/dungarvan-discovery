@@ -26,6 +26,25 @@
   --shadow-glow: 0 0 20px rgb(139 92 246 / 0.3);
   --shadow-glow-intense: 0 0 40px rgb(139 92 246 / 0.4), 0 0 80px rgb(139 92 246 / 0.2);
 
+  /* Enhanced Typography Scale */
+  --font-size-card-title: clamp(0.95rem, 2.8vw, 1.125rem);
+  --font-size-card-meta: clamp(0.7rem, 1.8vw, 0.85rem);
+  --font-size-card-body: clamp(0.8rem, 2.2vw, 0.95rem);
+  --line-height-tight: 1.25;
+  --line-height-relaxed: 1.45;
+  --line-height-comfortable: 1.35;
+
+  /* Enhanced Spacing System */
+  --spacing-card-padding: clamp(0.875rem, 3.5vw, 1.25rem);
+  --spacing-card-gap: clamp(0.375rem, 1.5vw, 0.625rem);
+  --spacing-section-gap: clamp(0.5rem, 2vw, 0.75rem);
+
+  /* Enhanced Card Dimensions */
+  --card-width-sm: clamp(13rem, 35vw, 15rem);
+  --card-height-sm: clamp(20rem, 50vw, 24rem);
+  --card-width-md: clamp(15rem, 40vw, 18rem);
+  --card-height-md: clamp(24rem, 55vw, 28rem);
+
   /* Animation easing curves */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -133,28 +152,56 @@ body {
   opacity: 0.6;
 }
 
-/* Enhanced shadow system */
+/* Enhanced shadow system with more depth */
 .shadow-elegant {
   box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
+    0 4px 6px -1px rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .shadow-elegant-hover {
   box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.15),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 0 20px rgba(139, 92, 246, 0.15);
+    0 20px 25px -5px rgba(0, 0, 0, 0.18),
+    0 10px 10px -5px rgba(0, 0, 0, 0.06),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 20px rgba(139, 92, 246, 0.18);
 }
 
 .shadow-elegant-selected {
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 0 40px rgba(251, 191, 36, 0.3),
-    0 0 80px rgba(251, 191, 36, 0.15);
+    0 25px 50px -12px rgba(0, 0, 0, 0.28),
+    0 16px 32px -8px rgba(0, 0, 0, 0.12),
+    0 8px 16px -4px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 40px rgba(251, 191, 36, 0.35),
+    0 0 80px rgba(251, 191, 36, 0.18);
+}
+
+/* Enhanced card depth system */
+.card-depth-subtle {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.card-depth-medium {
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.card-depth-strong {
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.16),
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* Advanced Animation Utilities */
@@ -199,6 +246,35 @@ body {
 @keyframes bounce-subtle {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+@keyframes gentle-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.35);
+  }
+}
+
+/* Enhanced animation utilities */
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-gentle-glow {
+  animation: gentle-glow 3s ease-in-out infinite;
 }
 
 /* Accessibility: Respect reduced motion preferences */
@@ -303,17 +379,53 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Better responsive text sizing */
+/* Enhanced responsive text sizing */
 .text-responsive-xs {
-  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+  font-size: var(--font-size-card-meta);
+  line-height: var(--line-height-comfortable);
 }
 
 .text-responsive-sm {
-  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  font-size: var(--font-size-card-body);
+  line-height: var(--line-height-relaxed);
 }
 
 .text-responsive-base {
-  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  font-size: var(--font-size-card-title);
+  line-height: var(--line-height-tight);
+}
+
+/* Enhanced typography utilities */
+.text-card-title-enhanced {
+  font-size: var(--font-size-card-title);
+  line-height: var(--line-height-tight);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.text-card-meta-enhanced {
+  font-size: var(--font-size-card-meta);
+  line-height: var(--line-height-comfortable);
+  opacity: 0.92;
+}
+
+.text-card-body-enhanced {
+  font-size: var(--font-size-card-body);
+  line-height: var(--line-height-relaxed);
+  opacity: 0.95;
+}
+
+/* Enhanced spacing utilities */
+.space-y-enhanced > * + * {
+  margin-top: var(--spacing-section-gap);
+}
+
+.gap-enhanced {
+  gap: var(--spacing-card-gap);
+}
+
+.p-enhanced {
+  padding: var(--spacing-card-padding);
 }
 
 /* Hide scrollbars */
@@ -342,17 +454,47 @@ h1, h2, h3, h4, h5, h6 {
   font-feature-settings: 'kern' 1;
 }
 
-/* Improved button interactions */
-button, .button {
+/* Enhanced button and interactive element improvements */
+button, .button, [role="button"] {
   touch-action: manipulation;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px; /* Minimum touch target size */
+  min-width: 44px;
 }
 
-/* Enhanced focus indicators */
+/* Enhanced card interactions */
+.card-interactive {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-interactive:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Enhanced focus indicators with better accessibility */
 *:focus-visible {
   outline: 2px solid rgb(139, 92, 246);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 4px rgba(139, 92, 246, 0.15),
+    0 0 8px rgba(139, 92, 246, 0.25);
+  transition: all 0.2s ease;
+}
+
+/* Enhanced button focus states */
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid rgb(139, 92, 246);
+  outline-offset: 3px;
+  box-shadow:
+    0 0 0 5px rgba(139, 92, 246, 0.2),
+    0 0 12px rgba(139, 92, 246, 0.3);
 }
 
 /* Smooth transitions for all interactive elements */

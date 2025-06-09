@@ -231,9 +231,12 @@ export function CardHand({
             </motion.div>
           </div>
         ) : (
-          // Enhanced Initial Layout: 5 cards with better responsive spacing
+          // Enhanced Initial Layout: 5 cards with improved responsive spacing
           <motion.div
-            className="flex gap-1 sm:gap-2 md:gap-4 lg:gap-6 justify-center flex-wrap max-w-7xl mx-auto px-2"
+            className="flex gap-enhanced justify-center flex-wrap max-w-7xl mx-auto px-2 md:px-4"
+            style={{
+              gap: 'clamp(0.25rem, 2vw, 1.5rem)'
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}

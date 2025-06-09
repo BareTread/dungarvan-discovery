@@ -59,10 +59,15 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-52 h-80 sm:w-60 sm:h-96 md:w-72 md:h-[28rem] cursor-pointer focus-ring",
+          "relative cursor-pointer focus-ring",
+          "w-52 h-80 sm:w-60 sm:h-96 md:w-72 md:h-[30rem] lg:w-80 lg:h-[32rem]",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}
+        style={{
+          width: 'var(--card-width-md)',
+          height: 'var(--card-height-md)'
+        }}
         onClick={canSelect ? onSelect : undefined}
         onMouseEnter={() => canSelect && !showActivityDetails && onHover(true)}
         onMouseLeave={() => onHover(false)}
@@ -230,7 +235,7 @@ export function GameCard({
           /* Card Front (Mystery Side) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 p-3 sm:p-4 md:p-5 lg:p-6 card-glow",
+              "absolute inset-0 rounded-xl border-2 card-glow",
               "bg-gradient-to-br from-slate-800/95 via-slate-850/95 to-slate-900/95",
               "backdrop-blur-sm border-slate-700/80",
               "transition-all duration-500 ease-out",
@@ -238,6 +243,9 @@ export function GameCard({
               isSelected && "shadow-elegant-selected border-yellow-400/80 bg-gradient-to-br from-slate-800 via-slate-850 to-slate-900",
               !isHovered && !isSelected && "shadow-elegant"
             )}
+            style={{
+              padding: 'var(--spacing-card-padding)'
+            }}
           >
           <div className="flex flex-col items-center justify-center h-full text-center relative overflow-hidden">
             {/* Animated background effects */}
@@ -292,7 +300,7 @@ export function GameCard({
             </motion.div>
 
             <motion.h3
-              className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 relative z-10"
+              className="text-card-title-enhanced text-white mb-3 relative z-10"
               animate={isSelected ? {
                 scale: [1, 1.05, 1],
                 y: [0, -2, 0]
@@ -303,7 +311,7 @@ export function GameCard({
             </motion.h3>
 
             <motion.p
-              className="text-slate-300 text-xs sm:text-sm relative z-10 leading-relaxed px-1 sm:px-0"
+              className="text-card-meta-enhanced text-slate-300 relative z-10 px-1 sm:px-0 text-center"
               animate={isSelected ? {
                 opacity: [0.7, 1, 0.9],
                 y: [0, -1, 0]
@@ -353,18 +361,25 @@ export function GameCard({
           /* Card Back (Activity Details) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 p-3 sm:p-4 md:p-5",
-              "bg-gradient-to-br backdrop-blur-sm",
+              "absolute inset-0 rounded-xl border-2 backdrop-blur-sm",
+              "bg-gradient-to-br",
               getCategoryColor(activity.category),
-              "border-white/30 shadow-2xl text-white",
+              "border-white/30 card-depth-medium text-white",
               "focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2",
               "transition-all duration-300"
             )}
+            style={{
+              padding: 'var(--spacing-card-padding)'
+            }}
           >
           <div className="flex flex-col h-full relative overflow-hidden">
-            {/* Scrollable content area with improved spacing */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide space-y-2 sm:space-y-3"
-                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {/* Scrollable content area with enhanced spacing */}
+            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
+                 style={{
+                   scrollbarWidth: 'none',
+                   msOverflowStyle: 'none',
+                   gap: 'var(--spacing-section-gap)'
+                 }}>
               {/* Subtle background pattern */}
               <div className="absolute inset-0 opacity-5 pointer-events-none">
                 <div className="absolute inset-0" style={{
@@ -418,9 +433,10 @@ export function GameCard({
               </div>
             </motion.div>
 
-            {/* Compact Title */}
+            {/* Enhanced Title */}
             <motion.h3
-              className="text-responsive-sm font-bold mb-2 leading-tight relative z-10 line-clamp-2 card-text-compact"
+              className="text-card-title-enhanced font-bold relative z-10 line-clamp-2"
+              style={{ marginBottom: 'var(--spacing-section-gap)' }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -428,33 +444,38 @@ export function GameCard({
               {activity.title}
             </motion.h3>
 
-            {/* Compact Location & Duration */}
+            {/* Enhanced Location & Duration */}
             <motion.div
-              className="text-responsive-xs opacity-90 mb-2 sm:mb-3 space-y-1 relative z-10"
+              className="text-card-meta-enhanced relative z-10"
+              style={{
+                marginBottom: 'var(--spacing-section-gap)',
+                gap: 'var(--spacing-card-gap)'
+              }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
-                <span className="text-sm">📍</span>
-                <span className="font-medium text-responsive-xs card-text-tight truncate">{activity.location}</span>
+              <div className="flex items-center gap-2 bg-white/12 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/10 mb-2">
+                <span className="text-base">📍</span>
+                <span className="font-medium text-card-meta-enhanced truncate">{activity.location}</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
-                <span className="text-sm">⏱️</span>
-                <span className="font-medium text-responsive-xs card-text-tight">{formatDuration(activity.duration)}</span>
+              <div className="flex items-center gap-2 bg-white/12 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/10">
+                <span className="text-base">⏱️</span>
+                <span className="font-medium text-card-meta-enhanced">{formatDuration(activity.duration)}</span>
               </div>
             </motion.div>
 
-            {/* Compact Description with expand/collapse */}
+            {/* Enhanced Description with expand/collapse */}
             <motion.div
-              className="mb-2 sm:mb-3 relative z-10"
+              className="relative z-10"
+              style={{ marginBottom: 'var(--spacing-section-gap)' }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
               <motion.p
                 className={cn(
-                  "text-responsive-xs card-text-compact opacity-95 cursor-pointer",
+                  "text-card-body-enhanced cursor-pointer",
                   !isDescriptionExpanded && "line-clamp-3"
                 )}
                 onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
@@ -463,7 +484,7 @@ export function GameCard({
               </motion.p>
               {activity.description.length > 120 && !isDescriptionExpanded && (
                 <motion.button
-                  className="text-responsive-xs text-white/60 hover:text-white/80 mt-1 font-medium"
+                  className="text-card-meta-enhanced text-white/70 hover:text-white/90 mt-2 font-medium transition-colors duration-200"
                   onClick={() => setIsDescriptionExpanded(true)}
                   whileHover={{ scale: 1.05 }}
                 >
@@ -472,22 +493,23 @@ export function GameCard({
               )}
             </motion.div>
 
-            {/* Compact Local Secret */}
+            {/* Enhanced Local Secret */}
             <motion.div
-              className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg p-2 sm:p-3 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer"
+              className="bg-gradient-to-r from-white/18 to-white/12 rounded-xl backdrop-blur-sm border border-white/25 relative overflow-hidden cursor-pointer card-depth-subtle"
+              style={{ padding: 'var(--spacing-card-padding)' }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
               onClick={() => setIsSecretExpanded(!isSecretExpanded)}
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ scale: 1.01, boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)" }}
               whileTap={{ scale: 0.99 }}
             >
               {/* Subtle glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-lg" />
 
-              <div className="flex items-start gap-2 relative z-10">
+              <div className="flex items-start relative z-10" style={{ gap: 'var(--spacing-card-gap)' }}>
                 <motion.span
-                  className="text-yellow-300 text-sm mt-0.5 flex-shrink-0"
+                  className="text-yellow-300 text-lg mt-1 flex-shrink-0"
                   animate={{
                     rotate: [0, 10, -10, 0],
                     scale: [1, 1.1, 1]
@@ -501,12 +523,12 @@ export function GameCard({
                   💡
                 </motion.span>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="text-responsive-xs font-bold text-yellow-300 tracking-wide uppercase">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-card-meta-enhanced font-bold text-yellow-300 tracking-wide uppercase">
                       Local Secret
                     </div>
                     <motion.span
-                      className="text-yellow-300/70 text-xs flex-shrink-0"
+                      className="text-yellow-300/70 text-sm flex-shrink-0"
                       animate={{ rotate: isSecretExpanded ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -515,17 +537,17 @@ export function GameCard({
                   </div>
                   <motion.p
                     className={cn(
-                      "text-responsive-xs card-text-compact text-white/95 font-medium",
+                      "text-card-body-enhanced text-white/96 font-medium",
                       !isSecretExpanded && "line-clamp-2"
                     )}
-                    animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
+                    animate={{ opacity: isSecretExpanded ? 1 : 0.92 }}
                     transition={{ duration: 0.3 }}
                   >
                     {activity.localSecret}
                   </motion.p>
                   {!isSecretExpanded && activity.localSecret.length > 80 && (
                     <motion.div
-                      className="text-responsive-xs text-yellow-300/60 mt-1 font-medium"
+                      className="text-card-meta-enhanced text-yellow-300/70 mt-2 font-medium"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
