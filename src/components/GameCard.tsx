@@ -82,7 +82,7 @@ export function GameCard({
         animate={{
           scale: isSelected ? 1.15 : 1,
           y: isSelected ? -24 : 0,
-          rotateY: isFlipped ? -180 : 0,
+          rotateY: isFlipped ? 180 : 0,
           rotateX: isSelected ? -2 : 0,
           zIndex: isSelected ? 10 : 1,
           filter: isSelected ? "brightness(1.1)" : "brightness(1)"
