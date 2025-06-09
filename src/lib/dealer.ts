@@ -187,6 +187,20 @@ export function getDifficultyEmoji(difficulty?: Activity['difficulty']): string 
     moderate: '🟡',
     challenging: '🔴',
   };
-  
+
   return difficulty ? difficultyEmojis[difficulty] : '⚪';
+}
+
+/**
+ * Get cost emoji
+ */
+export function getCostEmoji(cost?: Activity['cost']): string {
+  const costEmojis = {
+    free: '🆓',
+    low: '💰',
+    medium: '💰💰',
+    high: '💰💰💰',
+  };
+
+  return cost ? costEmojis[cost] : '';
 }

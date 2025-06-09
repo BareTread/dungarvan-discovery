@@ -174,7 +174,7 @@ export function CardHand({
               transition={{ delay: 1, duration: 0.6 }}
               className="text-center w-full px-2"
             >
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-1.5 sm:gap-2 md:gap-3 justify-center max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-3 sm:gap-4 md:gap-6 justify-center max-w-6xl mx-auto">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -189,8 +189,8 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 0.4,
-                        opacity: 0.9,
+                        scale: 0.55,
+                        opacity: 0.95,
                         rotateY: 0,
                         y: 0,
                         filter: "blur(0px)"
@@ -203,10 +203,11 @@ export function CardHand({
                       }}
                       className="transform-gpu"
                       whileHover={{
-                        scale: 0.45,
+                        scale: 0.65,
                         opacity: 1,
-                        y: -4,
-                        rotateX: 2,
+                        y: -8,
+                        rotateX: 3,
+                        filter: "brightness(1.1) saturate(1.1)",
                         transition: {
                           duration: 0.3,
                           ease: [0.175, 0.885, 0.32, 1.275]

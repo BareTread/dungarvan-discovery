@@ -9,6 +9,7 @@ export interface Activity {
   localSecret: string;
   bestTime?: 'dawn' | 'morning' | 'afternoon' | 'sunset' | 'night';
   difficulty?: 'easy' | 'moderate' | 'challenging';
+  cost?: 'free' | 'low' | 'medium' | 'high';
 }
 
 export const activities: Activity[] = [
@@ -595,7 +596,8 @@ export const activities: Activity[] = [
     description: 'Peaceful walk along the recently refurbished boardwalk with stunning bay views and bird watching opportunities.',
     localSecret: 'Early morning is best for spotting herons and egrets fishing in the shallows.',
     bestTime: 'morning',
-    difficulty: 'easy'
+    difficulty: 'easy',
+    cost: 'free'
   },
   {
     id: 'outdoor-2',
@@ -643,7 +645,8 @@ export const activities: Activity[] = [
     description: 'Walk or cycle the spectacular 46km off-road trail through tunnels, over viaducts, and past stunning countryside.',
     localSecret: 'The Ballyvoyle Tunnel section is completely free and offers the most dramatic scenery.',
     bestTime: 'morning',
-    difficulty: 'easy'
+    difficulty: 'easy',
+    cost: 'free'
   },
   {
     id: 'outdoor-6',
@@ -655,7 +658,8 @@ export const activities: Activity[] = [
     description: 'Explore this 12th-century Norman castle with free admission and learn about 800 years of Irish history.',
     localSecret: 'The castle offers free guided tours on weekends - ask the caretaker about the hidden chambers.',
     bestTime: 'afternoon',
-    difficulty: 'easy'
+    difficulty: 'easy',
+    cost: 'free'
   },
   {
     id: 'outdoor-7',
@@ -664,10 +668,11 @@ export const activities: Activity[] = [
     title: 'Helvick Head Cliff Walk',
     location: 'Helvick Head',
     duration: '2-3 hours',
-    description: 'Dramatic free cliff walk with breathtaking Atlantic views, lighthouse visits, and excellent whale watching.',
+    description: 'Feel the Atlantic breeze on this dramatic cliff walk where rugged coastline meets endless ocean views, historic lighthouse, and world-class whale watching.',
     localSecret: 'This is the best free whale watching spot in Ireland - minke whales pass by in summer.',
     bestTime: 'morning',
-    difficulty: 'moderate'
+    difficulty: 'moderate',
+    cost: 'free'
   },
   {
     id: 'outdoor-8',
@@ -676,10 +681,11 @@ export const activities: Activity[] = [
     title: 'Colligan Wood Nature Walk',
     location: 'Colligan Wood',
     duration: '1-2 hours',
-    description: 'Free forest walk through ancient woodland with marked trails, wildlife spotting, and peaceful river views.',
+    description: 'Breathe in the earthy scent of ancient woodland as you follow marked trails through towering trees, listening for wildlife and discovering peaceful river views.',
     localSecret: 'Red deer roam freely here - sit quietly by the stream at dawn for the best sightings.',
     bestTime: 'dawn',
-    difficulty: 'easy'
+    difficulty: 'easy',
+    cost: 'free'
   },
   {
     id: 'outdoor-9',

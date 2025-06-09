@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Activity } from '@/lib/activities';
-import { getCategoryColor, formatDuration, getTimeEmoji, getDifficultyEmoji } from '@/lib/dealer';
+import { getCategoryColor, formatDuration, getTimeEmoji, getDifficultyEmoji, getCostEmoji } from '@/lib/dealer';
 import { cn } from '@/lib/utils';
 
 interface GameCardProps {
@@ -31,6 +31,7 @@ export function GameCard({
 }: GameCardProps) {
   // Show activity details when flipped (either selected or revealed)
   const showActivityDetails = isFlipped;
+  const [isSecretExpanded, setIsSecretExpanded] = React.useState(false);
   return (
     <motion.div
       initial={{
@@ -81,16 +82,16 @@ export function GameCard({
         }}
 
         animate={{
-          scale: isSelected ? 1.2 : (isFlipped && !isSelected) ? 0.85 : 1,
-          y: isSelected ? -32 : (isFlipped && !isSelected) ? 8 : 0,
-          rotateX: isSelected ? -3 : (isFlipped && !isSelected) ? 1 : 0,
-          rotateZ: isSelected ? 0 : (isFlipped && !isSelected) ? Math.random() * 4 - 2 : 0,
+          scale: isSelected ? 1.05 : (isFlipped && !isSelected) ? 0.9 : 1,
+          y: isSelected ? -20 : (isFlipped && !isSelected) ? 4 : 0,
+          rotateX: isSelected ? -2 : (isFlipped && !isSelected) ? 0.5 : 0,
+          rotateZ: isSelected ? 0 : (isFlipped && !isSelected) ? Math.random() * 3 - 1.5 : 0,
           zIndex: isSelected ? 20 : (isFlipped && !isSelected) ? 5 : 1,
-          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.75 : 1,
+          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.85 : 1,
           filter: isSelected
             ? "brightness(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(0,0,0,0.3))"
             : (isFlipped && !isSelected)
-              ? "brightness(0.65) blur(1.5px) saturate(0.8)"
+              ? "brightness(0.75) blur(0.8px) saturate(0.9)"
               : "brightness(1)"
         }}
         transition={{
@@ -142,12 +143,12 @@ export function GameCard({
             ease: [0.175, 0.885, 0.32, 1.275]
           }
         } : (isFlipped && !isSelected) ? {
-          scale: 0.88,
-          y: 6,
-          opacity: 0.85,
-          filter: "brightness(0.75) blur(1px) saturate(0.9)",
+          scale: 0.95,
+          y: -2,
+          opacity: 0.95,
+          filter: "brightness(0.9) blur(0.3px) saturate(1.05)",
           transition: {
-            duration: 0.4,
+            duration: 0.3,
             ease: "easeOut"
           }
         } : {}}
@@ -397,6 +398,19 @@ export function GameCard({
                 >
                   {getDifficultyEmoji(activity.difficulty)}
                 </motion.span>
+                {activity.cost && (
+                  <motion.span
+                    className={`text-xs backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border font-medium ${
+                      activity.cost === 'free'
+                        ? 'bg-green-500/25 border-green-400/30 text-green-200'
+                        : 'bg-white/25 border-white/20'
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {getCostEmoji(activity.cost)}
+                  </motion.span>
+                )}
               </div>
             </motion.div>
 
@@ -439,10 +453,13 @@ export function GameCard({
 
             {/* Enhanced Local Secret */}
             <motion.div
-              className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden"
+              className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
+              onClick={() => setIsSecretExpanded(!isSecretExpanded)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               {/* Subtle glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-xl" />
@@ -463,12 +480,37 @@ export function GameCard({
                   💡
                 </motion.span>
                 <div className="flex-1">
-                  <div className="text-xs font-bold text-yellow-300 mb-1 sm:mb-2 tracking-wide uppercase">
-                    Local Secret
+                  <div className="flex items-center justify-between mb-1 sm:mb-2">
+                    <div className="text-xs font-bold text-yellow-300 tracking-wide uppercase">
+                      Local Secret
+                    </div>
+                    <motion.span
+                      className="text-yellow-300/70 text-xs"
+                      animate={{ rotate: isSecretExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      ▼
+                    </motion.span>
                   </div>
-                  <p className="text-xs leading-relaxed text-white/95 font-medium line-clamp-2">
+                  <motion.p
+                    className={`text-xs leading-relaxed text-white/95 font-medium ${
+                      isSecretExpanded ? '' : 'line-clamp-2'
+                    }`}
+                    animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     {activity.localSecret}
-                  </p>
+                  </motion.p>
+                  {!isSecretExpanded && (
+                    <motion.div
+                      className="text-xs text-yellow-300/60 mt-1 font-medium"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      Tap to reveal more...
+                    </motion.div>
+                  )}
                 </div>
               </div>
 
