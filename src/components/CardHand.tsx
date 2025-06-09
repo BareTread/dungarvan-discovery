@@ -231,12 +231,12 @@ export function CardHand({
             </motion.div>
           </div>
         ) : (
-          // Enhanced Initial Layout: 5 cards with tighter mobile spacing
+          // Enhanced Initial Layout: 5 cards with very tight mobile spacing
           <motion.div
             className="flex justify-center flex-wrap max-w-7xl mx-auto px-2 md:px-4"
             style={{
               gap: 'clamp(0.125rem, 1vw, 1rem)',
-              rowGap: 'clamp(0.25rem, 1.5vw, 0.75rem)'
+              rowGap: 'clamp(0.125rem, 0.5vw, 0.375rem)'
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
