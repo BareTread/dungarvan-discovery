@@ -48,6 +48,21 @@ export function GameCard({
         onClick={canSelect ? onSelect : undefined}
         onMouseEnter={() => canSelect && !isFlipped && onHover(true)}
         onMouseLeave={() => onHover(false)}
+        role={canSelect ? "button" : "img"}
+        tabIndex={canSelect ? 0 : -1}
+        aria-label={
+          canSelect
+            ? `Select mystery adventure card ${activity.id}`
+            : isFlipped
+              ? `${activity.title} in ${activity.location}. Duration: ${activity.duration}. ${activity.description}`
+              : "Mystery adventure card"
+        }
+        onKeyDown={(e) => {
+          if (canSelect && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            onSelect();
+          }
+        }}
         style={{
           transformStyle: 'preserve-3d',
           perspective: '1000px'
@@ -76,6 +91,7 @@ export function GameCard({
             "absolute inset-0 rounded-xl border-2 p-6 card-glow",
             "bg-gradient-to-br from-slate-800 to-slate-900",
             "border-slate-700 shadow-2xl",
+            "focus-within:ring-2 focus-within:ring-purple-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-900",
             isHovered && "shadow-purple-500/30 border-purple-500/50",
             isSelected && "border-yellow-400/70 shadow-yellow-400/30"
           )}
@@ -132,7 +148,8 @@ export function GameCard({
             "absolute inset-0 rounded-xl border-2 p-6",
             "bg-gradient-to-br",
             getCategoryColor(activity.category),
-            "border-white/20 shadow-2xl text-white"
+            "border-white/20 shadow-2xl text-white",
+            "focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2"
           )}
           style={{
             backfaceVisibility: 'hidden',

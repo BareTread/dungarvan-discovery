@@ -71,16 +71,16 @@ export function CardHand({
       <div className="relative">
         {gamePhase === 'complete' && selectedIndex !== null ? (
           // Final Layout: Selected card prominent, others smaller below
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center max-w-6xl mx-auto px-4">
             {/* Selected Card (Large) */}
             <motion.div
               layout
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-12"
+              className="mb-8"
             >
               <motion.div
                 initial={{ scale: 1.15 }}
-                animate={{ scale: 1.2 }}
+                animate={{ scale: 1.1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <GameCard
@@ -101,12 +101,12 @@ export function CardHand({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-center mb-8"
+              className="text-center mb-6 z-10 relative"
             >
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-xl font-bold text-white mb-2">
                 🎉 Your Adventure Awaits!
               </h3>
-              <p className="text-slate-300 text-lg">
+              <p className="text-slate-300 text-base">
                 Perfect choice! Here&apos;s what you didn&apos;t pick:
               </p>
             </motion.div>
@@ -116,9 +116,9 @@ export function CardHand({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
-              className="text-center"
+              className="text-center w-full"
             >
-              <div className="flex gap-3 justify-center flex-wrap max-w-4xl">
+              <div className="flex gap-4 justify-center flex-wrap max-w-5xl mx-auto">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -126,7 +126,7 @@ export function CardHand({
                     <motion.div
                       key={card.id}
                       initial={{ scale: 0.5, opacity: 0, rotateY: 180 }}
-                      animate={{ scale: 0.65, opacity: 0.9, rotateY: 0 }}
+                      animate={{ scale: 0.6, opacity: 0.9, rotateY: 0 }}
                       transition={{
                         delay: 1.2 + (index * 0.15),
                         duration: 0.5,
@@ -134,7 +134,7 @@ export function CardHand({
                       }}
                       className="transform-gpu"
                       whileHover={{
-                        scale: 0.7,
+                        scale: 0.65,
                         opacity: 1,
                         transition: { duration: 0.2 }
                       }}

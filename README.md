@@ -1,24 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dungarvan Discovery
 
-## Getting Started
+An interactive card-based adventure game that helps visitors discover hidden gems, local secrets, and unforgettable experiences in Dungarvan, Ireland's Ancient East.
 
-First, run the development server:
+## 🎴 Features
+
+- **Interactive Card Game**: Choose from 5 randomly dealt adventure cards
+- **60+ Activities**: Curated experiences across 6 categories (Adventure, Coastal, Foodie, Heritage, Hidden Gems, Culture)
+- **Smooth Animations**: Built with Framer Motion for delightful user interactions
+- **Responsive Design**: Works beautifully on all devices
+- **Accessibility First**: Full keyboard navigation and screen reader support
+- **Dark Mode**: Elegant dark theme optimized for readability
+
+## 🚀 Getting Started
+
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS 4
+- **Animations**: Framer Motion
+- **State Management**: Zustand
+- **UI Components**: shadcn/ui + Radix UI
+- **Icons**: Lucide React
+- **TypeScript**: Full type safety
 
 ## Learn More
 
