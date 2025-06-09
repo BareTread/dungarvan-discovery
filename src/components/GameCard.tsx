@@ -20,6 +20,7 @@ interface GameCardProps {
 
 export function GameCard({
   activity,
+  index,
   isFlipped,
   isSelected,
   isHovered,
@@ -56,7 +57,7 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-64 h-80 cursor-pointer focus-ring",
+          "relative w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 cursor-pointer focus-ring",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}
@@ -80,38 +81,54 @@ export function GameCard({
         }}
 
         animate={{
-          scale: isSelected ? 1.15 : (isFlipped && !isSelected) ? 0.95 : 1,
-          y: isSelected ? -24 : 0,
-          rotateX: isSelected ? -2 : 0,
-          zIndex: isSelected ? 10 : 1,
-          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1,
+          scale: isSelected ? 1.2 : (isFlipped && !isSelected) ? 0.85 : 1,
+          y: isSelected ? -32 : (isFlipped && !isSelected) ? 8 : 0,
+          rotateX: isSelected ? -3 : (isFlipped && !isSelected) ? 1 : 0,
+          rotateZ: isSelected ? 0 : (isFlipped && !isSelected) ? Math.random() * 4 - 2 : 0,
+          zIndex: isSelected ? 20 : (isFlipped && !isSelected) ? 5 : 1,
+          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.75 : 1,
           filter: isSelected
-            ? "brightness(1.1)"
+            ? "brightness(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(0,0,0,0.3))"
             : (isFlipped && !isSelected)
-              ? "brightness(0.7) blur(2px)"
+              ? "brightness(0.65) blur(1.5px) saturate(0.8)"
               : "brightness(1)"
         }}
         transition={{
           scale: {
-            duration: 0.5,
-            ease: [0.175, 0.885, 0.32, 1.275],
+            duration: isSelected ? 0.7 : 0.8,
+            ease: isSelected ? [0.175, 0.885, 0.32, 1.275] : [0.25, 0.46, 0.45, 0.94],
             type: "spring",
-            stiffness: 300,
-            damping: 30
+            stiffness: isSelected ? 250 : 180,
+            damping: isSelected ? 25 : 30,
+            delay: isSelected ? 0 : (index * 0.06)
           },
           y: {
-            duration: 0.5,
+            duration: isSelected ? 0.6 : 0.9,
             ease: [0.175, 0.885, 0.32, 1.275],
             type: "spring",
-            stiffness: 300,
-            damping: 30
+            stiffness: isSelected ? 300 : 200,
+            damping: isSelected ? 28 : 35,
+            delay: isSelected ? 0 : (index * 0.08)
           },
           rotateX: {
-            duration: 0.5,
-            ease: [0.25, 0.46, 0.45, 0.94]
+            duration: 0.6,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: isSelected ? 0 : (index * 0.04)
+          },
+          rotateZ: {
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: isSelected ? 0 : (index * 0.05)
+          },
+          opacity: {
+            duration: isSelected ? 0.4 : 0.6,
+            ease: "easeOut",
+            delay: isSelected ? 0 : (index * 0.03)
           },
           filter: {
-            duration: 0.3
+            duration: isSelected ? 0.5 : 0.7,
+            ease: "easeOut",
+            delay: isSelected ? 0 : (index * 0.04)
           },
           zIndex: { duration: 0 }
         }}
@@ -124,12 +141,88 @@ export function GameCard({
             duration: 0.3,
             ease: [0.175, 0.885, 0.32, 1.275]
           }
+        } : (isFlipped && !isSelected) ? {
+          scale: 0.88,
+          y: 6,
+          opacity: 0.85,
+          filter: "brightness(0.75) blur(1px) saturate(0.9)",
+          transition: {
+            duration: 0.4,
+            ease: "easeOut"
+          }
         } : {}}
         whileTap={canSelect ? {
           scale: 0.98,
           transition: { duration: 0.1 }
         } : {}}
       >
+        {/* Subtle breathing animation for non-selected flipped cards */}
+        {isFlipped && !isSelected && (
+          <motion.div
+            className="absolute inset-0 rounded-xl"
+            animate={{
+              scale: [1, 1.005, 1],
+              opacity: [0.8, 0.85, 0.8]
+            }}
+            transition={{
+              duration: 3 + (index * 0.2),
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            style={{
+              background: 'linear-gradient(45deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 100%)',
+              pointerEvents: 'none'
+            }}
+          />
+        )}
+
+        {/* Floating animation for selected card */}
+        {isSelected && (
+          <>
+            <motion.div
+              className="absolute inset-0 rounded-xl"
+              animate={{
+                y: [0, -2, 0],
+                rotateX: [-3, -2, -3],
+                scale: [1, 1.002, 1]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{
+                background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(168, 85, 247, 0.06) 50%, rgba(236, 72, 153, 0.08) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
+
+            {/* Magical particles around selected card */}
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+                style={{
+                  left: `${20 + (i * 12)}%`,
+                  top: `${15 + (i % 2) * 70}%`,
+                }}
+                animate={{
+                  y: [0, -8, 0],
+                  x: [0, Math.sin(i) * 4, 0],
+                  opacity: [0.3, 0.8, 0.3],
+                  scale: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 2 + (i * 0.3),
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.2
+                }}
+              />
+            ))}
+          </>
+        )}
+
         {/* Conditional rendering based on flip state */}
         {!showActivityDetails ? (
           /* Card Front (Mystery Side) */
@@ -179,7 +272,7 @@ export function GameCard({
             )}
 
             <motion.div
-              className="text-6xl mb-4 relative z-10"
+              className="text-4xl sm:text-5xl md:text-6xl mb-3 md:mb-4 relative z-10"
               animate={isSelected ? {
                 scale: [1, 1.3, 1.1],
                 rotate: [0, 15, -10, 5, 0],
@@ -197,7 +290,7 @@ export function GameCard({
             </motion.div>
 
             <motion.h3
-              className="text-xl font-bold text-white mb-2 relative z-10"
+              className="text-lg sm:text-xl font-bold text-white mb-2 relative z-10"
               animate={isSelected ? {
                 scale: [1, 1.05, 1],
                 y: [0, -2, 0]
@@ -208,7 +301,7 @@ export function GameCard({
             </motion.h3>
 
             <motion.p
-              className="text-slate-300 text-sm relative z-10 leading-relaxed"
+              className="text-slate-300 text-xs sm:text-sm relative z-10 leading-relaxed px-2 sm:px-0"
               animate={isSelected ? {
                 opacity: [0.7, 1, 0.9],
                 y: [0, -1, 0]
@@ -258,7 +351,7 @@ export function GameCard({
           /* Card Back (Activity Details) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 p-6",
+              "absolute inset-0 rounded-xl border-2 p-4 sm:p-5 md:p-6",
               "bg-gradient-to-br backdrop-blur-sm",
               getCategoryColor(activity.category),
               "border-white/30 shadow-2xl text-white",
@@ -283,7 +376,7 @@ export function GameCard({
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <motion.div
-                className="text-4xl"
+                className="text-3xl sm:text-4xl"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.2 }}
               >
@@ -309,7 +402,7 @@ export function GameCard({
 
             {/* Title */}
             <motion.h3
-              className="text-xl font-bold mb-3 leading-tight relative z-10"
+              className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 leading-tight relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -319,7 +412,7 @@ export function GameCard({
 
             {/* Location & Duration */}
             <motion.div
-              className="text-sm opacity-90 mb-4 space-y-2 relative z-10"
+              className="text-xs sm:text-sm opacity-90 mb-3 sm:mb-4 space-y-1.5 sm:space-y-2 relative z-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -336,7 +429,7 @@ export function GameCard({
 
             {/* Description */}
             <motion.p
-              className="text-sm leading-relaxed mb-4 flex-grow relative z-10 opacity-95"
+              className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 flex-grow relative z-10 opacity-95"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
@@ -346,7 +439,7 @@ export function GameCard({
 
             {/* Enhanced Local Secret */}
             <motion.div
-              className="bg-gradient-to-r from-white/15 to-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden"
+              className="bg-gradient-to-r from-white/15 to-white/10 rounded-xl p-3 sm:p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}

@@ -21,7 +21,7 @@ export function CardDealer() {
   } = useCardGame();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center justify-center p-8 relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center justify-center p-4 md:p-8 relative overflow-hidden">
       {/* Enhanced background effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-slate-900/50" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-slate-900/5 to-transparent" />
@@ -59,10 +59,10 @@ export function CardDealer() {
           ease: [0.175, 0.885, 0.32, 1.275],
           filter: { duration: 0.8 }
         }}
-        className="text-center mb-12 relative z-10"
+        className="text-center mb-8 md:mb-12 relative z-10"
       >
         <motion.h1
-          className="text-5xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative"
           animate={{
             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
           }}
@@ -93,7 +93,7 @@ export function CardDealer() {
         </motion.h1>
 
         <motion.p
-          className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
@@ -103,7 +103,7 @@ export function CardDealer() {
       </motion.header>
 
       {/* Main Game Area */}
-      <section className="flex-1 flex flex-col items-center justify-center w-full max-w-7xl relative z-10" aria-label="Interactive card game">
+      <section className="flex-1 flex flex-col items-center justify-center w-full max-w-7xl relative z-10 px-2 md:px-4" aria-label="Interactive card game">
         <AnimatePresence mode="wait">
           {!hasCards ? (
             // Enhanced Welcome State
@@ -233,7 +233,7 @@ export function CardDealer() {
               duration: 0.8,
               ease: [0.175, 0.885, 0.32, 1.275]
             }}
-            className="flex gap-4 mt-8 relative z-10"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10 px-4"
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -242,7 +242,7 @@ export function CardDealer() {
               <Button
                 onClick={dealNewHand}
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-700 hover:via-purple-800 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group"
+                className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-700 hover:via-purple-800 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group w-full sm:w-auto"
                 aria-label="Deal a new hand of 5 adventure cards"
               >
                 {/* Button shimmer effect */}
@@ -263,7 +263,7 @@ export function CardDealer() {
                 onClick={resetGame}
                 variant="outline"
                 size="lg"
-                className="border-slate-600/80 bg-slate-800/50 backdrop-blur-sm text-slate-300 hover:bg-slate-700/80 hover:text-white hover:border-slate-500 px-6 py-3 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-elegant"
+                className="border-slate-600/80 bg-slate-800/50 backdrop-blur-sm text-slate-300 hover:bg-slate-700/80 hover:text-white hover:border-slate-500 px-6 py-3 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-elegant w-full sm:w-auto"
                 aria-label="Reset the game and return to the beginning"
               >
                 <RotateCcw className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -279,7 +279,7 @@ export function CardDealer() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="mt-12 text-center text-slate-500 text-sm"
+        className="mt-8 md:mt-12 text-center text-slate-500 text-sm px-4"
       >
         <p>Discover the magic of Dungarvan • Ireland&apos;s Ancient East</p>
       </motion.footer>

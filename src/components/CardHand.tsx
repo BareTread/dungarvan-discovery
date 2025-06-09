@@ -40,10 +40,10 @@ export function CardHand({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -30, scale: 0.9 }}
             transition={{ duration: 0.8, ease: [0.175, 0.885, 0.32, 1.275] }}
-            className="mb-8 text-center"
+            className="mb-6 md:mb-8 text-center px-4"
           >
             <motion.h2
-              className="text-2xl md:text-3xl font-bold text-white mb-3"
+              className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -51,7 +51,7 @@ export function CardHand({
               Choose Your Adventure
             </motion.h2>
             <motion.p
-              className="text-slate-400 text-lg"
+              className="text-slate-400 text-base md:text-lg"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
@@ -67,10 +67,10 @@ export function CardHand({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -30, scale: 0.9 }}
             transition={{ duration: 0.8, ease: [0.175, 0.885, 0.32, 1.275] }}
-            className="mb-8 text-center"
+            className="mb-6 md:mb-8 text-center px-4"
           >
             <motion.h2
-              className="text-2xl md:text-3xl font-bold text-white mb-3"
+              className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3"
               animate={{
                 scale: [1, 1.05, 1],
                 textShadow: [
@@ -88,7 +88,7 @@ export function CardHand({
               ✨ Revealing Your Adventure...
             </motion.h2>
             <motion.p
-              className="text-slate-400 text-lg"
+              className="text-slate-400 text-base md:text-lg"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
@@ -103,16 +103,16 @@ export function CardHand({
       <div className="relative">
         {gamePhase === 'complete' && selectedIndex !== null ? (
           // Final Layout: Selected card prominent, others smaller below
-          <div className="flex flex-col items-center max-w-6xl mx-auto px-4">
+          <div className="flex flex-col items-center max-w-7xl mx-auto px-2 md:px-4">
             {/* Selected Card (Large) */}
             <motion.div
               layout
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-8"
+              className="mb-6 md:mb-8"
             >
               <motion.div
-                initial={{ scale: 1.15 }}
-                animate={{ scale: 1.1 }}
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1.05 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <GameCard
@@ -137,10 +137,10 @@ export function CardHand({
                 duration: 0.8,
                 ease: [0.175, 0.885, 0.32, 1.275]
               }}
-              className="text-center mb-8 z-10 relative"
+              className="text-center mb-6 md:mb-8 z-10 relative px-4"
             >
               <motion.h3
-                className="text-xl md:text-2xl font-bold text-white mb-3"
+                className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-3"
                 animate={{
                   scale: [1, 1.02, 1],
                   textShadow: [
@@ -158,7 +158,7 @@ export function CardHand({
                 🎉 Your Adventure Awaits!
               </motion.h3>
               <motion.p
-                className="text-slate-300 text-lg"
+                className="text-slate-300 text-base md:text-lg"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
@@ -174,7 +174,7 @@ export function CardHand({
               transition={{ delay: 1, duration: 0.6 }}
               className="text-center w-full"
             >
-              <div className="flex gap-4 justify-center flex-wrap max-w-5xl mx-auto">
+              <div className="flex gap-2 md:gap-4 justify-center flex-wrap max-w-6xl mx-auto">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -189,7 +189,7 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 0.6,
+                        scale: 0.5,
                         opacity: 0.9,
                         rotateY: 0,
                         y: 0,
@@ -203,7 +203,7 @@ export function CardHand({
                       }}
                       className="transform-gpu"
                       whileHover={{
-                        scale: 0.68,
+                        scale: 0.55,
                         opacity: 1,
                         y: -4,
                         rotateX: 2,
@@ -232,7 +232,7 @@ export function CardHand({
         ) : (
           // Enhanced Initial Layout: 5 cards in a row
           <motion.div
-            className="flex gap-6 justify-center flex-wrap"
+            className="flex gap-3 md:gap-6 justify-center flex-wrap max-w-7xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
