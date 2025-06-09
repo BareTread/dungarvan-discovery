@@ -28,8 +28,8 @@ export function GameCard({
   onHover,
   delay = 0
 }: GameCardProps) {
-  // Force flip for testing - remove this later
-  const forceFlipped = isSelected;
+  // Show activity details when flipped (either selected or revealed)
+  const showActivityDetails = isFlipped;
   return (
     <motion.div
       initial={{
@@ -61,14 +61,14 @@ export function GameCard({
           isSelected && "z-10"
         )}
         onClick={canSelect ? onSelect : undefined}
-        onMouseEnter={() => canSelect && !forceFlipped && onHover(true)}
+        onMouseEnter={() => canSelect && !showActivityDetails && onHover(true)}
         onMouseLeave={() => onHover(false)}
         role={canSelect ? "button" : "img"}
         tabIndex={canSelect ? 0 : -1}
         aria-label={
           canSelect
             ? `Select mystery adventure card ${activity.id}`
-            : forceFlipped
+            : showActivityDetails
               ? `${activity.title} in ${activity.location}. Duration: ${activity.duration}. ${activity.description}`
               : "Mystery adventure card"
         }
@@ -80,11 +80,16 @@ export function GameCard({
         }}
 
         animate={{
-          scale: isSelected ? 1.15 : 1,
+          scale: isSelected ? 1.15 : (isFlipped && !isSelected) ? 0.95 : 1,
           y: isSelected ? -24 : 0,
           rotateX: isSelected ? -2 : 0,
           zIndex: isSelected ? 10 : 1,
-          filter: isSelected ? "brightness(1.1)" : "brightness(1)"
+          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1,
+          filter: isSelected
+            ? "brightness(1.1)"
+            : (isFlipped && !isSelected)
+              ? "brightness(0.7) blur(2px)"
+              : "brightness(1)"
         }}
         transition={{
           scale: {
@@ -110,7 +115,7 @@ export function GameCard({
           },
           zIndex: { duration: 0 }
         }}
-        whileHover={canSelect && !isFlipped ? {
+        whileHover={canSelect && !showActivityDetails ? {
           scale: 1.08,
           y: -12,
           rotateX: 3,
@@ -126,7 +131,7 @@ export function GameCard({
         } : {}}
       >
         {/* Conditional rendering based on flip state */}
-        {!forceFlipped ? (
+        {!showActivityDetails ? (
           /* Card Front (Mystery Side) */
           <div
             className={cn(
