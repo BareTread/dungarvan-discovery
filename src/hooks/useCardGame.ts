@@ -6,7 +6,7 @@ export function useCardGame() {
     dealtCards: [],
     selectedIndex: null,
     isRevealing: false,
-    gamePhase: 'dealing'
+    gamePhase: 'selecting' // Start in selecting state to show fan layout
   });
 
   const [animationState, setAnimationState] = useState({
@@ -20,32 +20,24 @@ export function useCardGame() {
    */
   const dealNewHand = useCallback(() => {
     setAnimationState(prev => ({ ...prev, isDealing: true }));
-    
-    // Reset game state
+
+    // Deal new cards immediately to show fan layout
+    const newCards = cardDealer.dealBalancedHand();
+
+    // Set game state with cards immediately
     setGameState({
-      dealtCards: [],
+      dealtCards: newCards,
       selectedIndex: null,
       isRevealing: false,
-      gamePhase: 'dealing'
+      gamePhase: 'selecting' // Go directly to selecting to show fan layout
     });
 
     // Reset flip states
     setAnimationState(prev => ({
       ...prev,
-      flipStates: [false, false, false, false, false]
+      flipStates: [false, false, false, false, false],
+      isDealing: false // Set to false immediately since we have cards
     }));
-
-    // Deal new cards after a brief delay
-    setTimeout(() => {
-      const newCards = cardDealer.dealBalancedHand();
-      setGameState(prev => ({
-        ...prev,
-        dealtCards: newCards,
-        gamePhase: 'selecting'
-      }));
-      
-      setAnimationState(prev => ({ ...prev, isDealing: false }));
-    }, 200);
   }, []);
 
   /**

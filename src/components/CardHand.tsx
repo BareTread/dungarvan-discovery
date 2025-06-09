@@ -40,10 +40,10 @@ export function CardHand({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -30, scale: 0.9 }}
             transition={{ duration: 0.8, ease: [0.175, 0.885, 0.32, 1.275] }}
-            className="mb-6 md:mb-8 text-center px-4"
+            className="mb-8 md:mb-12 text-center px-4"
           >
             <motion.h2
-              className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -51,7 +51,7 @@ export function CardHand({
               Choose Your Adventure
             </motion.h2>
             <motion.p
-              className="text-slate-400 text-base md:text-lg"
+              className="text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-md mx-auto"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
@@ -137,10 +137,10 @@ export function CardHand({
                 duration: 0.8,
                 ease: [0.175, 0.885, 0.32, 1.275]
               }}
-              className="text-center mb-4 md:mb-6 z-10 relative px-4"
+              className="text-center mb-6 md:mb-10 z-10 relative px-4"
             >
               <motion.h3
-                className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
                 animate={{
                   scale: [1, 1.02, 1],
                   textShadow: [
@@ -158,7 +158,7 @@ export function CardHand({
                 🎉 Your Adventure Awaits!
               </motion.h3>
               <motion.p
-                className="text-slate-300 text-base md:text-lg"
+                className="text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-lg mx-auto"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
@@ -246,8 +246,8 @@ export function CardHand({
                 const offsetFromCenter = index - centerIndex;
 
                 // Tighter spacing and rotation for fan effect
-                const xOffset = offsetFromCenter * 45; // Much closer horizontal spacing
-                const rotation = offsetFromCenter * 8; // Subtle rotation for fan effect
+                const xOffset = offsetFromCenter * 35; // Even closer horizontal spacing
+                const rotation = offsetFromCenter * 6; // More subtle rotation for fan effect
                 const zIndex = totalCards - Math.abs(offsetFromCenter); // Center cards higher
 
                 return (
@@ -266,9 +266,9 @@ export function CardHand({
                     }}
                     animate={{
                       opacity: 1,
-                      scale: 0.85, // Slightly smaller for tighter fit
+                      scale: 0.75, // Smaller for tighter fit and mobile optimization
                       x: xOffset,
-                      y: Math.abs(offsetFromCenter) * 5, // Slight vertical offset for depth
+                      y: Math.abs(offsetFromCenter) * 3, // Less vertical offset for tighter layout
                       rotate: rotation
                     }}
                     transition={{

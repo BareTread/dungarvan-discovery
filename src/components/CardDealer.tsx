@@ -50,7 +50,7 @@ export function CardDealer() {
           />
         ))}
       </div>
-      {/* Enhanced Header */}
+      {/* Enhanced Header with Better Spacing */}
       <motion.header
         initial={{ opacity: 0, y: -50, filter: "blur(10px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -59,10 +59,10 @@ export function CardDealer() {
           ease: [0.175, 0.885, 0.32, 1.275],
           filter: { duration: 0.8 }
         }}
-        className="text-center mb-3 md:mb-4 lg:mb-6 relative z-10"
+        className="text-center mb-8 md:mb-12 lg:mb-16 relative z-10 px-4"
       >
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-3 lg:mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 lg:mb-8 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative leading-tight"
           animate={{
             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
           }}
@@ -93,7 +93,7 @@ export function CardDealer() {
         </motion.h1>
 
         <motion.p
-          className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed px-6"
+          className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-6 font-light"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
@@ -147,7 +147,7 @@ export function CardDealer() {
               </motion.div>
 
               <motion.h2
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
@@ -156,7 +156,7 @@ export function CardDealer() {
               </motion.h2>
 
               <motion.p
-                className="text-slate-400 mb-4 md:mb-5 max-w-md mx-auto leading-relaxed text-base sm:text-lg px-4"
+                className="text-slate-300 mb-6 md:mb-8 max-w-lg mx-auto leading-relaxed text-lg sm:text-xl px-4 font-light"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
@@ -279,9 +279,9 @@ export function CardDealer() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="mt-4 md:mt-6 text-center text-slate-500 text-sm px-4"
+        className="mt-8 md:mt-12 text-center text-slate-400 text-base px-4"
       >
-        <p>Discover the magic of Dungarvan • Ireland&apos;s Ancient East</p>
+        <p className="font-light">Discover the magic of Dungarvan • Ireland&apos;s Ancient East</p>
       </motion.footer>
     </main>
   );
