@@ -4,6 +4,15 @@
 
 export type HapticPattern = 'light' | 'medium' | 'heavy' | 'selection' | 'impact' | 'notification';
 
+// Extend Navigator interface for haptic feedback
+interface NavigatorWithHaptics extends Navigator {
+  hapticFeedback?: {
+    impactOccurred: (intensity: 'light' | 'medium' | 'heavy') => void;
+    selectionChanged: () => void;
+    notificationOccurred: (type: 'success' | 'warning' | 'error') => void;
+  };
+}
+
 /**
  * Trigger haptic feedback on supported devices
  */
@@ -14,26 +23,27 @@ export function triggerHaptic(pattern: HapticPattern = 'light'): void {
   }
 
   // Modern iOS devices with Haptic Engine
-  if ('hapticFeedback' in navigator) {
+  const nav = navigator as NavigatorWithHaptics;
+  if ('hapticFeedback' in nav && nav.hapticFeedback) {
     try {
       switch (pattern) {
         case 'light':
-          (navigator as any).hapticFeedback.impactOccurred('light');
+          nav.hapticFeedback.impactOccurred('light');
           break;
         case 'medium':
-          (navigator as any).hapticFeedback.impactOccurred('medium');
+          nav.hapticFeedback.impactOccurred('medium');
           break;
         case 'heavy':
-          (navigator as any).hapticFeedback.impactOccurred('heavy');
+          nav.hapticFeedback.impactOccurred('heavy');
           break;
         case 'selection':
-          (navigator as any).hapticFeedback.selectionChanged();
+          nav.hapticFeedback.selectionChanged();
           break;
         case 'notification':
-          (navigator as any).hapticFeedback.notificationOccurred('success');
+          nav.hapticFeedback.notificationOccurred('success');
           break;
         default:
-          (navigator as any).hapticFeedback.impactOccurred('light');
+          nav.hapticFeedback.impactOccurred('light');
       }
       return;
     } catch (error) {
