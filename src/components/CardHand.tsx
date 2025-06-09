@@ -231,12 +231,11 @@ export function CardHand({
             </motion.div>
           </div>
         ) : (
-          // Enhanced Initial Layout: 5 cards with very tight mobile spacing
+          // Enhanced Initial Layout: 5 cards with much tighter spacing
           <motion.div
-            className="flex justify-center flex-wrap max-w-7xl mx-auto px-2 md:px-4"
+            className="flex justify-center items-center max-w-6xl mx-auto px-1 sm:px-2"
             style={{
-              gap: 'clamp(0.125rem, 1vw, 1rem)',
-              rowGap: '-8rem'
+              gap: 'clamp(-2rem, -3vw, -1rem)', // Negative gap for overlapping
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -245,13 +244,33 @@ export function CardHand({
             {cards.map((card, index) => (
               <motion.div
                 key={card.id}
-                className="-mb-32 sm:-mb-40 md:-mb-48"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
+                className="relative"
+                style={{
+                  zIndex: cards.length - index, // Stack cards with proper z-index
+                  marginLeft: index > 0 ? 'clamp(-8rem, -12vw, -6rem)' : '0', // Overlap cards significantly
+                }}
+                initial={{
+                  opacity: 0,
+                  scale: 0.7,
+                  x: index * 20,
+                  rotateY: -15
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  x: 0,
+                  rotateY: 0
+                }}
                 transition={{
                   delay: index * 0.1,
-                  duration: 0.5,
+                  duration: 0.6,
                   ease: [0.175, 0.885, 0.32, 1.275]
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  zIndex: 50,
+                  x: index === 0 ? 10 : index === cards.length - 1 ? -10 : 0,
+                  transition: { duration: 0.2 }
                 }}
               >
                 <GameCard

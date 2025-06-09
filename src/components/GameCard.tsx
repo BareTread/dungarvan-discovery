@@ -60,7 +60,7 @@ export function GameCard({
       <motion.div
         className={cn(
           "relative cursor-pointer focus-ring",
-          "w-52 h-80 sm:w-60 sm:h-96 md:w-72 md:h-[30rem] lg:w-80 lg:h-[32rem]",
+          "w-48 h-72 sm:w-52 sm:h-80 md:w-56 md:h-84 lg:w-60 lg:h-88",
           !canSelect && "cursor-default",
           isSelected && "z-10"
         )}

@@ -46,8 +46,48 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 🚀 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Quick Deploy with Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/BareTread/dungarvan-discovery)
+
+### Manual Deployment
+
+1. **Vercel** (Recommended):
+   ```bash
+   npm install -g vercel
+   vercel --prod
+   ```
+
+2. **Netlify**:
+   ```bash
+   npm run build
+   # Upload the .next folder to Netlify
+   ```
+
+3. **GitHub Pages** (Static Export):
+   ```bash
+   npm run build
+   npm run export
+   # Deploy the out/ folder
+   ```
+
+### Environment Variables
+
+No environment variables are required for basic functionality.
+
+## 📱 Recent Updates
+
+### v1.1.0 - Text Layout & Space Optimization
+- ✨ Improved text layout and space utilization
+- 📱 Enhanced responsive text sizing with clamp() functions
+- 🔧 Expandable descriptions and local secrets
+- 🎨 Better typography with optimized line heights
+- 📐 Compact layout classes for mobile optimization
+- 🏷️ Improved badge and header spacing
+- 📜 Enhanced scrollable content areas
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
