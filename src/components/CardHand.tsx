@@ -117,7 +117,6 @@ export function CardHand({
               >
                 <GameCard
                   activity={cards[selectedIndex]}
-                  index={selectedIndex}
                   isFlipped={flipStates[selectedIndex]}
                   isSelected={true}
                   isHovered={false}
@@ -216,7 +215,6 @@ export function CardHand({
                     >
                       <GameCard
                         activity={card}
-                        index={index}
                         isFlipped={flipStates[index]}
                         isSelected={false}
                         isHovered={false}
@@ -286,7 +284,6 @@ export function CardHand({
                   >
                     <GameCard
                       activity={card}
-                      index={index}
                       isFlipped={flipStates[index]}
                       isSelected={selectedIndex === index}
                       isHovered={hoveredIndex === index}

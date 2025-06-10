@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 
 interface GameCardProps {
   activity: Activity;
-  index: number;
   isFlipped: boolean;
   isSelected: boolean;
   isHovered: boolean;
@@ -20,7 +19,6 @@ interface GameCardProps {
 
 export function GameCard({
   activity,
-  index,
   isFlipped,
   isSelected,
   isHovered,
@@ -36,26 +34,17 @@ export function GameCard({
   return (
     <motion.div
       initial={{
-        y: 120,
-        opacity: 0,
-        scale: 0.7,
-        rotateX: 25,
-        rotateY: 15,
-        filter: "blur(10px) brightness(0.5)"
+        y: 30,
+        opacity: 0
       }}
       animate={{
         y: 0,
-        opacity: 1,
-        scale: 1,
-        rotateX: 0,
-        rotateY: 0,
-        filter: "blur(0px) brightness(1)"
+        opacity: 1
       }}
       transition={{
-        duration: 1.2,
+        duration: 0.5,
         delay: delay,
-        ease: [0.175, 0.885, 0.32, 1.275],
-        filter: { duration: 0.8 }
+        ease: "easeOut"
       }}
       className="relative transform-gpu"
     >
@@ -91,33 +80,14 @@ export function GameCard({
         }}
 
         animate={{
-          scale: isSelected ? 1.05 : (isFlipped && !isSelected) ? 0.9 : 1,
-          y: isSelected ? -20 : (isFlipped && !isSelected) ? 4 : 0,
-          zIndex: isSelected ? 20 : (isFlipped && !isSelected) ? 5 : 1,
-          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.85 : 1,
-          filter: isSelected
-            ? "brightness(1.1) saturate(1.05)"
-            : (isFlipped && !isSelected)
-              ? "brightness(0.8) saturate(0.95)"
-              : "brightness(1)"
+          scale: isSelected ? 1.02 : (isFlipped && !isSelected) ? 0.95 : 1,
+          y: isSelected ? -10 : 0,
+          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1
         }}
         transition={{
-          duration: 0.5,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          delay: isSelected ? 0 : (index * 0.05)
+          duration: 0.3,
+          ease: "easeOut"
         }}
-        whileHover={canSelect && !showActivityDetails ? {
-          scale: 1.05,
-          y: -8,
-          transition: {
-            duration: 0.3,
-            ease: "easeOut"
-          }
-        } : {}}
-        whileTap={canSelect ? {
-          scale: 0.98,
-          transition: { duration: 0.1 }
-        } : {}}
       >
 
 
@@ -152,107 +122,28 @@ export function GameCard({
             }}
           >
           <div className="flex flex-col items-center justify-center h-full text-center relative overflow-hidden">
-            {/* Animated background effects */}
-            {isSelected && (
-              <>
-                <motion.div
-                  initial={{ scale: 0, opacity: 0, rotate: 0 }}
-                  animate={{ scale: 1, opacity: 1, rotate: 360 }}
-                  transition={{ duration: 1.2, ease: [0.175, 0.885, 0.32, 1.275] }}
-                  className="absolute inset-0 bg-gradient-to-br from-yellow-400/15 via-purple-500/10 to-pink-500/15 rounded-lg"
-                />
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 0.3 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent rounded-lg"
-                />
-              </>
-            )}
 
-            {/* Hover glow effect */}
-            {isHovered && !isSelected && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-pink-500/10 rounded-lg"
-              />
-            )}
 
-            <motion.div
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 md:mb-4 relative z-10"
-              animate={isSelected ? {
-                scale: [1, 1.3, 1.1],
-                rotate: [0, 15, -10, 5, 0],
-                y: [0, -5, 0]
-              } : isHovered ? {
-                scale: [1, 1.1, 1.05],
-                rotate: [0, 5, -5, 0]
-              } : {}}
-              transition={{
-                duration: isSelected ? 1.2 : 0.6,
-                ease: [0.175, 0.885, 0.32, 1.275]
-              }}
-            >
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 md:mb-4 relative z-10">
               🎲
-            </motion.div>
+            </div>
 
-            <motion.h3
-              className="text-card-title-enhanced text-white mb-3 relative z-10"
-              animate={isSelected ? {
-                scale: [1, 1.05, 1],
-                y: [0, -2, 0]
-              } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
+            <h3 className="text-card-title-enhanced text-white mb-3 relative z-10">
               {isSelected ? "✨ Chosen!" : "Mystery Adventure"}
-            </motion.h3>
+            </h3>
 
-            <motion.p
-              className="text-card-meta-enhanced text-slate-300 relative z-10 px-1 sm:px-0 text-center"
-              animate={isSelected ? {
-                opacity: [0.7, 1, 0.9],
-                y: [0, -1, 0]
-              } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
+            <p className="text-card-meta-enhanced text-slate-300 relative z-10 px-1 sm:px-0 text-center">
               {isSelected ? "Revealing your discovery..." : "Click to reveal your Dungarvan discovery"}
-            </motion.p>
+            </p>
 
-            {/* Enhanced progress indicator */}
+            {/* Simple progress indicator */}
             <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
-              <motion.div
-                className={cn(
-                  "h-1 sm:h-1.5 rounded-full relative overflow-hidden",
-                  isSelected
-                    ? "bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500"
-                    : "bg-gradient-to-r from-purple-500 to-pink-500 opacity-60"
-                )}
-                animate={isSelected ? {
-                  opacity: [0.6, 1, 0.8, 1],
-                  scale: [1, 1.02, 1]
-                } : {}}
-                transition={{
-                  duration: 2,
-                  repeat: isSelected ? Infinity : 0,
-                  ease: "easeInOut"
-                }}
-              >
-                {isSelected && (
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                    animate={{
-                      x: ['-100%', '100%']
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                )}
-              </motion.div>
+              <div className={cn(
+                "h-1 sm:h-1.5 rounded-full",
+                isSelected
+                  ? "bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500"
+                  : "bg-gradient-to-r from-purple-500 to-pink-500 opacity-60"
+              )} />
             </div>
           </div>
         </div>
@@ -302,32 +193,20 @@ export function GameCard({
                 {activity.emoji}
               </motion.div>
               <div className="flex gap-1 sm:gap-1.5 flex-wrap">
-                <motion.span
-                  className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <span className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight">
                   {getTimeEmoji(activity.bestTime)}
-                </motion.span>
-                <motion.span
-                  className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
+                </span>
+                <span className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight">
                   {getDifficultyEmoji(activity.difficulty)}
-                </motion.span>
+                </span>
                 {activity.cost && (
-                  <motion.span
-                    className={`text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-medium leading-tight ${
+                  <span className={`text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-medium leading-tight ${
                       activity.cost === 'free'
                         ? 'bg-green-500/25 border-green-400/30 text-green-200'
                         : 'bg-white/25 border-white/20'
-                    }`}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                    }`}>
                     {getCostEmoji(activity.cost)}
-                  </motion.span>
+                  </span>
                 )}
               </div>
             </motion.div>
@@ -407,20 +286,9 @@ export function GameCard({
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-lg" />
 
               <div className="flex items-start relative z-10" style={{ gap: 'var(--spacing-card-gap)' }}>
-                <motion.span
-                  className="text-yellow-300 text-lg mt-1 flex-shrink-0"
-                  animate={{
-                    rotate: [0, 10, -10, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
+                <span className="text-yellow-300 text-lg mt-1 flex-shrink-0">
                   💡
-                </motion.span>
+                </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-card-meta-enhanced font-bold text-yellow-300 tracking-wide uppercase">
