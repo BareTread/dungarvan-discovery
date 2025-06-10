@@ -109,11 +109,13 @@ body {
   position: relative;
 }
 
-/* Enhanced Card System */
+/* Enhanced Card System - Optimized for Performance */
 .card-flip {
   transform-style: preserve-3d;
   perspective: 1200px;
   will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Smooth flip transition with spring easing */
@@ -140,11 +142,10 @@ body {
   transform: rotateY(180deg);
 }
 
-/* Premium hover effects with magnetic attraction */
+/* Smooth hover effects - reduced complexity to prevent glitching */
 .card-flip:not(.flipped):not(.flipping):hover {
-  transform: translateY(-12px) scale(1.03) rotateX(3deg) rotateZ(0.5deg);
-  transition: all 0.4s var(--ease-magnetic);
-  filter: brightness(1.05) saturate(1.1);
+  transform: translateY(-8px) scale(1.02);
+  transition: transform 0.3s var(--ease-smooth);
 }
 
 /* Sophisticated magnetic button effects */
@@ -210,13 +211,13 @@ body {
 }
 
 .card-glow:hover::before {
-  opacity: 0.6;
-  filter: blur(20px);
+  opacity: 0.3;
+  filter: blur(16px);
 }
 
 .card-glow:hover::after {
-  opacity: 0.8;
-  filter: blur(10px);
+  opacity: 0.4;
+  filter: blur(8px);
 }
 
 /* Premium shadow system with glass morphism */
@@ -316,12 +317,11 @@ body {
 }
 
 .animate-magnetic-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .animate-magnetic-hover:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.05) saturate(1.1);
+  transform: translateY(-2px) scale(1.01);
 }
 
 @keyframes float {
@@ -423,7 +423,7 @@ body {
 }
 
 .animate-gentle-glow {
-  animation: gentle-glow 3s ease-in-out infinite;
+  /* Disabled to prevent glitching */
 }
 
 /* Accessibility: Respect reduced motion preferences */

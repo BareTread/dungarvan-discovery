@@ -93,71 +93,22 @@ export function GameCard({
         animate={{
           scale: isSelected ? 1.05 : (isFlipped && !isSelected) ? 0.9 : 1,
           y: isSelected ? -20 : (isFlipped && !isSelected) ? 4 : 0,
-          rotateX: isSelected ? -2 : (isFlipped && !isSelected) ? 0.5 : 0,
-          rotateZ: isSelected ? 0 : (isFlipped && !isSelected) ? Math.random() * 3 - 1.5 : 0,
           zIndex: isSelected ? 20 : (isFlipped && !isSelected) ? 5 : 1,
           opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.85 : 1,
           filter: isSelected
-            ? "brightness(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(0,0,0,0.3))"
+            ? "brightness(1.1) saturate(1.05)"
             : (isFlipped && !isSelected)
-              ? "brightness(0.75) blur(0.8px) saturate(0.9)"
+              ? "brightness(0.8) saturate(0.95)"
               : "brightness(1)"
         }}
         transition={{
-          scale: {
-            duration: isSelected ? 0.7 : 0.8,
-            ease: isSelected ? [0.175, 0.885, 0.32, 1.275] : [0.25, 0.46, 0.45, 0.94],
-            type: "spring",
-            stiffness: isSelected ? 250 : 180,
-            damping: isSelected ? 25 : 30,
-            delay: isSelected ? 0 : (index * 0.06)
-          },
-          y: {
-            duration: isSelected ? 0.6 : 0.9,
-            ease: [0.175, 0.885, 0.32, 1.275],
-            type: "spring",
-            stiffness: isSelected ? 300 : 200,
-            damping: isSelected ? 28 : 35,
-            delay: isSelected ? 0 : (index * 0.08)
-          },
-          rotateX: {
-            duration: 0.6,
-            ease: [0.25, 0.46, 0.45, 0.94],
-            delay: isSelected ? 0 : (index * 0.04)
-          },
-          rotateZ: {
-            duration: 0.8,
-            ease: [0.25, 0.46, 0.45, 0.94],
-            delay: isSelected ? 0 : (index * 0.05)
-          },
-          opacity: {
-            duration: isSelected ? 0.4 : 0.6,
-            ease: "easeOut",
-            delay: isSelected ? 0 : (index * 0.03)
-          },
-          filter: {
-            duration: isSelected ? 0.5 : 0.7,
-            ease: "easeOut",
-            delay: isSelected ? 0 : (index * 0.04)
-          },
-          zIndex: { duration: 0 }
+          duration: 0.5,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          delay: isSelected ? 0 : (index * 0.05)
         }}
         whileHover={canSelect && !showActivityDetails ? {
-          scale: 1.12,
-          y: -16,
-          rotateX: 8,
-          rotateY: 5,
-          rotateZ: 2,
-          filter: "brightness(1.15) saturate(1.3) drop-shadow(0 25px 50px rgba(139, 92, 246, 0.5))",
-          transition: {
-            duration: 0.4,
-            ease: [0.175, 0.885, 0.32, 1.275]
-          }
-        } : (isFlipped && !isSelected) ? {
-          scale: 0.98,
-          y: -4,
-          opacity: 0.98,
-          filter: "brightness(1.05) blur(0px) saturate(1.1)",
+          scale: 1.05,
+          y: -8,
           transition: {
             duration: 0.3,
             ease: "easeOut"
@@ -168,71 +119,19 @@ export function GameCard({
           transition: { duration: 0.1 }
         } : {}}
       >
-        {/* Subtle breathing animation for non-selected flipped cards */}
-        {isFlipped && !isSelected && (
+
+
+        {/* Simple glow for selected card */}
+        {isSelected && (
           <motion.div
-            className="absolute inset-0 rounded-xl"
-            animate={{
-              scale: [1, 1.005, 1],
-              opacity: [0.8, 0.85, 0.8]
-            }}
-            transition={{
-              duration: 3 + (index * 0.2),
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
             style={{
-              background: 'linear-gradient(45deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 100%)',
-              pointerEvents: 'none'
+              background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(168, 85, 247, 0.06) 50%, rgba(236, 72, 153, 0.08) 100%)',
             }}
           />
-        )}
-
-        {/* Floating animation for selected card */}
-        {isSelected && (
-          <>
-            <motion.div
-              className="absolute inset-0 rounded-xl"
-              animate={{
-                y: [0, -2, 0],
-                rotateX: [-3, -2, -3],
-                scale: [1, 1.002, 1]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              style={{
-                background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(168, 85, 247, 0.06) 50%, rgba(236, 72, 153, 0.08) 100%)',
-                pointerEvents: 'none'
-              }}
-            />
-
-            {/* Magical particles around selected card */}
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-yellow-400 rounded-full"
-                style={{
-                  left: `${20 + (i * 12)}%`,
-                  top: `${15 + (i % 2) * 70}%`,
-                }}
-                animate={{
-                  y: [0, -8, 0],
-                  x: [0, Math.sin(i) * 4, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                  scale: [0.5, 1, 0.5]
-                }}
-                transition={{
-                  duration: 2 + (i * 0.3),
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.2
-                }}
-              />
-            ))}
-          </>
         )}
 
         {/* Conditional rendering based on flip state */}
@@ -264,14 +163,9 @@ export function GameCard({
                 />
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: [0, 1.2, 1], opacity: [0, 0.8, 0.3] }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  animate={{ scale: 1, opacity: 0.3 }}
+                  transition={{ duration: 1, ease: "easeOut" }}
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent rounded-lg"
-                  style={{
-                    background: 'linear-gradient(45deg, transparent 30%, rgba(251, 191, 36, 0.2) 50%, transparent 70%)',
-                    backgroundSize: '200% 200%',
-                    animation: 'shimmer 2s linear infinite'
-                  }}
                 />
               </>
             )}
