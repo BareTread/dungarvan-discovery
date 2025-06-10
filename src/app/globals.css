@@ -1480,14 +1480,246 @@ body::before {
   }
 }
 
+/* Enhanced Card Fan Layout */
+.card-fan-item {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center bottom;
+}
+
+.card-fan-item:hover {
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
+}
+
+/* Enhanced Game Card Styling */
+.game-card-enhanced {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center;
+  will-change: transform, filter;
+}
+
+.game-card-enhanced:hover {
+  filter: brightness(1.05) saturate(1.1);
+}
+
+/* Enhanced Shadow System for Better Depth */
+.shadow-elegant {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.shadow-elegant-hover {
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 40px 80px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.shadow-elegant-selected {
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    0 30px 60px rgba(0, 0, 0, 0.25),
+    0 60px 120px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 0 60px rgba(251, 191, 36, 0.5),
+    0 0 120px rgba(251, 191, 36, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Local Secret Styling */
+.local-secret-premium {
+  position: relative;
+  margin-top: auto;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.local-secret-border {
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  border-radius: 0.75rem;
+  opacity: 0.9;
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+.local-secret-content {
+  position: relative;
+  background: linear-gradient(135deg, #FFF8DC 0%, #F5E6A3 100%);
+  border-radius: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+/* Enhanced Mystery Card Shadows */
+.mystery-card-shadow-1,
+.mystery-card-shadow-2 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0f0f1e 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: -1;
+}
+
+.mystery-card-shadow-1 {
+  transform: translateZ(-5px) translateY(4px) scale(0.97);
+  opacity: 0.8;
+}
+
+.mystery-card-shadow-2 {
+  transform: translateZ(-10px) translateY(8px) scale(0.94);
+  opacity: 0.6;
+}
+
+/* Enhanced Responsive Spacing for Text Overlap Prevention */
+@media (max-width: 768px) {
+  .celebration-gradient {
+    margin-top: clamp(10rem, 25vw, 15rem) !important;
+    padding-top: clamp(4rem, 10vw, 6rem) !important;
+  }
+
+  .game-card-selected {
+    margin-bottom: clamp(8rem, 20vw, 12rem) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .celebration-gradient {
+    margin-top: clamp(12rem, 30vw, 18rem) !important;
+    padding-top: clamp(5rem, 12vw, 8rem) !important;
+  }
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .golden-title,
   .celebration-gradient,
   .revealing-text,
   .dice,
-  .shimmer-overlay {
+  .shimmer-overlay,
+  .card-fan-item,
+  .game-card-enhanced,
+  .subtle-pulse {
     animation: none !important;
+    transition: none !important;
+  }
+
+  .category-pill-modern::before {
+    transition: none !important;
+  }
+}
+
+/* Improved Local Secret Styling */
+.local-secret-premium {
+  position: relative;
+  margin-top: auto;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.local-secret-border {
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  border-radius: 0.75rem;
+  opacity: 0.9;
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+.local-secret-content {
+  position: relative;
+  background: linear-gradient(135deg, #FFF8DC 0%, #F5E6A3 100%);
+  border-radius: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+/* Enhanced Mystery Card Shadows */
+.mystery-card-shadow-1,
+.mystery-card-shadow-2 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0f0f1e 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: -1;
+}
+
+.mystery-card-shadow-1 {
+  transform: translateZ(-5px) translateY(4px) scale(0.97);
+  opacity: 0.8;
+}
+
+.mystery-card-shadow-2 {
+  transform: translateZ(-10px) translateY(8px) scale(0.94);
+  opacity: 0.6;
+}
+
+/* Enhanced Card Depth and Polish */
+.shadow-elegant {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.shadow-elegant-hover {
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 40px 80px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.shadow-elegant-selected {
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    0 30px 60px rgba(0, 0, 0, 0.25),
+    0 60px 120px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 0 60px rgba(251, 191, 36, 0.5),
+    0 0 120px rgba(251, 191, 36, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .golden-title,
+  .celebration-gradient,
+  .revealing-text,
+  .dice,
+  .shimmer-overlay,
+  .card-fan-item,
+  .game-card-enhanced {
+    animation: none !important;
+    transition: none !important;
   }
 
   .category-pill-modern::before {

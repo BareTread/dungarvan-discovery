@@ -50,16 +50,20 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative cursor-pointer focus-ring",
-          "w-36 h-52 sm:w-40 sm:h-60 md:w-44 md:h-64 lg:w-48 lg:h-72",
+          "relative cursor-pointer focus-ring game-card-enhanced",
+          "w-full h-full", // Use full container dimensions
           !canSelect && "cursor-default",
           isSelected && "z-10 game-card-selected",
           canSelect && "hover:z-20",
           !showActivityDetails && "card-stack"
         )}
         style={{
-          width: 'var(--card-width-md)',
-          height: 'var(--card-height-md)'
+          width: 'clamp(140px, 35vw, 200px)', // Responsive but consistent sizing
+          height: 'clamp(200px, 50vw, 300px)',
+          maxWidth: '200px',
+          maxHeight: '300px',
+          minWidth: '140px',
+          minHeight: '200px'
         }}
         onClick={canSelect ? onSelect : undefined}
         onMouseEnter={() => canSelect && !showActivityDetails && onHover(true)}
@@ -86,21 +90,23 @@ export function GameCard({
           opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1
         }}
         transition={{
-          duration: 0.2,
-          ease: "easeOut"
+          duration: 0.3,
+          ease: [0.175, 0.885, 0.32, 1.275]
         }}
       >
 
 
-        {/* Simple glow for selected card */}
+        {/* Enhanced glow for selected card */}
         {isSelected && (
           <motion.div
-            className="absolute inset-0 rounded-xl pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            className="absolute inset-0 rounded-xl pointer-events-none z-0"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.175, 0.885, 0.32, 1.275] }}
             style={{
-              background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(168, 85, 247, 0.06) 50%, rgba(236, 72, 153, 0.08) 100%)',
+              background: 'radial-gradient(ellipse at center, rgba(251, 191, 36, 0.15) 0%, rgba(168, 85, 247, 0.1) 50%, transparent 80%)',
+              filter: 'blur(8px)',
+              transform: 'scale(1.1)'
             }}
           />
         )}
@@ -108,21 +114,24 @@ export function GameCard({
         {/* Conditional rendering based on flip state */}
         {!showActivityDetails ? (
           /* Card Front (Mystery Side) */
-          <div className="mystery-card-wrapper">
-            {/* Card stack shadows */}
+          <div className="mystery-card-wrapper relative">
+            {/* Enhanced card stack shadows */}
             <div className="mystery-card-shadow-1"></div>
             <div className="mystery-card-shadow-2"></div>
 
             <div
               className={cn(
                 "mystery-card-premium absolute inset-0 rounded-xl",
-                "transition-all duration-500 ease-out",
-                isHovered && !isSelected && "shadow-elegant-hover",
+                "transition-all duration-500 ease-out relative z-10",
+                isHovered && !isSelected && "shadow-elegant-hover transform scale-105",
                 isSelected && "shadow-elegant-selected",
                 !isHovered && !isSelected && "shadow-elegant"
               )}
               style={{
-                padding: 'var(--spacing-card-padding)'
+                padding: 'clamp(0.75rem, 3vw, 1.25rem)',
+                background: 'linear-gradient(135deg, rgba(15, 12, 41, 0.98) 0%, rgba(45, 27, 105, 0.95) 50%, rgba(26, 26, 62, 0.98) 100%)',
+                border: '2px solid',
+                borderImage: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(236, 72, 153, 0.6) 50%, rgba(59, 130, 246, 0.8) 100%) 1'
               }}
             >
               <div className="flex flex-col items-center justify-center h-full text-center relative overflow-hidden">
@@ -188,7 +197,12 @@ export function GameCard({
             )}
             style={{
               padding: 'clamp(0.75rem, 3vw, 1rem)',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              maxHeight: '100%', // Ensure content doesn't overflow
+              background: 'linear-gradient(135deg, rgba(0, 184, 217, 0.9) 0%, rgba(0, 119, 182, 0.9) 100%)',
+              backdropFilter: 'blur(12px)',
+              border: '2px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 8px 32px rgba(0, 184, 217, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
             }}
           >
             <div className="flex flex-col h-full relative overflow-hidden">
@@ -299,28 +313,38 @@ export function GameCard({
 
                 {/* Enhanced Local Secret with Premium Design */}
                 <motion.div
-                  className="local-secret-premium cursor-pointer hover:scale-[1.01] transition-all duration-300 mt-auto"
+                  className="local-secret-premium cursor-pointer hover:scale-[1.01] transition-all duration-300 mt-auto flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
                   onClick={() => setIsSecretExpanded(!isSecretExpanded)}
+                  style={{
+                    maxHeight: 'clamp(3.5rem, 12vw, 5rem)', // Strict height constraint
+                    overflow: 'hidden'
+                  }}
                 >
                   {/* Animated golden border */}
                   <div className="local-secret-border"></div>
 
-                  {/* Content container */}
-                  <div className="local-secret-content">
-                    <div className="flex items-start" style={{ gap: 'var(--spacing-card-gap)' }}>
-                      <span className="text-amber-400 text-lg mt-1 flex-shrink-0">
+                  {/* Content container with overflow protection */}
+                  <div
+                    className="local-secret-content"
+                    style={{
+                      maxHeight: '100%',
+                      overflow: 'hidden'
+                    }}
+                  >
+                    <div className="flex items-start gap-2">
+                      <span className="text-amber-600 text-base mt-0.5 flex-shrink-0">
                         💡
                       </span>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="local-secret-title">
-                            Local Secret
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="local-secret-title text-xs font-bold text-amber-900">
+                            LOCAL SECRET
                           </div>
                           <span
-                            className="text-amber-400/70 text-sm flex-shrink-0 transition-transform duration-300"
+                            className="text-amber-700 text-xs flex-shrink-0 transition-transform duration-300"
                             style={{ transform: isSecretExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
                           >
                             ▼
@@ -328,25 +352,28 @@ export function GameCard({
                         </div>
                         <p
                           className={cn(
-                            "local-secret-text transition-opacity duration-300",
+                            "local-secret-text text-xs leading-tight font-semibold text-amber-900",
                             !isSecretExpanded && "line-clamp-2"
                           )}
                           style={{
-                            opacity: isSecretExpanded ? 1 : 0.92
+                            opacity: isSecretExpanded ? 1 : 0.95,
+                            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
                           }}
                         >
                           {activity.localSecret}
                         </p>
-                        {!isSecretExpanded && activity.localSecret.length > 80 && (
-                          <div className="local-secret-title mt-2">
-                            Tap to reveal more...
+                        {!isSecretExpanded && activity.localSecret.length > 60 && (
+                          <div className="text-xs text-amber-800 mt-1 font-medium">
+                            Tap for more...
                           </div>
                         )}
                       </div>
                     </div>
 
                     {/* Decorative corner accent */}
-                    <div className="absolute top-0 right-0 w-6 h-6 bg-gradient-to-bl from-yellow-400/20 to-transparent rounded-bl-lg" />
+                    <div className="absolute top-0 right-0 w-4 h-4 bg-gradient-to-bl from-yellow-400/30 to-transparent rounded-bl-md" />
                   </div>
                 </motion.div>
               </div>

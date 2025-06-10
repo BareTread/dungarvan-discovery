@@ -60,9 +60,9 @@ export function useCardGame() {
       flipStates: prev.flipStates.map((state, i) => i === index ? true : state)
     }));
 
-    // Phase 3: Pause to let user see the selected card content
+    // Phase 3: Enhanced pause to let user see the selected card content
     setTimeout(() => {
-      // Phase 4: Flip the other cards one by one
+      // Phase 4: Flip the other cards one by one with improved timing
       const otherIndices = [0, 1, 2, 3, 4].filter(i => i !== index);
 
       otherIndices.forEach((cardIndex, staggerIndex) => {
@@ -73,19 +73,19 @@ export function useCardGame() {
               i === cardIndex ? true : state
             )
           }));
-        }, staggerIndex * ANIMATION_TIMINGS.REVEAL_STAGGER);
+        }, staggerIndex * (ANIMATION_TIMINGS.REVEAL_STAGGER * 0.8)); // Slightly faster stagger
       });
 
-      // Phase 5: After all cards are flipped, transition to final layout
+      // Phase 5: After all cards are flipped, transition to final layout with better timing
       setTimeout(() => {
         setGameState(prev => ({
           ...prev,
           isRevealing: false,
           gamePhase: 'complete'
         }));
-      }, otherIndices.length * ANIMATION_TIMINGS.REVEAL_STAGGER + ANIMATION_TIMINGS.LAYOUT_TRANSITION);
+      }, otherIndices.length * (ANIMATION_TIMINGS.REVEAL_STAGGER * 0.8) + (ANIMATION_TIMINGS.LAYOUT_TRANSITION * 1.2));
 
-    }, ANIMATION_TIMINGS.PAUSE_AFTER_FLIP);
+    }, ANIMATION_TIMINGS.PAUSE_AFTER_FLIP * 1.5); // Longer pause to appreciate selection
   }, [gameState.isRevealing, gameState.selectedIndex]);
 
   /**
