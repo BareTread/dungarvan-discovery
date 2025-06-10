@@ -38,31 +38,34 @@ export function GameCard({
       initial={{
         y: 120,
         opacity: 0,
-        scale: 0.8,
-        rotateX: 15,
-        filter: "blur(4px)"
+        scale: 0.7,
+        rotateX: 25,
+        rotateY: 15,
+        filter: "blur(10px) brightness(0.5)"
       }}
       animate={{
         y: 0,
         opacity: 1,
         scale: 1,
         rotateX: 0,
-        filter: "blur(0px)"
+        rotateY: 0,
+        filter: "blur(0px) brightness(1)"
       }}
       transition={{
-        duration: 0.8,
+        duration: 1.2,
         delay: delay,
         ease: [0.175, 0.885, 0.32, 1.275],
-        filter: { duration: 0.6 }
+        filter: { duration: 0.8 }
       }}
       className="relative transform-gpu"
     >
       <motion.div
         className={cn(
-          "relative cursor-pointer focus-ring",
+          "relative cursor-pointer focus-ring animate-magnetic-hover",
           "w-36 h-52 sm:w-40 sm:h-60 md:w-44 md:h-64 lg:w-48 lg:h-72",
           !canSelect && "cursor-default",
-          isSelected && "z-10"
+          isSelected && "z-10",
+          canSelect && "hover:z-20"
         )}
         style={{
           width: 'var(--card-width-md)',
@@ -140,19 +143,21 @@ export function GameCard({
           zIndex: { duration: 0 }
         }}
         whileHover={canSelect && !showActivityDetails ? {
-          scale: 1.08,
-          y: -12,
-          rotateX: 3,
-          rotateZ: 1,
+          scale: 1.12,
+          y: -16,
+          rotateX: 8,
+          rotateY: 5,
+          rotateZ: 2,
+          filter: "brightness(1.15) saturate(1.3) drop-shadow(0 25px 50px rgba(139, 92, 246, 0.5))",
           transition: {
-            duration: 0.3,
+            duration: 0.4,
             ease: [0.175, 0.885, 0.32, 1.275]
           }
         } : (isFlipped && !isSelected) ? {
-          scale: 0.95,
-          y: -2,
-          opacity: 0.95,
-          filter: "brightness(0.9) blur(0.3px) saturate(1.05)",
+          scale: 0.98,
+          y: -4,
+          opacity: 0.98,
+          filter: "brightness(1.05) blur(0px) saturate(1.1)",
           transition: {
             duration: 0.3,
             ease: "easeOut"

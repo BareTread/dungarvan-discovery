@@ -26,25 +26,65 @@ export function CardDealer() {
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-slate-900/50" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-slate-900/5 to-transparent" />
 
-      {/* Animated background particles */}
+      {/* Premium animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-purple-400/20 rounded-full"
+            className="absolute rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 6 + 2}px`,
+              height: `${Math.random() * 6 + 2}px`,
+              background: `linear-gradient(45deg,
+                rgba(139, 92, 246, ${Math.random() * 0.4 + 0.2}),
+                rgba(236, 72, 153, ${Math.random() * 0.4 + 0.2})
+              )`,
+              filter: 'blur(1px)',
+              boxShadow: `0 0 ${Math.random() * 20 + 10}px rgba(139, 92, 246, 0.3)`
             }}
             animate={{
-              y: [0, -100, 0],
+              y: [0, -150, 0],
+              x: [0, Math.random() * 100 - 50, 0],
               opacity: [0, 1, 0],
-              scale: [0, 1, 0],
+              scale: [0, 1.5, 0],
+              rotate: [0, 360]
             }}
             transition={{
-              duration: 8 + Math.random() * 4,
+              duration: Math.random() * 12 + 8,
               repeat: Infinity,
               delay: Math.random() * 8,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+
+        {/* Ambient glow orbs */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`glow-${i}`}
+            className="absolute rounded-full blur-2xl"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 300 + 150}px`,
+              height: `${Math.random() * 300 + 150}px`,
+              background: `radial-gradient(circle,
+                rgba(139, 92, 246, ${Math.random() * 0.08 + 0.03}) 0%,
+                rgba(236, 72, 153, ${Math.random() * 0.06 + 0.02}) 50%,
+                transparent 70%
+              )`
+            }}
+            animate={{
+              x: [0, Math.random() * 200 - 100, 0],
+              y: [0, Math.random() * 200 - 100, 0],
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{
+              duration: Math.random() * 25 + 20,
+              repeat: Infinity,
               ease: "easeInOut"
             }}
           />
@@ -62,41 +102,87 @@ export function CardDealer() {
         className="text-center mb-8 md:mb-12 lg:mb-16 relative z-10 px-4"
       >
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 lg:mb-8 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent relative leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 lg:mb-8 relative leading-tight"
+          style={{
+            background: 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 25%, #06B6D4 50%, #8B5CF6 75%, #EC4899 100%)',
+            backgroundSize: '400% 400%',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            filter: 'drop-shadow(0 0 30px rgba(139, 92, 246, 0.5))'
+          }}
           animate={{
             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
           }}
           transition={{
-            duration: 8,
+            duration: 12,
             repeat: Infinity,
             ease: "linear"
-          }}
-          style={{
-            backgroundSize: '200% 200%'
           }}
         >
           Dungarvan Discovery
 
-          {/* Subtle glow effect */}
+          {/* Premium aurora glow effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-purple-400/20 blur-xl -z-10"
+            className="absolute inset-0 blur-2xl -z-10"
+            style={{
+              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.3) 25%, rgba(6, 182, 212, 0.3) 50%, rgba(139, 92, 246, 0.3) 75%, rgba(236, 72, 153, 0.3) 100%)',
+              backgroundSize: '400% 400%',
+            }}
             animate={{
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.05, 1]
+              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              opacity: [0.4, 0.8, 0.4],
+              scale: [1, 1.1, 1]
             }}
             transition={{
-              duration: 4,
+              duration: 8,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
+
+          {/* Sparkle effects */}
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full"
+              style={{
+                left: `${15 + (i * 18)}%`,
+                top: `${20 + (i % 2) * 60}%`,
+              }}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+                rotate: [0, 180, 360]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.4,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
         </motion.h1>
 
         <motion.p
-          className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-6 font-light"
+          className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-6 font-light text-wrap-balance"
+          style={{
+            background: 'linear-gradient(135deg, rgba(203, 213, 225, 0.95) 0%, rgba(148, 163, 184, 0.9) 50%, rgba(203, 213, 225, 0.95) 100%)',
+            backgroundSize: '200% 200%',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+          animate={{
+            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
         >
           Discover hidden gems, local secrets, and unforgettable experiences in Ireland&apos;s Ancient East
         </motion.p>
@@ -174,11 +260,19 @@ export function CardDealer() {
                   onClick={dealNewHand}
                   disabled={isDealing}
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-700 hover:via-purple-800 hover:to-pink-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group"
+                  className="glass-morphism-strong text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-500 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group animate-magnetic-hover"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(236, 72, 153, 0.8) 100%)',
+                    backdropFilter: 'blur(20px) saturate(180%)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                  }}
                   aria-label={isDealing ? 'Dealing cards, please wait' : 'Deal 5 random adventure cards'}
                 >
-                  {/* Button shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  {/* Premium shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 ease-out" />
+
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-purple-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <motion.div
                     className="flex items-center relative z-10"
@@ -190,7 +284,12 @@ export function CardDealer() {
                       repeat: isDealing ? Infinity : 0
                     }}
                   >
-                    <Shuffle className="mr-2 h-5 w-5" aria-hidden="true" />
+                    <motion.div
+                      animate={isDealing ? { rotate: 360 } : {}}
+                      transition={{ duration: 1, repeat: isDealing ? Infinity : 0, ease: "linear" }}
+                    >
+                      <Shuffle className="mr-2 h-5 w-5" aria-hidden="true" />
+                    </motion.div>
                     {isDealing ? 'Dealing Cards...' : 'Deal the Cards'}
                   </motion.div>
                 </Button>
@@ -242,11 +341,19 @@ export function CardDealer() {
               <Button
                 onClick={dealNewHand}
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-700 hover:via-purple-800 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group w-full sm:w-auto"
+                className="btn-magnetic glass-morphism-strong text-white font-semibold px-6 py-3 rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-500 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group w-full sm:w-auto"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(236, 72, 153, 0.9) 100%)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
                 aria-label="Deal a new hand of 5 adventure cards"
               >
-                {/* Button shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                {/* Premium shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 ease-out" />
+
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-purple-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="flex items-center relative z-10">
                   <Shuffle className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -263,11 +370,21 @@ export function CardDealer() {
                 onClick={resetGame}
                 variant="outline"
                 size="lg"
-                className="border-slate-600/80 bg-slate-800/50 backdrop-blur-sm text-slate-300 hover:bg-slate-700/80 hover:text-white hover:border-slate-500 px-6 py-3 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-elegant w-full sm:w-auto"
+                className="btn-magnetic glass-morphism text-slate-300 hover:text-white px-6 py-3 rounded-xl transition-all duration-500 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-elegant w-full sm:w-auto group relative overflow-hidden"
+                style={{
+                  background: 'rgba(30, 41, 59, 0.6)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                  border: '1px solid rgba(148, 163, 184, 0.3)'
+                }}
                 aria-label="Reset the game and return to the beginning"
               >
-                <RotateCcw className="mr-2 h-4 w-4" aria-hidden="true" />
-                Start Over
+                {/* Subtle hover glow */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-slate-400/10 via-slate-300/10 to-slate-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="flex items-center relative z-10">
+                  <RotateCcw className="mr-2 h-4 w-4" aria-hidden="true" />
+                  Start Over
+                </div>
               </Button>
             </motion.div>
           </motion.div>
