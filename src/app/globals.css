@@ -48,7 +48,7 @@
   --card-width-sm: clamp(9rem, 24vw, 11rem);
   --card-height-sm: clamp(14rem, 36vw, 17rem);
   --card-width-md: clamp(11rem, 28vw, 14rem);
-  --card-height-md: clamp(18rem, 44vw, 22rem);
+  --card-height-md: clamp(17rem, 42vw, 20rem);
 
   /* Expert Animation Easing Curves */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -831,6 +831,19 @@ body {
 
 .p-enhanced {
   padding: var(--spacing-card-padding);
+}
+
+/* Prevent card overflow and ensure proper spacing */
+.game-card-container {
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.game-card-selected {
+  position: relative;
+  z-index: 10;
+  overflow: visible;
 }
 
 /* Premium Layout Utilities */

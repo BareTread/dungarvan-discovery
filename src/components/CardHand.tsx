@@ -111,12 +111,17 @@ export function CardHand({
             <motion.div
               layout
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-4 md:mb-6"
+              className="mb-8 md:mb-12"
+              style={{
+                paddingBottom: 'clamp(1rem, 4vw, 2rem)',
+                overflow: 'visible'
+              }}
             >
               <motion.div
                 initial={{ scale: 1.05 }}
                 animate={{ scale: 1.0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
+                style={{ overflow: 'visible' }}
               >
                 <GameCard
                   activity={cards[selectedIndex]}
@@ -139,7 +144,11 @@ export function CardHand({
                 duration: 0.8,
                 ease: [0.175, 0.885, 0.32, 1.275]
               }}
-              className="text-center mb-6 md:mb-10 z-10 relative px-4"
+              className="text-center mb-8 md:mb-12 z-10 relative px-4"
+              style={{
+                marginTop: 'clamp(2rem, 6vw, 4rem)',
+                clear: 'both'
+              }}
             >
               <motion.h3
                 className="celebration-gradient text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 leading-tight"

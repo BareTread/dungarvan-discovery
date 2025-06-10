@@ -81,8 +81,8 @@ export function GameCard({
         }}
 
         animate={{
-          scale: isSelected ? 1.02 : (isFlipped && !isSelected) ? 0.95 : 1,
-          y: isSelected ? -8 : 0,
+          scale: isSelected ? 1.0 : (isFlipped && !isSelected) ? 0.95 : 1,
+          y: isSelected ? 0 : 0,
           opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1
         }}
         transition={{
