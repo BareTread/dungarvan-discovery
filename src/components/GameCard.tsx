@@ -125,14 +125,24 @@ export function GameCard({
 
 
             <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 md:mb-4 relative z-10">
-              🎲
+              {isSelected ? "✨" : "🎲"}
             </div>
 
-            <h3 className="text-card-title-enhanced text-white mb-3 relative z-10">
+            <h3
+              className="text-card-title-enhanced text-white mb-3 relative z-10 font-bold"
+              style={{
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
+              }}
+            >
               {isSelected ? "✨ Chosen!" : "Mystery Adventure"}
             </h3>
 
-            <p className="text-card-meta-enhanced text-slate-300 relative z-10 px-1 sm:px-0 text-center">
+            <p
+              className="text-card-meta-enhanced text-slate-200 relative z-10 px-1 sm:px-0 text-center font-medium"
+              style={{
+                textShadow: '0 1px 8px rgba(0, 0, 0, 0.4)'
+              }}
+            >
               {isSelected ? "Revealing your discovery..." : "Click to reveal your Dungarvan discovery"}
             </p>
 
@@ -189,17 +199,17 @@ export function GameCard({
                 {activity.emoji}
               </div>
               <div className="flex gap-1 sm:gap-1.5 flex-wrap">
-                <span className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight">
+                <span className="text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg">
                   {getTimeEmoji(activity.bestTime)}
                 </span>
-                <span className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight">
+                <span className="text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg">
                   {getDifficultyEmoji(activity.difficulty)}
                 </span>
                 {activity.cost && (
-                  <span className={`text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-medium leading-tight ${
+                  <span className={`text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-semibold leading-tight shadow-lg ${
                       activity.cost === 'free'
-                        ? 'bg-green-500/25 border-green-400/30 text-green-200'
-                        : 'bg-white/25 border-white/20'
+                        ? 'bg-green-500/40 border-green-400/50 text-green-100'
+                        : 'bg-white/30 border-white/40 text-white'
                     }`}>
                     {getCostEmoji(activity.cost)}
                   </span>
@@ -229,13 +239,13 @@ export function GameCard({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <div className="flex items-center gap-2 bg-white/12 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/10 mb-2">
+              <div className="flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 mb-2 shadow-lg">
                 <span className="text-base">📍</span>
-                <span className="font-medium text-card-meta-enhanced truncate">{activity.location}</span>
+                <span className="font-semibold text-card-meta-enhanced truncate text-white">{activity.location}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/12 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/10">
+              <div className="flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 shadow-lg">
                 <span className="text-base">⏱️</span>
-                <span className="font-medium text-card-meta-enhanced">{formatDuration(activity.duration)}</span>
+                <span className="font-semibold text-card-meta-enhanced text-white">{formatDuration(activity.duration)}</span>
               </div>
             </motion.div>
 
@@ -268,27 +278,40 @@ export function GameCard({
 
             {/* Enhanced Local Secret */}
             <motion.div
-              className="bg-gradient-to-r from-white/18 to-white/12 rounded-xl backdrop-blur-sm border border-white/25 relative overflow-hidden cursor-pointer card-depth-subtle hover:scale-[1.01] transition-transform duration-200"
-              style={{ padding: 'var(--spacing-card-padding)' }}
+              className="relative overflow-hidden cursor-pointer hover:scale-[1.01] transition-all duration-300"
+              style={{
+                padding: 'var(--spacing-card-padding)',
+                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+                borderRadius: '12px',
+                boxShadow: '0 4px 20px rgba(255, 215, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                color: '#1a1a1a'
+              }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
               onClick={() => setIsSecretExpanded(!isSecretExpanded)}
             >
-              {/* Subtle glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-lg" />
+              {/* Enhanced shimmer effect */}
+              <div
+                className="absolute inset-0 rounded-lg"
+                style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%)',
+                  animation: 'shimmer 3s infinite',
+                  transform: 'translateX(-100%)'
+                }}
+              />
 
               <div className="flex items-start relative z-10" style={{ gap: 'var(--spacing-card-gap)' }}>
-                <span className="text-yellow-300 text-lg mt-1 flex-shrink-0">
+                <span className="text-amber-900 text-lg mt-1 flex-shrink-0">
                   💡
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-card-meta-enhanced font-bold text-yellow-300 tracking-wide uppercase">
+                    <div className="text-card-meta-enhanced font-bold text-amber-900 tracking-wide uppercase">
                       Local Secret
                     </div>
                     <span
-                      className="text-yellow-300/70 text-sm flex-shrink-0 transition-transform duration-300"
+                      className="text-amber-800/70 text-sm flex-shrink-0 transition-transform duration-300"
                       style={{ transform: isSecretExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
                     >
                       ▼
@@ -296,7 +319,7 @@ export function GameCard({
                   </div>
                   <p
                     className={cn(
-                      "text-card-body-enhanced text-white/96 font-medium transition-opacity duration-300",
+                      "text-card-body-enhanced text-amber-900 font-semibold transition-opacity duration-300",
                       !isSecretExpanded && "line-clamp-2"
                     )}
                     style={{ opacity: isSecretExpanded ? 1 : 0.92 }}
@@ -304,7 +327,7 @@ export function GameCard({
                     {activity.localSecret}
                   </p>
                   {!isSecretExpanded && activity.localSecret.length > 80 && (
-                    <div className="text-card-meta-enhanced text-yellow-300/70 mt-2 font-medium">
+                    <div className="text-card-meta-enhanced text-amber-800/70 mt-2 font-medium">
                       Tap to reveal more...
                     </div>
                   )}

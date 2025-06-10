@@ -44,14 +44,25 @@ export function CardHand({
           >
             <motion.h2
               className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
+              style={{
+                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B6B 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 2px 20px rgba(255, 215, 0, 0.3)',
+                filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.2))'
+              }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Choose Your Adventure
+              ✨ Choose Your Adventure
             </motion.h2>
             <motion.p
-              className="text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-md mx-auto"
+              className="text-slate-200 text-lg md:text-xl font-light leading-relaxed max-w-md mx-auto"
+              style={{
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
+              }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
@@ -140,18 +151,31 @@ export function CardHand({
             >
               <motion.h3
                 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
+                style={{
+                  background: 'linear-gradient(45deg, #FFD700, #FF6B6B, #4ECDC4, #45B7D1)',
+                  backgroundSize: '300% 300%',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  textShadow: '0 4px 30px rgba(255, 215, 0, 0.4)',
+                  filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.3))',
+                  fontWeight: '800'
+                }}
                 animate={{
                   scale: [1, 1.02, 1],
-                  textShadow: [
-                    "0 0 20px rgba(251, 191, 36, 0.3)",
-                    "0 0 30px rgba(251, 191, 36, 0.5)",
-                    "0 0 20px rgba(251, 191, 36, 0.3)"
-                  ]
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
                 }}
                 transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
+                  scale: {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  },
+                  backgroundPosition: {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }
                 }}
               >
                 🎉 Your Adventure Awaits!
@@ -201,12 +225,20 @@ export function CardHand({
                         filter: { duration: 0.6 }
                       }}
                       className="transform-gpu flex-shrink-0"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '12px',
+                        padding: '2px'
+                      }}
                       whileHover={{
                         scale: 0.6,
                         opacity: 1,
                         y: -12,
                         rotateX: 5,
                         filter: "brightness(1.1) saturate(1.1)",
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
                         transition: {
                           duration: 0.3,
                           ease: [0.175, 0.885, 0.32, 1.275]
