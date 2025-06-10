@@ -164,6 +164,9 @@ body {
 /* Premium shadow system with glass morphism */
 .shadow-elegant {
   box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.15),
     0 8px 32px -8px rgba(0, 0, 0, 0.18),
     0 4px 16px -4px rgba(0, 0, 0, 0.12),
     0 2px 8px -2px rgba(0, 0, 0, 0.08),
@@ -428,9 +431,18 @@ body {
 }
 
 .focus-ring:focus-visible {
-  outline: 2px solid rgb(139, 92, 246);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+  outline: 3px solid rgba(251, 191, 36, 0.5);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.1);
+}
+
+/* Enhanced card elevation for revealed cards */
+.game-card-revealed {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateZ(0);
 }
 
 /* High contrast mode support */

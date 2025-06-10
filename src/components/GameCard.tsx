@@ -307,7 +307,13 @@ export function GameCard({
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-card-meta-enhanced font-bold text-amber-900 tracking-wide uppercase">
+                    <div
+                      className="text-card-meta-enhanced font-bold tracking-wide uppercase"
+                      style={{
+                        color: '#5A3A1F',
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
                       Local Secret
                     </div>
                     <span
@@ -319,15 +325,25 @@ export function GameCard({
                   </div>
                   <p
                     className={cn(
-                      "text-card-body-enhanced text-amber-900 font-semibold transition-opacity duration-300",
+                      "text-card-body-enhanced font-semibold transition-opacity duration-300",
                       !isSecretExpanded && "line-clamp-2"
                     )}
-                    style={{ opacity: isSecretExpanded ? 1 : 0.92 }}
+                    style={{
+                      opacity: isSecretExpanded ? 1 : 0.92,
+                      color: '#6B4423',
+                      textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                    }}
                   >
                     {activity.localSecret}
                   </p>
                   {!isSecretExpanded && activity.localSecret.length > 80 && (
-                    <div className="text-card-meta-enhanced text-amber-800/70 mt-2 font-medium">
+                    <div
+                      className="text-card-meta-enhanced mt-2 font-medium"
+                      style={{
+                        color: '#5A3A1F',
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
                       Tap to reveal more...
                     </div>
                   )}
