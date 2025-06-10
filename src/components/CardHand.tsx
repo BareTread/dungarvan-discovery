@@ -43,15 +43,7 @@ export function CardHand({
             className="mb-8 md:mb-12 text-center px-4"
           >
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
-              style={{
-                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B6B 100%)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                textShadow: '0 2px 20px rgba(255, 215, 0, 0.3)',
-                filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.2))'
-              }}
+              className="golden-title text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 leading-tight"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -81,14 +73,9 @@ export function CardHand({
             className="mb-6 md:mb-8 text-center px-4"
           >
             <motion.h2
-              className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3"
+              className="revealing-text text-xl md:text-2xl lg:text-3xl font-bold mb-3"
               animate={{
-                scale: [1, 1.05, 1],
-                textShadow: [
-                  "0 0 20px rgba(251, 191, 36, 0.5)",
-                  "0 0 40px rgba(251, 191, 36, 0.8)",
-                  "0 0 20px rgba(251, 191, 36, 0.5)"
-                ]
+                scale: [1, 1.05, 1]
               }}
               transition={{
                 duration: 2,
@@ -96,7 +83,12 @@ export function CardHand({
                 ease: "easeInOut"
               }}
             >
-              ✨ Revealing Your Adventure...
+              ✨ Revealing Your Adventure
+              <span className="loading-dots">
+                <span className="loading-dot"></span>
+                <span className="loading-dot"></span>
+                <span className="loading-dot"></span>
+              </span>
             </motion.h2>
             <motion.p
               className="text-slate-400 text-base md:text-lg"
@@ -150,31 +142,15 @@ export function CardHand({
               className="text-center mb-6 md:mb-10 z-10 relative px-4"
             >
               <motion.h3
-                className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
-                style={{
-                  background: 'linear-gradient(45deg, #FFD700, #FF6B6B, #4ECDC4, #45B7D1)',
-                  backgroundSize: '300% 300%',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  textShadow: '0 4px 30px rgba(255, 215, 0, 0.4)',
-                  filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.3))',
-                  fontWeight: '800'
-                }}
+                className="celebration-gradient text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 leading-tight"
                 animate={{
-                  scale: [1, 1.02, 1],
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                  scale: [1, 1.02, 1]
                 }}
                 transition={{
                   scale: {
                     duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut"
-                  },
-                  backgroundPosition: {
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear"
                   }
                 }}
               >

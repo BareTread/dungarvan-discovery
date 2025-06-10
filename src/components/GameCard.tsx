@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Activity } from '@/lib/activities';
-import { getCategoryColor, formatDuration, getTimeEmoji, getDifficultyEmoji, getCostEmoji } from '@/lib/dealer';
+import { formatDuration, getTimeEmoji, getDifficultyEmoji, getCostEmoji } from '@/lib/dealer';
 import { cn } from '@/lib/utils';
 
 interface GameCardProps {
@@ -108,75 +108,82 @@ export function GameCard({
         {/* Conditional rendering based on flip state */}
         {!showActivityDetails ? (
           /* Card Front (Mystery Side) */
-          <div
-            className={cn(
-              "absolute inset-0 rounded-xl border-2 card-glow",
-              "bg-gradient-to-br from-slate-800/95 via-slate-850/95 to-slate-900/95",
-              "backdrop-blur-sm border-slate-700/80",
-              "transition-all duration-500 ease-out",
-              isHovered && !isSelected && "shadow-elegant-hover border-purple-500/60 bg-gradient-to-br from-slate-800/98 via-slate-850/98 to-slate-900/98",
-              isSelected && "shadow-elegant-selected border-yellow-400/80 bg-gradient-to-br from-slate-800 via-slate-850 to-slate-900",
-              !isHovered && !isSelected && "shadow-elegant"
-            )}
-            style={{
-              padding: 'var(--spacing-card-padding)'
-            }}
-          >
-          <div className="flex flex-col items-center justify-center h-full text-center relative overflow-hidden">
+          <div className="mystery-card-wrapper">
+            {/* Card stack shadows */}
+            <div className="mystery-card-shadow-1"></div>
+            <div className="mystery-card-shadow-2"></div>
 
-
-            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 md:mb-4 relative z-10">
-              {isSelected ? "✨" : "🎲"}
-            </div>
-
-            <h3
-              className="text-card-title-enhanced text-white mb-3 relative z-10 font-bold"
-              style={{
-                textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
-              }}
-            >
-              {isSelected ? "✨ Chosen!" : "Mystery Adventure"}
-            </h3>
-
-            <p
-              className="text-card-meta-enhanced text-slate-200 relative z-10 px-1 sm:px-0 text-center font-medium"
-              style={{
-                textShadow: '0 1px 8px rgba(0, 0, 0, 0.4)'
-              }}
-            >
-              {isSelected ? (
-                <span className="inline-flex items-center">
-                  Revealing your discovery
-                  <span className="inline-flex ml-2">
-                    <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce mx-1" style={{ animationDelay: '150ms' }}></span>
-                    <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                  </span>
-                </span>
-              ) : (
-                "Click to reveal your Dungarvan discovery"
+            <div
+              className={cn(
+                "mystery-card absolute inset-0 rounded-xl border-2 card-glow",
+                "backdrop-blur-sm",
+                "transition-all duration-500 ease-out",
+                isHovered && !isSelected && "shadow-elegant-hover border-purple-500/60",
+                isSelected && "shadow-elegant-selected border-yellow-400/80",
+                !isHovered && !isSelected && "shadow-elegant"
               )}
-            </p>
+              style={{
+                padding: 'var(--spacing-card-padding)'
+              }}
+            >
+              <div className="flex flex-col items-center justify-center h-full text-center relative overflow-hidden">
+                <div className="dice-container mb-2 sm:mb-3 md:mb-4 relative z-10">
+                  {isSelected ? (
+                    <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">✨</div>
+                  ) : (
+                    <div className="dice dice-glow text-3xl sm:text-4xl md:text-5xl lg:text-6xl flex items-center justify-center">
+                      🎲
+                    </div>
+                  )}
+                </div>
 
-            {/* Simple progress indicator */}
-            <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
-              <div className={cn(
-                "h-1 sm:h-1.5 rounded-full",
-                isSelected
-                  ? "bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500"
-                  : "bg-gradient-to-r from-purple-500 to-pink-500 opacity-60"
-              )} />
+                <h3
+                  className="text-card-title-enhanced text-white mb-3 relative z-10 font-bold"
+                  style={{
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
+                  }}
+                >
+                  {isSelected ? "✨ Chosen!" : "Mystery Adventure"}
+                </h3>
+
+                <p
+                  className="text-card-meta-enhanced text-slate-200 relative z-10 px-1 sm:px-0 text-center font-medium"
+                  style={{
+                    textShadow: '0 1px 8px rgba(0, 0, 0, 0.4)'
+                  }}
+                >
+                  {isSelected ? (
+                    <span className="inline-flex items-center">
+                      Revealing your discovery
+                      <span className="loading-dots">
+                        <span className="loading-dot"></span>
+                        <span className="loading-dot"></span>
+                        <span className="loading-dot"></span>
+                      </span>
+                    </span>
+                  ) : (
+                    "Click to reveal your Dungarvan discovery"
+                  )}
+                </p>
+
+                {/* Simple progress indicator */}
+                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4">
+                  <div className={cn(
+                    "h-1 sm:h-1.5 rounded-full",
+                    isSelected
+                      ? "bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500"
+                      : "bg-gradient-to-r from-purple-500 to-pink-500 opacity-60"
+                  )} />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
         ) : (
           /* Card Back (Activity Details) */
           <div
             className={cn(
-              "absolute inset-0 rounded-xl border-2 backdrop-blur-sm",
-              "bg-gradient-to-br",
-              getCategoryColor(activity.category),
-              "border-white/30 card-depth-medium text-white",
+              "revealed-card-glass absolute inset-0 rounded-xl border-2",
+              "text-white",
               "focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2",
               "transition-all duration-300"
             )}
@@ -184,190 +191,165 @@ export function GameCard({
               padding: 'var(--spacing-card-padding)'
             }}
           >
-          <div className="flex flex-col h-full relative overflow-hidden">
-            {/* Scrollable content area with enhanced spacing */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
-                 style={{
-                   scrollbarWidth: 'none',
-                   msOverflowStyle: 'none',
-                   gap: 'var(--spacing-section-gap)'
-                 }}>
-              {/* Subtle background pattern */}
-              <div className="absolute inset-0 opacity-5 pointer-events-none">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                                   radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)`
-                }} />
-              </div>
-
-            {/* Compact Header */}
-            <motion.div
-              className="flex items-start justify-between mb-2 sm:mb-3 relative z-10"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              <div className="text-xl sm:text-2xl md:text-3xl flex-shrink-0">
-                {activity.emoji}
-              </div>
-              <div className="flex gap-1 sm:gap-1.5 flex-wrap">
-                <span className="category-pill text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-xl hover:border-white/50">
-                  {getTimeEmoji(activity.bestTime)}
-                </span>
-                <span className="category-pill text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-xl hover:border-white/50">
-                  {getDifficultyEmoji(activity.difficulty)}
-                </span>
-                {activity.cost && (
-                  <span className={`category-pill text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-semibold leading-tight shadow-lg transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-xl ${
-                      activity.cost === 'free'
-                        ? 'bg-green-500/40 border-green-400/50 text-green-100 hover:border-green-400/70'
-                        : 'bg-white/30 border-white/40 text-white hover:border-white/50'
-                    }`}>
-                    {getCostEmoji(activity.cost)}
-                  </span>
-                )}
-              </div>
-            </motion.div>
-
-            {/* Enhanced Title */}
-            <motion.h3
-              className="text-card-title-enhanced font-bold relative z-10 line-clamp-2"
-              style={{ marginBottom: 'var(--spacing-section-gap)' }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              {activity.title}
-            </motion.h3>
-
-            {/* Enhanced Location & Duration */}
-            <motion.div
-              className="text-card-meta-enhanced relative z-10"
-              style={{
-                marginBottom: 'var(--spacing-section-gap)',
-                gap: 'var(--spacing-card-gap)'
-              }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              <div className="card-section flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 mb-2 shadow-lg transition-all duration-200 hover:bg-white/25">
-                <span className="icon-location text-base transition-transform duration-300">📍</span>
-                <span className="font-semibold text-card-meta-enhanced truncate text-white">{activity.location}</span>
-              </div>
-              <div className="card-section flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 shadow-lg transition-all duration-200 hover:bg-white/25">
-                <span className="icon-clock text-base transition-transform duration-300">⏱️</span>
-                <span className="font-semibold text-card-meta-enhanced text-white">{formatDuration(activity.duration)}</span>
-              </div>
-            </motion.div>
-
-            {/* Enhanced Description with expand/collapse */}
-            <motion.div
-              className="relative z-10"
-              style={{ marginBottom: 'var(--spacing-section-gap)' }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-              <motion.p
-                className={cn(
-                  "text-card-body-enhanced cursor-pointer",
-                  !isDescriptionExpanded && "line-clamp-3"
-                )}
-                onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
-              >
-                {activity.description}
-              </motion.p>
-              {activity.description.length > 120 && !isDescriptionExpanded && (
-                <button
-                  className="text-card-meta-enhanced text-white/70 hover:text-white/90 mt-2 font-medium transition-colors duration-200"
-                  onClick={() => setIsDescriptionExpanded(true)}
-                >
-                  Read more...
-                </button>
-              )}
-            </motion.div>
-
-            {/* Enhanced Local Secret */}
-            <motion.div
-              className="relative overflow-hidden cursor-pointer hover:scale-[1.01] transition-all duration-300"
-              style={{
-                padding: 'var(--spacing-card-padding)',
-                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-                borderRadius: '12px',
-                boxShadow: '0 4px 20px rgba(255, 215, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-                color: '#1a1a1a'
-              }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              onClick={() => setIsSecretExpanded(!isSecretExpanded)}
-            >
-              {/* Enhanced shimmer effect */}
-              <div
-                className="absolute inset-0 rounded-lg"
-                style={{
-                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%)',
-                  animation: 'shimmer 3s infinite',
-                  transform: 'translateX(-100%)'
-                }}
-              />
-
-              <div className="flex items-start relative z-10" style={{ gap: 'var(--spacing-card-gap)' }}>
-                <span className="text-amber-900 text-lg mt-1 flex-shrink-0">
-                  💡
-                </span>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-2">
-                    <div
-                      className="text-card-meta-enhanced font-bold tracking-wide uppercase"
-                      style={{
-                        color: '#5A3A1F',
-                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
-                      }}
-                    >
-                      Local Secret
-                    </div>
-                    <span
-                      className="text-amber-800/70 text-sm flex-shrink-0 transition-transform duration-300"
-                      style={{ transform: isSecretExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                    >
-                      ▼
-                    </span>
-                  </div>
-                  <p
-                    className={cn(
-                      "text-card-body-enhanced font-semibold transition-opacity duration-300",
-                      !isSecretExpanded && "line-clamp-2"
-                    )}
-                    style={{
-                      opacity: isSecretExpanded ? 1 : 0.92,
-                      color: '#6B4423',
-                      textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
-                    }}
-                  >
-                    {activity.localSecret}
-                  </p>
-                  {!isSecretExpanded && activity.localSecret.length > 80 && (
-                    <div
-                      className="text-card-meta-enhanced mt-2 font-medium"
-                      style={{
-                        color: '#5A3A1F',
-                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
-                      }}
-                    >
-                      Tap to reveal more...
-                    </div>
-                  )}
+            <div className="flex flex-col h-full relative overflow-hidden">
+              {/* Scrollable content area with enhanced spacing */}
+              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
+                   style={{
+                     scrollbarWidth: 'none',
+                     msOverflowStyle: 'none',
+                     gap: 'var(--spacing-section-gap)'
+                   }}>
+                {/* Subtle background pattern */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none">
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                                     radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)`
+                  }} />
                 </div>
-              </div>
 
-              {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-6 h-6 bg-gradient-to-bl from-yellow-400/20 to-transparent rounded-bl-lg" />
-            </motion.div>
+                {/* Compact Header */}
+                <motion.div
+                  className="flex items-start justify-between mb-2 sm:mb-3 relative z-10"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                  <div className="text-xl sm:text-2xl md:text-3xl flex-shrink-0">
+                    {activity.emoji}
+                  </div>
+                  <div className="flex gap-1 sm:gap-1.5 flex-wrap">
+                    <span className="category-pill-modern text-responsive-xs text-white">
+                      {getTimeEmoji(activity.bestTime)}
+                    </span>
+                    <span className="category-pill-modern text-responsive-xs text-white">
+                      {getDifficultyEmoji(activity.difficulty)}
+                    </span>
+                    {activity.cost && (
+                      <span className={`category-pill-modern text-responsive-xs ${
+                          activity.cost === 'free'
+                            ? 'bg-green-500/40 border-green-400/50 text-green-100'
+                            : 'text-white'
+                        }`}>
+                        {getCostEmoji(activity.cost)}
+                      </span>
+                    )}
+                  </div>
+                </motion.div>
+
+                {/* Enhanced Title */}
+                <motion.h3
+                  className="text-card-title-enhanced font-bold relative z-10 line-clamp-2"
+                  style={{ marginBottom: 'var(--spacing-section-gap)' }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                >
+                  {activity.title}
+                </motion.h3>
+
+                {/* Enhanced Location & Duration */}
+                <motion.div
+                  className="text-card-meta-enhanced relative z-10"
+                  style={{
+                    marginBottom: 'var(--spacing-section-gap)',
+                    gap: 'var(--spacing-card-gap)'
+                  }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                >
+                  <div className="info-section-enhanced card-section flex items-center gap-2 mb-2">
+                    <span className="info-icon icon-location text-base transition-transform duration-300">📍</span>
+                    <span className="font-semibold text-card-meta-enhanced truncate text-white">{activity.location}</span>
+                  </div>
+                  <div className="info-section-enhanced card-section flex items-center gap-2">
+                    <span className="info-icon icon-clock text-base transition-transform duration-300">⏱️</span>
+                    <span className="font-semibold text-card-meta-enhanced text-white">{formatDuration(activity.duration)}</span>
+                  </div>
+                </motion.div>
+
+                {/* Enhanced Description with expand/collapse */}
+                <motion.div
+                  className="relative z-10"
+                  style={{ marginBottom: 'var(--spacing-section-gap)' }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  <motion.p
+                    className={cn(
+                      "text-card-body-enhanced cursor-pointer",
+                      !isDescriptionExpanded && "line-clamp-3"
+                    )}
+                    onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                  >
+                    {activity.description}
+                  </motion.p>
+                  {activity.description.length > 120 && !isDescriptionExpanded && (
+                    <button
+                      className="text-card-meta-enhanced text-white/70 hover:text-white/90 mt-2 font-medium transition-colors duration-200"
+                      onClick={() => setIsDescriptionExpanded(true)}
+                    >
+                      Read more...
+                    </button>
+                  )}
+                </motion.div>
+
+                {/* Enhanced Local Secret with Premium Design */}
+                <motion.div
+                  className="local-secret-premium cursor-pointer hover:scale-[1.01] transition-all duration-300"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  onClick={() => setIsSecretExpanded(!isSecretExpanded)}
+                >
+                  {/* Animated golden border */}
+                  <div className="local-secret-border"></div>
+
+                  {/* Content container */}
+                  <div className="local-secret-content">
+                    <div className="flex items-start" style={{ gap: 'var(--spacing-card-gap)' }}>
+                      <span className="text-amber-400 text-lg mt-1 flex-shrink-0">
+                        💡
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="local-secret-title">
+                            Local Secret
+                          </div>
+                          <span
+                            className="text-amber-400/70 text-sm flex-shrink-0 transition-transform duration-300"
+                            style={{ transform: isSecretExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                          >
+                            ▼
+                          </span>
+                        </div>
+                        <p
+                          className={cn(
+                            "local-secret-text transition-opacity duration-300",
+                            !isSecretExpanded && "line-clamp-2"
+                          )}
+                          style={{
+                            opacity: isSecretExpanded ? 1 : 0.92
+                          }}
+                        >
+                          {activity.localSecret}
+                        </p>
+                        {!isSecretExpanded && activity.localSecret.length > 80 && (
+                          <div className="local-secret-title mt-2">
+                            Tap to reveal more...
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Decorative corner accent */}
+                    <div className="absolute top-0 right-0 w-6 h-6 bg-gradient-to-bl from-yellow-400/20 to-transparent rounded-bl-lg" />
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
-        </div>
         )}
       </motion.div>
     </motion.div>
