@@ -47,7 +47,7 @@ export function CardDealer() {
           />
         ))}
       </div>
-      {/* Enhanced Header with Better Spacing */}
+      {/* Enhanced Header with Premium Typography */}
       <motion.header
         initial={{ opacity: 0, y: -50, filter: "blur(10px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -56,23 +56,16 @@ export function CardDealer() {
           ease: [0.175, 0.885, 0.32, 1.275],
           filter: { duration: 0.8 }
         }}
-        className="text-center mb-8 md:mb-12 lg:mb-16 relative z-10 px-4"
+        className="content-center relative z-10 px-4"
       >
-        <h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 lg:mb-8 relative leading-tight"
-          style={{
-            background: 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 50%, #06B6D4 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.3))'
-          }}
-        >
-          Dungarvan Discovery
+        <h1 className="text-hero-enhanced">
+          Dungarvan
+          <br />
+          Discovery
         </h1>
 
         <motion.p
-          className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-6 font-light text-wrap-balance text-slate-300"
+          className="text-subtitle-enhanced"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -126,12 +119,7 @@ export function CardDealer() {
                   onClick={dealNewHand}
                   disabled={isDealing}
                   size="lg"
-                  className="glass-morphism-strong text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-500 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group animate-magnetic-hover"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(236, 72, 153, 0.8) 100%)',
-                    backdropFilter: 'blur(20px) saturate(180%)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)'
-                  }}
+                  className="btn-magnetic text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl shadow-elegant hover:shadow-elegant-hover focus-premium relative overflow-hidden group"
                   aria-label={isDealing ? 'Dealing cards, please wait' : 'Deal 5 random adventure cards'}
                 >
                   {/* Premium shimmer effect */}
@@ -207,12 +195,7 @@ export function CardDealer() {
               <Button
                 onClick={dealNewHand}
                 size="lg"
-                className="btn-magnetic glass-morphism-strong text-white font-semibold px-6 py-3 rounded-xl shadow-elegant hover:shadow-elegant-hover transition-all duration-500 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 relative overflow-hidden group w-full sm:w-auto"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(236, 72, 153, 0.9) 100%)',
-                  backdropFilter: 'blur(20px) saturate(180%)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)'
-                }}
+                className="btn-magnetic text-white font-semibold px-6 py-3 rounded-xl shadow-elegant hover:shadow-elegant-hover focus-premium relative overflow-hidden group w-full sm:w-auto"
                 aria-label="Deal a new hand of 5 adventure cards"
               >
                 {/* Premium shimmer effect */}

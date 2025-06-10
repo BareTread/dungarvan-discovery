@@ -173,7 +173,7 @@ export function CardHand({
               transition={{ delay: 1, duration: 0.6 }}
               className="text-center w-full px-2"
             >
-              <div className="flex gap-1 sm:gap-2 justify-center max-w-4xl mx-auto overflow-x-auto scrollbar-hide">
+              <div className="flex gap-3 sm:gap-4 justify-center max-w-4xl mx-auto overflow-x-auto scrollbar-hide">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 

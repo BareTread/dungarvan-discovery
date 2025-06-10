@@ -115,11 +115,10 @@ export function GameCard({
 
             <div
               className={cn(
-                "mystery-card absolute inset-0 rounded-xl border-2 card-glow",
-                "backdrop-blur-sm",
+                "mystery-card-premium absolute inset-0 rounded-xl",
                 "transition-all duration-500 ease-out",
-                isHovered && !isSelected && "shadow-elegant-hover border-purple-500/60",
-                isSelected && "shadow-elegant-selected border-yellow-400/80",
+                isHovered && !isSelected && "shadow-elegant-hover",
+                isSelected && "shadow-elegant-selected",
                 !isHovered && !isSelected && "shadow-elegant"
               )}
               style={{
