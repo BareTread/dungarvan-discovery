@@ -53,8 +53,9 @@ export function GameCard({
           "relative cursor-pointer focus-ring",
           "w-36 h-52 sm:w-40 sm:h-60 md:w-44 md:h-64 lg:w-48 lg:h-72",
           !canSelect && "cursor-default",
-          isSelected && "z-10",
-          canSelect && "hover:z-20"
+          isSelected && "z-10 game-card-selected",
+          canSelect && "hover:z-20",
+          !showActivityDetails && "card-stack"
         )}
         style={{
           width: 'var(--card-width-md)',

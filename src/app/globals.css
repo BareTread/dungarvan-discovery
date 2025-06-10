@@ -460,6 +460,93 @@ body {
   transform: translateY(-2px) rotate(-5deg);
 }
 
+/* Card stacking effect for mystery cards */
+.card-stack {
+  position: relative;
+}
+
+.card-stack::before,
+.card-stack::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 1rem;
+  z-index: -1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-stack::before {
+  transform: translateY(8px) scale(0.98);
+  opacity: 0.6;
+}
+
+.card-stack::after {
+  transform: translateY(16px) scale(0.96);
+  opacity: 0.4;
+}
+
+/* Subtle texture for premium feel */
+.game-card-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.1) 20deg,
+    transparent 40deg
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Ambient glow for selected cards */
+.game-card-selected::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    circle at center,
+    rgba(251, 191, 36, 0.1) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 2rem;
+}
+
+/* Enhanced card content spacing */
+.card-content > * + * {
+  margin-top: 1rem;
+}
+
+.card-section {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  transition: background 0.2s ease;
+}
+
+.card-section:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Performance optimization for animations */
+.animating-element {
+  will-change: transform, opacity;
+}
+
+/* Smooth transitions for all interactive elements */
+.clickable {
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clickable:active {
+  transform: scale(0.95);
+}
+
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .card-glow::before,
