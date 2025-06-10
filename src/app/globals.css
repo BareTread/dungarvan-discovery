@@ -48,7 +48,7 @@
   --card-width-sm: clamp(9rem, 24vw, 11rem);
   --card-height-sm: clamp(14rem, 36vw, 17rem);
   --card-width-md: clamp(11rem, 28vw, 14rem);
-  --card-height-md: clamp(17rem, 42vw, 21rem);
+  --card-height-md: clamp(18rem, 44vw, 22rem);
 
   /* Expert Animation Easing Curves */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1167,7 +1167,9 @@ body::before {
 /* Complete Local Secret redesign */
 .local-secret-premium {
   position: relative;
-  margin-top: 1.5rem;
+  margin-top: auto;
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .local-secret-border {

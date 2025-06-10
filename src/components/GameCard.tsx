@@ -192,11 +192,12 @@ export function GameCard({
           >
             <div className="flex flex-col h-full relative overflow-hidden">
               {/* Scrollable content area with enhanced spacing */}
-              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
+              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide pb-4"
                    style={{
                      scrollbarWidth: 'none',
                      msOverflowStyle: 'none',
-                     gap: 'var(--spacing-section-gap)'
+                     gap: 'var(--spacing-section-gap)',
+                     maxHeight: '100%'
                    }}>
                 {/* Subtle background pattern */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none">
@@ -296,7 +297,7 @@ export function GameCard({
 
                 {/* Enhanced Local Secret with Premium Design */}
                 <motion.div
-                  className="local-secret-premium cursor-pointer hover:scale-[1.01] transition-all duration-300"
+                  className="local-secret-premium cursor-pointer hover:scale-[1.01] transition-all duration-300 mt-auto"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
