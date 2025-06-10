@@ -50,7 +50,7 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative cursor-pointer focus-ring animate-magnetic-hover",
+          "relative cursor-pointer focus-ring",
           "w-36 h-52 sm:w-40 sm:h-60 md:w-44 md:h-64 lg:w-48 lg:h-72",
           !canSelect && "cursor-default",
           isSelected && "z-10",
@@ -81,11 +81,11 @@ export function GameCard({
 
         animate={{
           scale: isSelected ? 1.02 : (isFlipped && !isSelected) ? 0.95 : 1,
-          y: isSelected ? -10 : 0,
+          y: isSelected ? -8 : 0,
           opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1
         }}
         transition={{
-          duration: 0.3,
+          duration: 0.2,
           ease: "easeOut"
         }}
       >
@@ -185,13 +185,9 @@ export function GameCard({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <motion.div
-                className="text-xl sm:text-2xl md:text-3xl flex-shrink-0"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div className="text-xl sm:text-2xl md:text-3xl flex-shrink-0">
                 {activity.emoji}
-              </motion.div>
+              </div>
               <div className="flex gap-1 sm:gap-1.5 flex-wrap">
                 <span className="text-responsive-xs bg-white/25 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/20 font-medium leading-tight">
                   {getTimeEmoji(activity.bestTime)}
@@ -261,26 +257,23 @@ export function GameCard({
                 {activity.description}
               </motion.p>
               {activity.description.length > 120 && !isDescriptionExpanded && (
-                <motion.button
+                <button
                   className="text-card-meta-enhanced text-white/70 hover:text-white/90 mt-2 font-medium transition-colors duration-200"
                   onClick={() => setIsDescriptionExpanded(true)}
-                  whileHover={{ scale: 1.05 }}
                 >
                   Read more...
-                </motion.button>
+                </button>
               )}
             </motion.div>
 
             {/* Enhanced Local Secret */}
             <motion.div
-              className="bg-gradient-to-r from-white/18 to-white/12 rounded-xl backdrop-blur-sm border border-white/25 relative overflow-hidden cursor-pointer card-depth-subtle"
+              className="bg-gradient-to-r from-white/18 to-white/12 rounded-xl backdrop-blur-sm border border-white/25 relative overflow-hidden cursor-pointer card-depth-subtle hover:scale-[1.01] transition-transform duration-200"
               style={{ padding: 'var(--spacing-card-padding)' }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
               onClick={() => setIsSecretExpanded(!isSecretExpanded)}
-              whileHover={{ scale: 1.01, boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)" }}
-              whileTap={{ scale: 0.99 }}
             >
               {/* Subtle glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 rounded-lg" />
@@ -294,33 +287,26 @@ export function GameCard({
                     <div className="text-card-meta-enhanced font-bold text-yellow-300 tracking-wide uppercase">
                       Local Secret
                     </div>
-                    <motion.span
-                      className="text-yellow-300/70 text-sm flex-shrink-0"
-                      animate={{ rotate: isSecretExpanded ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
+                    <span
+                      className="text-yellow-300/70 text-sm flex-shrink-0 transition-transform duration-300"
+                      style={{ transform: isSecretExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
                     >
                       ▼
-                    </motion.span>
+                    </span>
                   </div>
-                  <motion.p
+                  <p
                     className={cn(
-                      "text-card-body-enhanced text-white/96 font-medium",
+                      "text-card-body-enhanced text-white/96 font-medium transition-opacity duration-300",
                       !isSecretExpanded && "line-clamp-2"
                     )}
-                    animate={{ opacity: isSecretExpanded ? 1 : 0.92 }}
-                    transition={{ duration: 0.3 }}
+                    style={{ opacity: isSecretExpanded ? 1 : 0.92 }}
                   >
                     {activity.localSecret}
-                  </motion.p>
+                  </p>
                   {!isSecretExpanded && activity.localSecret.length > 80 && (
-                    <motion.div
-                      className="text-card-meta-enhanced text-yellow-300/70 mt-2 font-medium"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
+                    <div className="text-card-meta-enhanced text-yellow-300/70 mt-2 font-medium">
                       Tap to reveal more...
-                    </motion.div>
+                    </div>
                   )}
                 </div>
               </div>

@@ -142,10 +142,10 @@ body {
   transform: rotateY(180deg);
 }
 
-/* Smooth hover effects - reduced complexity to prevent glitching */
+/* Simplified hover effects - prevent glitching */
 .card-flip:not(.flipped):not(.flipping):hover {
-  transform: translateY(-8px) scale(1.02);
-  transition: transform 0.3s var(--ease-smooth);
+  transform: translateY(-4px) !important;
+  transition: transform 0.2s ease !important;
 }
 
 /* Simple button effects - no pseudo-elements */
@@ -373,23 +373,38 @@ body {
   /* Disabled to prevent glitching */
 }
 
-/* Force stable animations - prevent glitching */
+/* Force stable rendering - prevent glitching */
 * {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  -webkit-transform-style: flat !important;
+  transform-style: flat !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
 }
 
-/* Disable problematic animations that cause flashing */
+/* Only allow 3D transforms on card flip containers */
+.card-flip {
+  -webkit-transform-style: preserve-3d !important;
+  transform-style: preserve-3d !important;
+}
+
+/* Disable ALL problematic animations that cause flashing and conflicts */
 .animate-float,
 .animate-pulse-glow,
 .animate-shimmer,
 .animate-bounce-subtle,
 .animate-aurora,
 .animate-breathe,
-.animate-gentle-glow {
+.animate-gentle-glow,
+.animate-magnetic-hover {
   animation: none !important;
+  transition: none !important;
+}
+
+/* Simplified hover effects only */
+.animate-magnetic-hover:hover {
+  transform: translateY(-1px) !important;
+  transition: transform 0.2s ease !important;
 }
 
 /* Accessibility: Respect reduced motion preferences */

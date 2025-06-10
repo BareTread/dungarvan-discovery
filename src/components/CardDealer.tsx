@@ -26,66 +26,23 @@ export function CardDealer() {
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-slate-900/50" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-slate-900/5 to-transparent" />
 
-      {/* Premium animated background particles */}
+      {/* Simplified static background - no animations to prevent conflicts */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 6 + 2}px`,
-              height: `${Math.random() * 6 + 2}px`,
-              background: `linear-gradient(45deg,
-                rgba(139, 92, 246, ${Math.random() * 0.4 + 0.2}),
-                rgba(236, 72, 153, ${Math.random() * 0.4 + 0.2})
-              )`,
-              filter: 'blur(1px)',
-              boxShadow: `0 0 ${Math.random() * 20 + 10}px rgba(139, 92, 246, 0.3)`
-            }}
-            animate={{
-              y: [0, -150, 0],
-              x: [0, Math.random() * 100 - 50, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1.5, 0],
-              rotate: [0, 360]
-            }}
-            transition={{
-              duration: Math.random() * 12 + 8,
-              repeat: Infinity,
-              delay: Math.random() * 8,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-
-        {/* Ambient glow orbs */}
-        {[...Array(5)].map((_, i) => (
-          <motion.div
+        {/* Static ambient glow orbs */}
+        {[...Array(3)].map((_, i) => (
+          <div
             key={`glow-${i}`}
-            className="absolute rounded-full blur-2xl"
+            className="absolute rounded-full blur-3xl opacity-20"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 300 + 150}px`,
-              height: `${Math.random() * 300 + 150}px`,
+              left: `${20 + i * 30}%`,
+              top: `${20 + i * 25}%`,
+              width: `${200 + i * 50}px`,
+              height: `${200 + i * 50}px`,
               background: `radial-gradient(circle,
-                rgba(139, 92, 246, ${Math.random() * 0.08 + 0.03}) 0%,
-                rgba(236, 72, 153, ${Math.random() * 0.06 + 0.02}) 50%,
+                rgba(139, 92, 246, 0.1) 0%,
+                rgba(236, 72, 153, 0.05) 50%,
                 transparent 70%
               )`
-            }}
-            animate={{
-              x: [0, Math.random() * 200 - 100, 0],
-              y: [0, Math.random() * 200 - 100, 0],
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.5, 0.2]
-            }}
-            transition={{
-              duration: Math.random() * 25 + 20,
-              repeat: Infinity,
-              ease: "easeInOut"
             }}
           />
         ))}
@@ -101,88 +58,24 @@ export function CardDealer() {
         }}
         className="text-center mb-8 md:mb-12 lg:mb-16 relative z-10 px-4"
       >
-        <motion.h1
+        <h1
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 lg:mb-8 relative leading-tight"
           style={{
-            background: 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 25%, #06B6D4 50%, #8B5CF6 75%, #EC4899 100%)',
-            backgroundSize: '400% 400%',
+            background: 'linear-gradient(135deg, #8B5CF6 0%, #EC4899 50%, #06B6D4 100%)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 30px rgba(139, 92, 246, 0.5))'
-          }}
-          animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear"
+            filter: 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.3))'
           }}
         >
           Dungarvan Discovery
-
-          {/* Premium aurora glow effect */}
-          <motion.div
-            className="absolute inset-0 blur-2xl -z-10"
-            style={{
-              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.3) 25%, rgba(6, 182, 212, 0.3) 50%, rgba(139, 92, 246, 0.3) 75%, rgba(236, 72, 153, 0.3) 100%)',
-              backgroundSize: '400% 400%',
-            }}
-            animate={{
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              opacity: [0.4, 0.8, 0.4],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-
-          {/* Sparkle effects */}
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full"
-              style={{
-                left: `${15 + (i * 18)}%`,
-                top: `${20 + (i % 2) * 60}%`,
-              }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-                rotate: [0, 180, 360]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                delay: i * 0.4,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-        </motion.h1>
+        </h1>
 
         <motion.p
-          className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-6 font-light text-wrap-balance"
-          style={{
-            background: 'linear-gradient(135deg, rgba(203, 213, 225, 0.95) 0%, rgba(148, 163, 184, 0.9) 50%, rgba(203, 213, 225, 0.95) 100%)',
-            backgroundSize: '200% 200%',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-          animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear"
-          }}
+          className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-6 font-light text-wrap-balance text-slate-300"
           initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
         >
           Discover hidden gems, local secrets, and unforgettable experiences in Ireland&apos;s Ancient East
         </motion.p>
@@ -201,36 +94,9 @@ export function CardDealer() {
               transition={{ duration: 0.8, ease: [0.175, 0.885, 0.32, 1.275] }}
               className="text-center"
             >
-              <motion.div
-                animate={{
-                  rotate: [0, 8, -8, 0],
-                  scale: [1, 1.1, 1],
-                  y: [0, -5, 0]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="text-6xl sm:text-7xl md:text-8xl mb-3 md:mb-4 relative"
-              >
+              <div className="text-6xl sm:text-7xl md:text-8xl mb-3 md:mb-4 relative">
                 🎴
-                {/* Card glow effect */}
-                <motion.div
-                  className="absolute inset-0 text-6xl sm:text-7xl md:text-8xl blur-xl opacity-30"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  🎴
-                </motion.div>
-              </motion.div>
+              </div>
 
               <motion.h2
                 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight"
