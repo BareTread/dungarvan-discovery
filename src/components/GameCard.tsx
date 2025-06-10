@@ -187,17 +187,19 @@ export function GameCard({
               "transition-all duration-300"
             )}
             style={{
-              padding: 'var(--spacing-card-padding)'
+              padding: 'clamp(0.75rem, 3vw, 1rem)',
+              overflow: 'hidden'
             }}
           >
             <div className="flex flex-col h-full relative overflow-hidden">
               {/* Scrollable content area with enhanced spacing */}
-              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide pb-4"
+              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
                    style={{
                      scrollbarWidth: 'none',
                      msOverflowStyle: 'none',
                      gap: 'var(--spacing-section-gap)',
-                     maxHeight: '100%'
+                     maxHeight: '100%',
+                     paddingBottom: 'clamp(0.5rem, 2vw, 1rem)'
                    }}>
                 {/* Subtle background pattern */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none">

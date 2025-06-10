@@ -48,7 +48,7 @@
   --card-width-sm: clamp(9rem, 24vw, 11rem);
   --card-height-sm: clamp(14rem, 36vw, 17rem);
   --card-width-md: clamp(11rem, 28vw, 14rem);
-  --card-height-md: clamp(17rem, 42vw, 20rem);
+  --card-height-md: clamp(15rem, 38vw, 18rem);
 
   /* Expert Animation Easing Curves */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1183,6 +1183,8 @@ body::before {
   margin-top: auto;
   margin-bottom: 0;
   flex-shrink: 0;
+  max-height: clamp(4rem, 15vw, 6rem);
+  overflow: hidden;
 }
 
 .local-secret-border {
@@ -1209,9 +1211,11 @@ body::before {
   position: relative;
   background: linear-gradient(135deg, #FFF8DC 0%, #F5E6A3 100%);
   border-radius: 0.75rem;
-  padding: 1rem 1.25rem;
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem);
   border: 1px solid rgba(255, 215, 0, 0.3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .local-secret-title {
@@ -1230,9 +1234,11 @@ body::before {
 .local-secret-text {
   color: #1a1a1a;
   font-weight: 600;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  line-height: 1.4;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Modern category pills with micro-interactions */

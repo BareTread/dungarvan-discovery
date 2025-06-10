@@ -111,10 +111,11 @@ export function CardHand({
             <motion.div
               layout
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-8 md:mb-12"
+              className="mb-12 md:mb-16"
               style={{
-                paddingBottom: 'clamp(1rem, 4vw, 2rem)',
-                overflow: 'visible'
+                paddingBottom: 'clamp(2rem, 8vw, 4rem)',
+                overflow: 'visible',
+                marginBottom: 'clamp(3rem, 10vw, 6rem)'
               }}
             >
               <motion.div
@@ -146,8 +147,9 @@ export function CardHand({
               }}
               className="text-center mb-8 md:mb-12 z-10 relative px-4"
               style={{
-                marginTop: 'clamp(2rem, 6vw, 4rem)',
-                clear: 'both'
+                marginTop: 'clamp(4rem, 12vw, 8rem)',
+                clear: 'both',
+                paddingTop: 'clamp(2rem, 6vw, 4rem)'
               }}
             >
               <motion.h3
