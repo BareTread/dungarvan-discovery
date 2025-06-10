@@ -143,7 +143,18 @@ export function GameCard({
                 textShadow: '0 1px 8px rgba(0, 0, 0, 0.4)'
               }}
             >
-              {isSelected ? "Revealing your discovery..." : "Click to reveal your Dungarvan discovery"}
+              {isSelected ? (
+                <span className="inline-flex items-center">
+                  Revealing your discovery
+                  <span className="inline-flex ml-2">
+                    <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce mx-1" style={{ animationDelay: '150ms' }}></span>
+                    <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                  </span>
+                </span>
+              ) : (
+                "Click to reveal your Dungarvan discovery"
+              )}
             </p>
 
             {/* Simple progress indicator */}
@@ -199,17 +210,17 @@ export function GameCard({
                 {activity.emoji}
               </div>
               <div className="flex gap-1 sm:gap-1.5 flex-wrap">
-                <span className="text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg">
+                <span className="category-pill text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-xl hover:border-white/50">
                   {getTimeEmoji(activity.bestTime)}
                 </span>
-                <span className="text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg">
+                <span className="category-pill text-responsive-xs bg-white/30 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-white/40 font-semibold leading-tight text-white shadow-lg transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-xl hover:border-white/50">
                   {getDifficultyEmoji(activity.difficulty)}
                 </span>
                 {activity.cost && (
-                  <span className={`text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-semibold leading-tight shadow-lg ${
+                  <span className={`category-pill text-responsive-xs backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border font-semibold leading-tight shadow-lg transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-xl ${
                       activity.cost === 'free'
-                        ? 'bg-green-500/40 border-green-400/50 text-green-100'
-                        : 'bg-white/30 border-white/40 text-white'
+                        ? 'bg-green-500/40 border-green-400/50 text-green-100 hover:border-green-400/70'
+                        : 'bg-white/30 border-white/40 text-white hover:border-white/50'
                     }`}>
                     {getCostEmoji(activity.cost)}
                   </span>
@@ -239,12 +250,12 @@ export function GameCard({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <div className="flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 mb-2 shadow-lg">
-                <span className="text-base">📍</span>
+              <div className="card-section flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 mb-2 shadow-lg transition-all duration-200 hover:bg-white/25">
+                <span className="icon-location text-base transition-transform duration-300">📍</span>
                 <span className="font-semibold text-card-meta-enhanced truncate text-white">{activity.location}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 shadow-lg">
-                <span className="text-base">⏱️</span>
+              <div className="card-section flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/30 shadow-lg transition-all duration-200 hover:bg-white/25">
+                <span className="icon-clock text-base transition-transform duration-300">⏱️</span>
                 <span className="font-semibold text-card-meta-enhanced text-white">{formatDuration(activity.duration)}</span>
               </div>
             </motion.div>

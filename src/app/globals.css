@@ -445,6 +445,21 @@ body {
   transform: translateZ(0);
 }
 
+/* Enhanced category pills with micro-interactions */
+.category-pill:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Subtle icon animations */
+.card-section:hover .icon-location {
+  transform: translateY(-2px) rotate(5deg);
+}
+
+.card-section:hover .icon-clock {
+  transform: translateY(-2px) rotate(-5deg);
+}
+
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .card-glow::before,
