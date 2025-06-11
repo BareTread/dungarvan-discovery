@@ -50,7 +50,7 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative w-64 h-96 xs:w-72 xs:h-[28rem] sm:w-80 sm:h-[32rem] md:w-88 md:h-[36rem] lg:w-96 lg:h-[40rem] cursor-pointer focus-ring",
+          "relative w-44 h-56 xs:w-48 xs:h-64 sm:w-52 sm:h-72 md:w-56 md:h-80 lg:w-60 lg:h-[22rem] cursor-pointer focus-ring",
           !canSelect && "cursor-default",
           isSelected && "z-30",
           canSelect && "hover:z-20",
@@ -82,9 +82,8 @@ export function GameCard({
         }}
 
         animate={{
-          scale: isSelected ? 1.0 : (isFlipped && !isSelected) ? 0.95 : 1,
-          y: isSelected ? 0 : 0,
-          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1
+          scale: isSelected ? 1.0 : 1,
+          opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.85 : 1
         }}
         whileTap={canSelect ? {
           scale: 0.98,
@@ -92,7 +91,7 @@ export function GameCard({
         } : {}}
         transition={{
           duration: 0.3,
-          ease: [0.175, 0.885, 0.32, 1.275]
+          ease: "easeOut"
         }}
       >
 
@@ -305,7 +304,7 @@ export function GameCard({
                   )}
                 </motion.div>
 
-                {/* Large Local Secret */}
+                {/* Constrained Local Secret */}
                 <motion.div
                   className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg p-4 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
@@ -313,7 +312,8 @@ export function GameCard({
                   transition={{ delay: 0.6, duration: 0.5 }}
                   onClick={() => setIsSecretExpanded(!isSecretExpanded)}
                   style={{
-                    minHeight: '5rem' // Larger minimum height for content
+                    maxHeight: 'clamp(3rem, 12vw, 5rem)',
+                    overflow: 'hidden'
                   }}
                 >
                   <div className="flex items-start gap-1.5">
@@ -332,38 +332,44 @@ export function GameCard({
                       💡
                     </motion.span>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-base font-bold text-yellow-300 tracking-wide uppercase">
-                          Local Secret
+                      <div className="overflow-y-auto scrollbar-hide max-h-full">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="text-base font-bold text-yellow-300 tracking-wide uppercase">
+                            Local Secret
+                          </div>
+                          <motion.span
+                            className="text-yellow-300/70 text-base flex-shrink-0"
+                            animate={{ rotate: isSecretExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            ▼
+                          </motion.span>
                         </div>
-                        <motion.span
-                          className="text-yellow-300/70 text-base flex-shrink-0"
-                          animate={{ rotate: isSecretExpanded ? 180 : 0 }}
+                        <motion.p
+                          className={cn(
+                            "text-base font-semibold break-words leading-relaxed",
+                            !isSecretExpanded && "line-clamp-3"
+                          )}
+                          style={{
+                            color: '#6B4423',
+                            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)'
+                          }}
+                          animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
                           transition={{ duration: 0.3 }}
                         >
-                          ▼
-                        </motion.span>
-                      </div>
-                      <motion.p
-                        className={cn(
-                          "text-base text-white/95 font-medium break-words leading-relaxed",
-                          !isSecretExpanded && "line-clamp-3"
+                          {activity.localSecret}
+                        </motion.p>
+                        {!isSecretExpanded && activity.localSecret.length > 80 && (
+                          <motion.div
+                            className="text-base text-yellow-300/60 mt-2 font-medium"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            Tap to expand...
+                          </motion.div>
                         )}
-                        animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {activity.localSecret}
-                      </motion.p>
-                      {!isSecretExpanded && activity.localSecret.length > 80 && (
-                        <motion.div
-                          className="text-base text-yellow-300/60 mt-2 font-medium"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.2 }}
-                        >
-                          Tap to expand...
-                        </motion.div>
-                      )}
+                      </div>
                     </div>
                   </div>
                 </motion.div>

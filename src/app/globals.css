@@ -709,18 +709,36 @@ body {
 
 /* Enhanced responsive text sizing */
 .text-responsive-xs {
-  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
-  line-height: var(--line-height-comfortable);
+  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 .text-responsive-sm {
-  font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-  line-height: var(--line-height-relaxed);
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  line-height: 1.5;
 }
 
 .text-responsive-base {
-  font-size: clamp(0.8rem, 2.2vw, 0.9rem);
-  line-height: var(--line-height-tight);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  line-height: 1.4;
+}
+
+/* Better text overflow handling */
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Additional responsive breakpoint classes */
@@ -1612,39 +1630,39 @@ body::before {
   opacity: 0.6;
 }
 
-/* Enhanced Responsive Spacing for Text Overlap Prevention */
-@media (max-width: 768px) {
+/* Comprehensive Mobile Optimizations */
+@media (max-width: 640px) {
+  .card-fan-item {
+    transform-origin: center center !important;
+  }
+
   .celebration-gradient {
-    margin-top: clamp(10rem, 25vw, 15rem) !important;
-    padding-top: clamp(4rem, 10vw, 6rem) !important;
+    margin-top: clamp(15rem, 35vw, 20rem) !important;
+    padding-top: clamp(6rem, 15vw, 10rem) !important;
   }
 
   .game-card-selected {
-    margin-bottom: clamp(8rem, 20vw, 12rem) !important;
+    margin-bottom: clamp(12rem, 30vw, 16rem) !important;
   }
 
-  /* Mobile touch optimization */
-  .game-card-enhanced {
+  /* Ensure minimum touch targets */
+  .card-interactive,
+  button,
+  [role="button"] {
     min-height: 44px;
     min-width: 44px;
-  }
-
-  /* Improved mobile scrolling */
-  .scrollbar-hide {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
   }
 }
 
 @media (max-width: 480px) {
-  .celebration-gradient {
-    margin-top: clamp(12rem, 30vw, 18rem) !important;
-    padding-top: clamp(5rem, 12vw, 8rem) !important;
+  /* Extra small mobile adjustments */
+  .mystery-card-premium {
+    padding: clamp(0.5rem, 2vw, 0.75rem) !important;
   }
 
-  /* Extra small mobile optimizations */
-  .card-fan-item {
-    transform-origin: center center;
+  .local-secret-content {
+    padding: 0.5rem 0.75rem !important;
+    max-height: 3rem !important;
   }
 }
 

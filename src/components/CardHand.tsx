@@ -123,8 +123,8 @@ export function CardHand({
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="w-full flex justify-center"
               style={{
-                marginBottom: 'clamp(6rem, 15vw, 10rem)', // Massive spacing to prevent overlap
-                paddingBottom: 'clamp(3rem, 8vw, 5rem)',
+                marginBottom: 'clamp(10rem, 25vw, 15rem)', // Increased spacing to prevent overlap
+                paddingBottom: 'clamp(4rem, 10vw, 6rem)', // Additional padding
                 overflow: 'visible'
               }}
             >
@@ -162,9 +162,9 @@ export function CardHand({
               }}
               className="text-center w-full relative z-10"
               style={{
-                marginTop: 'clamp(8rem, 20vw, 12rem)', // Even more spacing
+                marginTop: 'clamp(12rem, 30vw, 18rem)', // Increased spacing for success message
                 marginBottom: 'clamp(4rem, 10vw, 6rem)',
-                paddingTop: 'clamp(3rem, 8vw, 5rem)',
+                paddingTop: 'clamp(5rem, 12vw, 8rem)', // Extra padding
                 clear: 'both'
               }}
             >
@@ -292,11 +292,12 @@ export function CardHand({
                 const centerIndex = Math.floor(totalCards / 2);
                 const offsetFromCenter = index - centerIndex;
 
-                // Mobile-first responsive spacing and rotation
-                const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-                const xOffset = offsetFromCenter * (isMobile ? 35 : 40);
-                const rotation = offsetFromCenter * (isMobile ? 4 : 6); // Reduced rotation for mobile stability
-                const yOffset = Math.abs(offsetFromCenter) * (isMobile ? 2 : 3); // Reduced for tighter mobile layout
+                // Enhanced responsive spacing and rotation
+                const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+                const isTablet = typeof window !== 'undefined' && window.innerWidth < 1024;
+                const xOffset = offsetFromCenter * (isMobile ? 25 : isTablet ? 30 : 40);
+                const rotation = offsetFromCenter * (isMobile ? 2 : isTablet ? 4 : 6);
+                const yOffset = Math.abs(offsetFromCenter) * (isMobile ? 1 : isTablet ? 2 : 3);
                 const zIndex = totalCards - Math.abs(offsetFromCenter);
 
                 return (
@@ -305,6 +306,8 @@ export function CardHand({
                     className="absolute card-fan-item"
                     style={{
                       zIndex: zIndex,
+                      minHeight: '44px',
+                      minWidth: '44px'
                     }}
                     initial={{
                       opacity: 0,
@@ -316,7 +319,7 @@ export function CardHand({
                     }}
                     animate={{
                       opacity: 1,
-                      scale: isMobile ? 0.9 : 0.85, // Larger on mobile for 44px+ touch targets
+                      scale: isMobile ? 1.0 : isTablet ? 0.95 : 0.85, // Enhanced touch targets
                       x: xOffset,
                       y: yOffset,
                       rotate: rotation,
@@ -329,9 +332,9 @@ export function CardHand({
                       filter: { duration: 0.6 }
                     }}
                     whileHover={{
-                      scale: isMobile ? 1.05 : 1.1, // Optimized hover for mobile
+                      scale: isMobile ? 1.05 : isTablet ? 1.08 : 1.1,
                       zIndex: 50,
-                      y: yOffset - (isMobile ? 15 : 25), // Reduced lift on mobile
+                      y: yOffset - (isMobile ? 15 : isTablet ? 20 : 25),
                       rotate: 0,
                       filter: "brightness(1.1) saturate(1.1)",
                       transition: {
@@ -340,7 +343,7 @@ export function CardHand({
                       }
                     }}
                     whileTap={{
-                      scale: isMobile ? 0.95 : 1.0, // Touch feedback
+                      scale: isMobile ? 0.95 : isTablet ? 0.98 : 1.0,
                       transition: { duration: 0.1 }
                     }}
                   >
