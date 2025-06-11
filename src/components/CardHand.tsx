@@ -71,7 +71,7 @@ export function CardHand({
 
             {/* Bottom Container: Other Cards */}
             <div className="flex justify-center gap-4 flex-wrap">
-              {otherCards.map((card, index) => {
+              {otherCards.map((card) => {
                 const originalIndex = cards.findIndex(c => c.id === card.id);
                 return (
                   <motion.div
