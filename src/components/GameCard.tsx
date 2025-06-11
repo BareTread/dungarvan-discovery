@@ -312,7 +312,7 @@ export function GameCard({
                   transition={{ delay: 0.6, duration: 0.5 }}
                   onClick={() => setIsSecretExpanded(!isSecretExpanded)}
                   style={{
-                    maxHeight: 'clamp(3rem, 12vw, 5rem)',
+                    maxHeight: 'clamp(4rem, 15vw, 7rem)', // Increased for larger cards
                     overflow: 'hidden'
                   }}
                 >

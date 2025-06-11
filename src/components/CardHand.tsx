@@ -209,7 +209,7 @@ export function CardHand({
                 paddingBottom: 'clamp(2rem, 5vw, 3rem)' // Bottom padding for better layout
               }}
             >
-              <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto px-4">
+              <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-7xl mx-auto px-4">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -245,13 +245,13 @@ export function CardHand({
                         // Removed size restrictions - let cards be full size
                       }}
                       whileHover={{
-                        scale: 1.05, // Slight hover scale increase from full size
+                        scale: 1.02, // Subtle hover for larger cards
                         opacity: 1,
-                        y: -8,
-                        rotateX: 2,
-                        filter: "brightness(1.05) saturate(1.05)",
+                        y: -6,
+                        rotateX: 1,
+                        filter: "brightness(1.08) saturate(1.08)",
                         transition: {
-                          duration: 0.2,
+                          duration: 0.3,
                           ease: [0.175, 0.885, 0.32, 1.275]
                         }
                       }}
