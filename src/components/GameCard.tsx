@@ -3,8 +3,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Activity } from '@/lib/activities';
-import { formatDuration, getCategoryGradient, getCostEmoji, getDifficultyEmoji, getTimeEmoji } from '@/lib/dealer';
-import { MapPin, Clock, Zap, Lightbulb } from 'lucide-react';
+import { formatDuration, getCategoryGradient, getTimeEmoji } from '@/lib/dealer';
+import { MapPin, Clock, Lightbulb } from 'lucide-react';
 
 interface GameCardProps {
   activity: Activity;

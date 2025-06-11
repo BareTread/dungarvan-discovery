@@ -22,7 +22,7 @@ export function CardDealer() {
   } = useCardGame();
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-between p-4 relative text-center overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col items-center justify-start sm:justify-between p-4 sm:p-6 md:p-8 relative text-center overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-purple-950 to-background -z-10" />
 
@@ -31,12 +31,12 @@ export function CardDealer() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="relative z-10 w-full max-w-4xl mx-auto pt-8"
+        className="relative z-10 w-full max-w-4xl mx-auto pt-8 sm:pt-12 md:pt-16"
       >
-        <h1 className="text-4xl md:text-6xl font-bold text-gradient-gold mb-4">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient-gold mb-4">
           Dungarvan Discovery
         </h1>
-        <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+        <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto">
           Discover hidden gems, local secrets, and unforgettable experiences in Ireland&apos;s Ancient East.
         </p>
       </motion.header>

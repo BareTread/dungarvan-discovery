@@ -15,7 +15,7 @@ interface CardHandProps {
   gamePhase: GamePhase;
   onDealingComplete: () => void;
   onRevealComplete: () => void;
-  canSelectCard: (index: number) => boolean;
+  canSelectCard: () => boolean;
 }
 
 const handContainerVariants = {
@@ -72,7 +72,7 @@ export function CardHand({ cards, selectedIndex, flipStates, hoveredIndex, onSel
                 className="absolute cursor-pointer"
                 onHoverStart={() => onHoverCard(index)}
                 onHoverEnd={() => onHoverCard(null)}
-                onClick={() => canSelectCard(index) && onSelectCard(index)}
+                onClick={() => canSelectCard() && onSelectCard(index)}
                 animate={{
                   ...cardMotionProps.animate,
                   ...(isRevealing
