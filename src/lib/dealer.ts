@@ -1,206 +1,70 @@
 import { Activity, activities } from './activities';
 
-export interface GameState {
-  dealtCards: Activity[];
-  selectedIndex: number | null;
-  isRevealing: boolean;
-  gamePhase: 'dealing' | 'selecting' | 'revealing' | 'complete';
-}
-
 export class CardDealer {
   private usedCards: Set<string> = new Set();
+  private readonly DECK_RESET_THRESHOLD = 0.7; // Reset after 70% of cards are used
 
   /**
-   * Deal a fresh hand of 5 cards, ensuring no duplicates from recent hands
-   */
-  dealNewHand(): Activity[] {
-    // If we've used more than half the deck, reset to avoid repetition
-    if (this.usedCards.size > activities.length / 2) {
-      this.usedCards.clear();
-    }
-
-    const availableCards = activities.filter(
-      activity => !this.usedCards.has(activity.id)
-    );
-
-    // Shuffle available cards
-    const shuffled = [...availableCards].sort(() => Math.random() - 0.5);
-    
-    // Take first 5 cards
-    const hand = shuffled.slice(0, 5);
-    
-    // Mark these cards as used
-    hand.forEach(card => this.usedCards.add(card.id));
-    
-    return hand;
-  }
-
-  /**
-   * Get a balanced hand with variety across categories
+   * Deal a balanced hand of 5 cards with varied categories.
    */
   dealBalancedHand(): Activity[] {
-    const categories: Activity['category'][] = ['adventure', 'coastal', 'foodie', 'heritage', 'hidden', 'culture'];
+    if (this.usedCards.size > activities.length * this.DECK_RESET_THRESHOLD) {
+      this.reset();
+    }
+
+    let availableCards = activities.filter(activity => !this.usedCards.has(activity.id));
+
+    // Shuffle the available cards
+    availableCards.sort(() => Math.random() - 0.5);
+
     const hand: Activity[] = [];
     const usedCategories = new Set<Activity['category']>();
 
-    // Try to get one card from each category first
-    for (const category of categories) {
-      if (hand.length >= 5) break;
-      
-      const categoryCards = activities.filter(
-        activity => 
-          activity.category === category && 
-          !this.usedCards.has(activity.id) &&
-          !hand.includes(activity)
-      );
-      
-      if (categoryCards.length > 0) {
-        const randomCard = categoryCards[Math.floor(Math.random() * categoryCards.length)];
-        hand.push(randomCard);
-        usedCategories.add(category);
-      }
+    // Prioritize unique categories
+    for (const card of availableCards) {
+        if (hand.length >= 5) break;
+        if (!usedCategories.has(card.category)) {
+            hand.push(card);
+            usedCategories.add(card.category);
+        }
     }
 
-    // Fill remaining slots with any available cards
-    while (hand.length < 5) {
-      const availableCards = activities.filter(
-        activity => 
-          !this.usedCards.has(activity.id) && 
-          !hand.includes(activity)
-      );
-      
-      if (availableCards.length === 0) {
-        // Reset if we run out of cards
-        this.usedCards.clear();
-        return this.dealBalancedHand();
-      }
-      
-      const randomCard = availableCards[Math.floor(Math.random() * availableCards.length)];
-      hand.push(randomCard);
+    // Fill the rest of the hand if needed
+    if (hand.length < 5) {
+        const remainingCards = availableCards.filter(card => !hand.some(h => h.id === card.id));
+        hand.push(...remainingCards.slice(0, 5 - hand.length));
     }
 
-    // Mark cards as used
     hand.forEach(card => this.usedCards.add(card.id));
-    
-    // Shuffle the final hand so categories aren't predictable
-    return hand.sort(() => Math.random() - 0.5);
+    return hand;
   }
 
-  /**
-   * Reset the dealer state
-   */
   reset(): void {
     this.usedCards.clear();
   }
-
-  /**
-   * Get statistics about card usage
-   */
-  getStats() {
-    return {
-      totalCards: activities.length,
-      usedCards: this.usedCards.size,
-      remainingCards: activities.length - this.usedCards.size,
-      usagePercentage: Math.round((this.usedCards.size / activities.length) * 100)
-    };
-  }
 }
 
-// Singleton instance
 export const cardDealer = new CardDealer();
 
-/**
- * Animation timing constants - Optimized for smooth performance
- */
-export const ANIMATION_TIMINGS = {
-  DEAL_STAGGER: 100, // ms between each card appearing
-  DEAL_DURATION: 600, // ms for each card to animate in
-  FLIP_DURATION: 600, // ms for card flip animation
-  SELECTION_DELAY: 200, // ms before starting flip sequence
-  REVEAL_STAGGER: 150, // ms between revealing other cards
-  PAUSE_AFTER_FLIP: 1000, // ms to pause and show selected card
-  LAYOUT_TRANSITION: 600, // ms for final layout transition
-  TOTAL_DEAL_TIME: 1000, // Total time for dealing animation
-  TOTAL_REVEAL_TIME: 2500, // Total time for reveal sequence
-} as const;
-
-/**
- * Get category gradient for styling
- */
+// UTILITY FUNCTIONS
 export function getCategoryGradient(category: Activity['category']): string {
   const gradients = {
-    adventure: 'var(--adventure)',
-    coastal: 'var(--coastal)',
-    foodie: 'var(--foodie)',
-    heritage: 'var(--heritage)',
-    hidden: 'var(--hidden)',
-    culture: 'var(--culture)',
+    adventure: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+    coastal: 'linear-gradient(135deg, #06B6D4, #0891B2)',
+    foodie: 'linear-gradient(135deg, #F97316, #C2410C)',
+    heritage: 'linear-gradient(135deg, #A855F7, #7E22CE)',
+    hidden: 'linear-gradient(135deg, #EC4899, #BE185D)',
+    culture: 'linear-gradient(135deg, #10B981, #047857)',
   };
-  
   return gradients[category];
 }
 
-/**
- * Get category color for UI elements
- */
-export function getCategoryColor(category: Activity['category']): string {
-  const colors = {
-    adventure: 'from-blue-500 to-cyan-500',
-    coastal: 'from-cyan-500 to-blue-400',
-    foodie: 'from-orange-500 to-red-500',
-    heritage: 'from-purple-500 to-pink-500',
-    hidden: 'from-pink-500 to-rose-500',
-    culture: 'from-emerald-500 to-teal-500',
-  };
-  
-  return colors[category];
-}
-
-/**
- * Format duration for display
- */
 export function formatDuration(duration: string): string {
-  return duration.replace(/(\d+)-(\d+)/, '$1–$2');
+  return duration.replace('-', '–');
 }
 
-/**
- * Get time of day emoji
- */
-export function getTimeEmoji(bestTime?: Activity['bestTime']): string {
-  const timeEmojis = {
-    dawn: '🌅',
-    morning: '🌄',
-    afternoon: '☀️',
-    sunset: '🌅',
-    night: '🌙',
-  };
-  
-  return bestTime ? timeEmojis[bestTime] : '⏰';
-}
+export const getTimeEmoji = (bestTime?: Activity['bestTime']) => ({ dawn: '🌅', morning: '🌄', afternoon: '☀️', sunset: '🌇', night: '🌙' }[bestTime || ''] || '⏰');
 
-/**
- * Get difficulty emoji
- */
-export function getDifficultyEmoji(difficulty?: Activity['difficulty']): string {
-  const difficultyEmojis = {
-    easy: '🟢',
-    moderate: '🟡',
-    challenging: '🔴',
-  };
+export const getDifficultyEmoji = (difficulty?: Activity['difficulty']) => ({ easy: '🟢', moderate: '🟡', challenging: '🔴' }[difficulty || ''] || '⚪️');
 
-  return difficulty ? difficultyEmojis[difficulty] : '⚪';
-}
-
-/**
- * Get cost emoji
- */
-export function getCostEmoji(cost?: Activity['cost']): string {
-  const costEmojis = {
-    free: '🆓',
-    low: '💰',
-    medium: '💰💰',
-    high: '💰💰💰',
-  };
-
-  return cost ? costEmojis[cost] : '';
-}
+export const getCostEmoji = (cost?: Activity['cost']) => ({ free: 'Free', low: '€', medium: '€€', high: '€€€' }[cost || ''] || '');

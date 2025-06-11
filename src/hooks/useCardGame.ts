@@ -1,196 +1,92 @@
 import { useState, useCallback } from 'react';
-import { cardDealer, GameState, ANIMATION_TIMINGS } from '@/lib/dealer';
+import { cardDealer } from '@/lib/dealer';
+import type { Activity } from '@/lib/activities';
+
+// A single, unified state interface for simplicity and reliability.
+interface GameState {
+  dealtCards: Activity[];
+  selectedIndex: number | null;
+  gamePhase: 'welcome' | 'selecting' | 'revealing' | 'complete';
+  flipStates: boolean[];
+  hoveredIndex: number | null;
+}
+
+const INITIAL_STATE: GameState = {
+  dealtCards: [],
+  selectedIndex: null,
+  gamePhase: 'welcome',
+  flipStates: Array(5).fill(false),
+  hoveredIndex: null,
+};
 
 export function useCardGame() {
-  const [gameState, setGameState] = useState<GameState>({
-    dealtCards: [],
-    selectedIndex: null,
-    isRevealing: false,
-    gamePhase: 'selecting' // Start in selecting state to show fan layout
-  });
+  const [gameState, setGameState] = useState<GameState>(INITIAL_STATE);
+  const [isDealing, setIsDealing] = useState(false);
 
-  const [animationState, setAnimationState] = useState({
-    flipStates: [false, false, false, false, false],
-    hoveredIndex: null as number | null,
-    isDealing: false
-  });
-
-  /**
-   * Deal a new hand of cards
-   */
+  // Deals a new hand and resets the game to the 'selecting' phase.
   const dealNewHand = useCallback(() => {
-    setAnimationState(prev => ({ ...prev, isDealing: true }));
-
-    // Deal new cards immediately to show fan layout
+    setIsDealing(true);
     const newCards = cardDealer.dealBalancedHand();
-
-    // Set game state with cards immediately
     setGameState({
+      ...INITIAL_STATE,
       dealtCards: newCards,
-      selectedIndex: null,
-      isRevealing: false,
-      gamePhase: 'selecting' // Go directly to selecting to show fan layout
+      gamePhase: 'selecting',
     });
-
-    // Reset flip states
-    setAnimationState(prev => ({
-      ...prev,
-      flipStates: [false, false, false, false, false],
-      isDealing: false // Set to false immediately since we have cards
-    }));
+    setIsDealing(false);
   }, []);
 
-  /**
-   * Select a card and trigger reveal sequence
-   */
+  // Handles the entire card selection and reveal sequence.
+  // No more setTimeouts! Framer Motion will handle delays in the components.
   const selectCard = useCallback((index: number) => {
-    if (gameState.isRevealing || gameState.selectedIndex !== null) return;
+    if (gameState.gamePhase !== 'selecting' || gameState.selectedIndex !== null) return;
 
-    // Phase 1: Mark card as selected, start revealing, and flip immediately
+    // 1. Immediately set the selected index and change phase.
     setGameState(prev => ({
       ...prev,
       selectedIndex: index,
-      isRevealing: true,
-      gamePhase: 'revealing'
+      gamePhase: 'revealing',
     }));
 
-    // Phase 2: Flip the selected card immediately (no delay)
-    setAnimationState(prev => ({
-      ...prev,
-      flipStates: prev.flipStates.map((state, i) => i === index ? true : state)
+    // 2. Flip all cards. The animation delay will be handled in the GameCard component.
+    setGameState(prev => ({
+        ...prev,
+        flipStates: Array(5).fill(true)
     }));
 
-    // Phase 3: Pause to let user see the selected card content
+    // 3. After a delay (handled by Framer Motion's `layout` transition), move to the complete phase.
+    // We'll use a delayed state update to trigger the final layout change.
     setTimeout(() => {
-      // Phase 4: Flip the other cards one by one
-      const otherIndices = [0, 1, 2, 3, 4].filter(i => i !== index);
+        setGameState(prev => ({ ...prev, gamePhase: 'complete' }));
+    }, 1500); // This single timeout ensures the layout animates after cards have flipped.
+  }, [gameState.gamePhase, gameState.selectedIndex]);
 
-      otherIndices.forEach((cardIndex, staggerIndex) => {
-        setTimeout(() => {
-          setAnimationState(prev => ({
-            ...prev,
-            flipStates: prev.flipStates.map((state, i) =>
-              i === cardIndex ? true : state
-            )
-          }));
-        }, staggerIndex * ANIMATION_TIMINGS.REVEAL_STAGGER);
-      });
-
-      // Phase 5: After all cards are flipped, transition to final layout
-      setTimeout(() => {
-        setGameState(prev => ({
-          ...prev,
-          isRevealing: false,
-          gamePhase: 'complete'
-        }));
-      }, otherIndices.length * ANIMATION_TIMINGS.REVEAL_STAGGER + ANIMATION_TIMINGS.LAYOUT_TRANSITION);
-
-    }, ANIMATION_TIMINGS.PAUSE_AFTER_FLIP);
-  }, [gameState.isRevealing, gameState.selectedIndex]);
-
-  /**
-   * Reset the entire game
-   */
+  // Resets the game to the initial welcome screen.
   const resetGame = useCallback(() => {
     cardDealer.reset();
-    setGameState({
-      dealtCards: [],
-      selectedIndex: null,
-      isRevealing: false,
-      gamePhase: 'dealing'
-    });
-    setAnimationState({
-      flipStates: [false, false, false, false, false],
-      hoveredIndex: null,
-      isDealing: false
-    });
+    setGameState(INITIAL_STATE);
   }, []);
 
-  /**
-   * Set hovered card for animations
-   */
+  // Tracks which card is being hovered over.
   const setHoveredCard = useCallback((index: number | null) => {
-    if (gameState.isRevealing) return;
-    setAnimationState(prev => ({ ...prev, hoveredIndex: index }));
-  }, [gameState.isRevealing]);
+    if (gameState.gamePhase === 'selecting') {
+      setGameState(prev => ({ ...prev, hoveredIndex: index }));
+    }
+  }, [gameState.gamePhase]);
 
-  /**
-   * Get the selected activity
-   */
-  const selectedActivity = gameState.selectedIndex !== null 
-    ? gameState.dealtCards[gameState.selectedIndex] 
-    : null;
-
-  /**
-   * Get the rejected activities (non-selected cards)
-   */
-  const rejectedActivities = gameState.selectedIndex !== null
-    ? gameState.dealtCards.filter((_, index) => index !== gameState.selectedIndex)
-    : [];
-
-  /**
-   * Check if a card can be selected
-   */
+  // Determines if a card can be selected.
   const canSelectCard = (index: number): boolean => {
-    return gameState.gamePhase === 'selecting' && 
-           !gameState.isRevealing && 
-           gameState.selectedIndex === null &&
-           index < gameState.dealtCards.length;
+    return gameState.gamePhase === 'selecting' && index < gameState.dealtCards.length;
   };
-
-  /**
-   * Check if a card is flipped
-   */
-  const isCardFlipped = (index: number): boolean => {
-    return animationState.flipStates[index] || false;
-  };
-
-  /**
-   * Check if a card is hovered
-   */
-  const isCardHovered = (index: number): boolean => {
-    return animationState.hoveredIndex === index;
-  };
-
-  /**
-   * Get game statistics
-   */
-  const getGameStats = useCallback(() => {
-    return {
-      ...cardDealer.getStats(),
-      currentHand: gameState.dealtCards.length,
-      hasSelection: gameState.selectedIndex !== null,
-      isComplete: gameState.gamePhase === 'complete'
-    };
-  }, [gameState]);
 
   return {
-    // Game state
     gameState,
-    animationState,
-    
-    // Derived state
-    selectedActivity,
-    rejectedActivities,
-    
-    // Actions
+    isDealing,
+    hasCards: gameState.dealtCards.length > 0,
+    isComplete: gameState.gamePhase === 'complete',
     dealNewHand,
     selectCard,
     resetGame,
     setHoveredCard,
-    
-    // Helpers
     canSelectCard,
-    isCardFlipped,
-    isCardHovered,
-    getGameStats,
-    
-    // Computed properties
-    hasCards: gameState.dealtCards.length > 0,
-    isDealing: animationState.isDealing,
-    isSelecting: gameState.gamePhase === 'selecting',
-    isRevealing: gameState.isRevealing,
-    isComplete: gameState.gamePhase === 'complete',
-    canDealNewHand: gameState.gamePhase === 'complete' || gameState.dealtCards.length === 0
   };
 }

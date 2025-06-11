@@ -19,15 +19,14 @@ const containerVariants = {
 export function CardDealer() {
   const {
     gameState,
-    animationState,
+    isDealing,
+    hasCards,
+    isComplete,
     dealNewHand,
     selectCard,
     resetGame,
     setHoveredCard,
     canSelectCard,
-    hasCards,
-    isDealing,
-    isComplete,
   } = useCardGame();
 
   return (
@@ -92,8 +91,8 @@ export function CardDealer() {
               <CardHand
                 cards={gameState.dealtCards}
                 selectedIndex={gameState.selectedIndex}
-                flipStates={animationState.flipStates}
-                hoveredIndex={animationState.hoveredIndex}
+                flipStates={gameState.flipStates}
+                hoveredIndex={gameState.hoveredIndex}
                 canSelectCard={canSelectCard}
                 onSelectCard={selectCard}
                 onHoverCard={setHoveredCard}
