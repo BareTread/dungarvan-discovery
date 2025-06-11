@@ -26,91 +26,98 @@ export function CardHand({
   gamePhase,
 }: CardHandProps) {
   const isComplete = gamePhase === 'complete';
+  const otherCards = cards.filter((_, index) => index !== selectedIndex);
 
   return (
-    <div className="w-full flex-1 flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center p-4">
       {/* Dynamic Header */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {gamePhase === 'selecting' && (
           <motion.div
             key="selecting-header"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gradient-gold mb-2">Choose Your Adventure</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gradient-gold mb-2">
+              Choose Your Adventure
+            </h2>
             <p className="text-slate-300">Hover and click a card to reveal your discovery.</p>
           </motion.div>
         )}
-        {isComplete && (
-            <motion.h3
-              key="complete-header"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 0.5, duration: 0.5 } }}
-              className="text-3xl md:text-4xl font-bold mb-8 text-gradient-celebrate"
-            >
-              🎉 Your Adventure Awaits!
-            </motion.h3>
-        )}
       </AnimatePresence>
 
-      {/* Card Layout Area */}
-      <div className="relative w-full flex-1 flex items-center justify-center">
-        {cards.map((card, index) => {
-          const isSelected = index === selectedIndex;
-          const totalCards = cards.length;
-          const centerIndex = Math.floor(totalCards / 2);
-          const offsetFromCenter = index - centerIndex;
+      {/* Layout Container */}
+      <div className="flex-1 w-full flex flex-col items-center justify-center">
+        {/* === A. COMPLETE LAYOUT === */}
+        {isComplete && selectedIndex !== null && (
+          <motion.div className="w-full flex flex-col items-center gap-8">
+             <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0, transition: { delay: 0.8, duration: 0.5 } }}
+                className="text-3xl md:text-4xl font-bold text-gradient-celebrate"
+              >
+                🎉 Your Adventure Awaits!
+              </motion.h3>
 
-          // Fan layout properties
-          const fanRotation = offsetFromCenter * 6;
-          const fanYOffset = Math.abs(offsetFromCenter) * 12;
-          const fanXOffset = offsetFromCenter * 40;
-
-          return (
+            {/* Top Container: Selected Card */}
             <motion.div
-              key={card.id}
-              layout // This is the magic prop for smooth transitions!
-              className="absolute cursor-pointer"
-              style={{ transformOrigin: 'bottom center' }}
-              onHoverStart={() => onHoverCard(index)}
-              onHoverEnd={() => onHoverCard(null)}
-              onClick={() => canSelectCard(index) && onSelectCard(index)}
-              transition={{
-                duration: 0.7,
-                ease: [0.32, 0.72, 0, 1], // Smooth cinematic ease
-              }}
-              animate={
-                isComplete
-                  ? { // Final "complete" state position
-                      x: isSelected ? 0 : (offsetFromCenter < 0 ? -150 : 150) + (offsetFromCenter * 20),
-                      y: isSelected ? -80 : 280,
-                      scale: isSelected ? 1.05 : 0.7,
-                      opacity: isSelected ? 1 : 0.5,
-                      zIndex: isSelected ? 20 : 1,
-                      rotate: isSelected ? 0 : 0,
-                    }
-                  : { // "Selecting" state position (fan)
-                      x: fanXOffset,
-                      y: fanYOffset,
-                      rotate: fanRotation,
-                      zIndex: hoveredIndex === index ? 10 : totalCards - Math.abs(offsetFromCenter),
-                    }
-              }
-              whileHover={gamePhase === 'selecting' ? {
-                y: fanYOffset - 20,
-                rotate: 0,
-                scale: 1.05,
-              } : {}}
+              layoutId={`card-wrapper-${selectedIndex}`}
+              className="z-20"
             >
-              <GameCard
-                activity={card}
-                isFlipped={flipStates[index]}
-              />
+              <GameCard activity={cards[selectedIndex]} isFlipped={true} />
             </motion.div>
-          );
-        })}
+
+            {/* Bottom Container: Other Cards */}
+            <div className="flex justify-center gap-4 flex-wrap">
+              {otherCards.map((card, index) => {
+                const originalIndex = cards.findIndex(c => c.id === card.id);
+                return (
+                  <motion.div
+                    key={card.id}
+                    layoutId={`card-wrapper-${originalIndex}`}
+                    className="z-10 opacity-60 scale-75"
+                  >
+                    <GameCard activity={card} isFlipped={true} />
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+
+        {/* === B. SELECTING LAYOUT (FAN) === */}
+        {!isComplete && (
+          <div className="relative w-full flex-1 flex items-center justify-center">
+            {cards.map((card, index) => {
+              const isHovered = hoveredIndex === index;
+              const offsetFromCenter = index - Math.floor(cards.length / 2);
+
+              return (
+                <motion.div
+                  key={card.id}
+                  layoutId={`card-wrapper-${index}`}
+                  className="absolute cursor-pointer"
+                  style={{ transformOrigin: 'bottom center' }}
+                  onHoverStart={() => onHoverCard(index)}
+                  onHoverEnd={() => onHoverCard(null)}
+                  onClick={() => canSelectCard(index) && onSelectCard(index)}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  animate={{
+                    x: offsetFromCenter * 60,
+                    y: isHovered ? -40 : Math.abs(offsetFromCenter) * 20,
+                    rotate: isHovered ? 0 : offsetFromCenter * 8,
+                    scale: isHovered ? 1.1 : 1,
+                    zIndex: isHovered ? 10 : cards.length - Math.abs(offsetFromCenter),
+                  }}
+                >
+                  <GameCard activity={card} isFlipped={flipStates[index]} />
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

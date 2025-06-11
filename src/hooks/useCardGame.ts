@@ -35,29 +35,20 @@ export function useCardGame() {
     setIsDealing(false);
   }, []);
 
-  // Handles the entire card selection and reveal sequence.
-  // No more setTimeouts! Framer Motion will handle delays in the components.
   const selectCard = useCallback((index: number) => {
     if (gameState.gamePhase !== 'selecting' || gameState.selectedIndex !== null) return;
 
-    // 1. Immediately set the selected index and change phase.
     setGameState(prev => ({
       ...prev,
       selectedIndex: index,
       gamePhase: 'revealing',
+      flipStates: Array(5).fill(true) // Flip all cards at once
     }));
 
-    // 2. Flip all cards. The animation delay will be handled in the GameCard component.
-    setGameState(prev => ({
-        ...prev,
-        flipStates: Array(5).fill(true)
-    }));
-
-    // 3. After a delay (handled by Framer Motion's `layout` transition), move to the complete phase.
-    // We'll use a delayed state update to trigger the final layout change.
+    // Transition to the final layout after the flip animation has had time to complete.
     setTimeout(() => {
         setGameState(prev => ({ ...prev, gamePhase: 'complete' }));
-    }, 1500); // This single timeout ensures the layout animates after cards have flipped.
+    }, 2000); // Increased delay for a smoother visual transition
   }, [gameState.gamePhase, gameState.selectedIndex]);
 
   // Resets the game to the initial welcome screen.
