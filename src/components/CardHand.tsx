@@ -208,7 +208,7 @@ export function CardHand({
                 paddingTop: 'clamp(1rem, 3vw, 2rem)'
               }}
             >
-              <div className="flex gap-2 sm:gap-3 justify-center max-w-5xl mx-auto overflow-x-auto scrollbar-hide pb-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-1.5 sm:gap-2 md:gap-3 justify-center max-w-5xl mx-auto">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -223,8 +223,8 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 0.5, // Increased for accessibility (140px * 0.5 = 70px minimum - still above 44px)
-                        opacity: 0.85,
+                        scale: 0.55,
+                        opacity: 0.9,
                         rotateY: 0,
                         y: 0,
                         filter: "blur(0px)"
@@ -244,16 +244,13 @@ export function CardHand({
                         minWidth: 'clamp(80px, 20vw, 120px)' // Responsive min width
                       }}
                       whileHover={{
-                        scale: 0.6, // Increased hover scale for better touch feedback
+                        scale: 0.6,
                         opacity: 1,
-                        y: -8,
-                        rotateX: 3,
-                        filter: "brightness(1.1) saturate(1.1)",
-                        background: 'rgba(255, 255, 255, 0.08)',
-                        borderColor: 'rgba(255, 255, 255, 0.15)',
-                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.25)',
+                        y: -4,
+                        rotateX: 2,
+                        filter: "brightness(1.05) saturate(1.05)",
                         transition: {
-                          duration: 0.3,
+                          duration: 0.2,
                           ease: [0.175, 0.885, 0.32, 1.275]
                         }
                       }}
@@ -295,9 +292,10 @@ export function CardHand({
                 const offsetFromCenter = index - centerIndex;
 
                 // Mobile-first responsive spacing and rotation
-                const xOffset = offsetFromCenter * Math.min(40, window?.innerWidth ? window.innerWidth * 0.08 : 40);
-                const rotation = offsetFromCenter * 6; // Reduced rotation for mobile stability
-                const yOffset = Math.abs(offsetFromCenter) * 3; // Reduced for tighter mobile layout
+                const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+                const xOffset = offsetFromCenter * (isMobile ? 35 : 40);
+                const rotation = offsetFromCenter * (isMobile ? 4 : 6); // Reduced rotation for mobile stability
+                const yOffset = Math.abs(offsetFromCenter) * (isMobile ? 2 : 3); // Reduced for tighter mobile layout
                 const zIndex = totalCards - Math.abs(offsetFromCenter);
 
                 return (
@@ -317,7 +315,7 @@ export function CardHand({
                     }}
                     animate={{
                       opacity: 1,
-                      scale: window?.innerWidth && window.innerWidth < 768 ? 0.9 : 0.85, // Larger on mobile for 44px+ touch targets
+                      scale: isMobile ? 0.9 : 0.85, // Larger on mobile for 44px+ touch targets
                       x: xOffset,
                       y: yOffset,
                       rotate: rotation,
@@ -330,9 +328,9 @@ export function CardHand({
                       filter: { duration: 0.6 }
                     }}
                     whileHover={{
-                      scale: window?.innerWidth && window.innerWidth < 768 ? 1.05 : 1.1, // Optimized hover for mobile
+                      scale: isMobile ? 1.05 : 1.1, // Optimized hover for mobile
                       zIndex: 50,
-                      y: yOffset - (window?.innerWidth && window.innerWidth < 768 ? 15 : 25), // Reduced lift on mobile
+                      y: yOffset - (isMobile ? 15 : 25), // Reduced lift on mobile
                       rotate: 0,
                       filter: "brightness(1.1) saturate(1.1)",
                       transition: {
@@ -341,7 +339,7 @@ export function CardHand({
                       }
                     }}
                     whileTap={{
-                      scale: window?.innerWidth && window.innerWidth < 768 ? 0.95 : 1.0, // Touch feedback
+                      scale: isMobile ? 0.95 : 1.0, // Touch feedback
                       transition: { duration: 0.1 }
                     }}
                   >

@@ -345,6 +345,22 @@ body {
   transform: translateY(-2px) scale(1.01);
 }
 
+/* Reduced motion performance optimizations */
+@media (max-width: 768px) {
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-shimmer,
+  .animate-bounce-subtle {
+    animation-duration: 4s !important; /* Slower animations on mobile */
+  }
+  /* Simplify complex animations on mobile */
+  .card-glow::before,
+  .card-glow::after {
+    opacity: 0.3 !important;
+    filter: blur(6px) !important;
+  }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   33% { transform: translateY(-10px) rotate(1deg); }
@@ -693,18 +709,28 @@ body {
 
 /* Enhanced responsive text sizing */
 .text-responsive-xs {
-  font-size: var(--font-size-card-meta);
+  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
   line-height: var(--line-height-comfortable);
 }
 
 .text-responsive-sm {
-  font-size: var(--font-size-card-body);
+  font-size: clamp(0.7rem, 1.8vw, 0.8rem);
   line-height: var(--line-height-relaxed);
 }
 
 .text-responsive-base {
-  font-size: var(--font-size-card-title);
+  font-size: clamp(0.8rem, 2.2vw, 0.9rem);
   line-height: var(--line-height-tight);
+}
+
+/* Additional responsive breakpoint classes */
+@media (max-width: 375px) {
+  .text-responsive-xs {
+    font-size: 0.6rem;
+  }
+  .text-responsive-sm {
+    font-size: 0.7rem;
+  }
 }
 
 /* Premium typography utilities */
@@ -1596,12 +1622,52 @@ body::before {
   .game-card-selected {
     margin-bottom: clamp(8rem, 20vw, 12rem) !important;
   }
+
+  /* Mobile touch optimization */
+  .game-card-enhanced {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improved mobile scrolling */
+  .scrollbar-hide {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
 }
 
 @media (max-width: 480px) {
   .celebration-gradient {
     margin-top: clamp(12rem, 30vw, 18rem) !important;
     padding-top: clamp(5rem, 12vw, 8rem) !important;
+  }
+
+  /* Extra small mobile optimizations */
+  .card-fan-item {
+    transform-origin: center center;
+  }
+}
+
+/* Critical Performance Optimizations */
+.game-card-enhanced,
+.card-fan-item,
+.mystery-card-premium {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .local-secret-content {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+  }
+
+  .text-amber-900 {
+    color: #000000 !important;
   }
 }
 
@@ -1621,6 +1687,13 @@ body::before {
 
   .category-pill-modern::before {
     transition: none !important;
+  }
+
+  /* Maintain functionality without animations */
+  .card-fan-item:hover,
+  .game-card-enhanced:hover {
+    transform: none !important;
+    filter: brightness(1.1) !important;
   }
 }
 

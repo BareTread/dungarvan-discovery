@@ -75,7 +75,7 @@ export function CardDealer() {
       </motion.header>
 
       {/* Main Game Area */}
-      <section className="flex-1 flex flex-col items-center justify-start w-full max-w-7xl relative z-10 px-2 md:px-4" aria-label="Interactive card game">
+      <section className="flex-1 flex flex-col items-center justify-center w-full max-w-6xl relative z-20 px-2 md:px-4" aria-label="Interactive card game">
         <AnimatePresence mode="wait">
           {!hasCards ? (
             // Enhanced Welcome State
@@ -186,7 +186,7 @@ export function CardDealer() {
               duration: 0.8,
               ease: [0.175, 0.885, 0.32, 1.275]
             }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-3 md:mt-4 relative z-10 px-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-30 px-4"
           >
             <motion.div
               whileHover={{ scale: 1.05 }}

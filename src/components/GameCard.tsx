@@ -50,24 +50,21 @@ export function GameCard({
     >
       <motion.div
         className={cn(
-          "relative cursor-pointer focus-ring game-card-enhanced",
-          "w-full h-full", // Use full container dimensions
+          "relative w-44 h-64 xs:w-48 xs:h-72 sm:w-52 sm:h-80 md:w-60 md:h-96 lg:w-64 lg:h-[26rem] cursor-pointer focus-ring",
           !canSelect && "cursor-default",
-          isSelected && "z-10 game-card-selected",
+          isSelected && "z-30",
           canSelect && "hover:z-20",
           !showActivityDetails && "card-stack"
         )}
         style={{
-          width: 'clamp(140px, 35vw, 200px)', // Responsive but consistent sizing
-          height: 'clamp(200px, 50vw, 300px)',
-          maxWidth: '200px',
-          maxHeight: '300px',
-          minWidth: '140px',
-          minHeight: '200px'
+          touchAction: 'manipulation', // Prevents double-tap zoom on mobile
+          WebkitTapHighlightColor: 'transparent' // Removes default mobile tap highlight
         }}
         onClick={canSelect ? onSelect : undefined}
         onMouseEnter={() => canSelect && !showActivityDetails && onHover(true)}
         onMouseLeave={() => onHover(false)}
+        onTouchStart={() => canSelect && !showActivityDetails && onHover(true)}
+        onTouchEnd={() => onHover(false)}
         role={canSelect ? "button" : "img"}
         tabIndex={canSelect ? 0 : -1}
         aria-label={
@@ -89,6 +86,10 @@ export function GameCard({
           y: isSelected ? 0 : 0,
           opacity: isSelected ? 1 : (isFlipped && !isSelected) ? 0.8 : 1
         }}
+        whileTap={canSelect ? {
+          scale: 0.98,
+          transition: { duration: 0.1 }
+        } : {}}
         transition={{
           duration: 0.3,
           ease: [0.175, 0.885, 0.32, 1.275]
@@ -206,15 +207,9 @@ export function GameCard({
             }}
           >
             <div className="flex flex-col h-full relative overflow-hidden">
-              {/* Scrollable content area with enhanced spacing */}
-              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
-                   style={{
-                     scrollbarWidth: 'none',
-                     msOverflowStyle: 'none',
-                     gap: 'var(--spacing-section-gap)',
-                     maxHeight: '100%',
-                     paddingBottom: 'clamp(0.5rem, 2vw, 1rem)'
-                   }}>
+              {/* Scrollable content area with improved spacing */}
+              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide space-y-1.5 sm:space-y-2 max-h-full"
+                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 {/* Subtle background pattern */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none">
                   <div className="absolute inset-0" style={{
@@ -225,7 +220,7 @@ export function GameCard({
 
                 {/* Compact Header */}
                 <motion.div
-                  className="flex items-start justify-between mb-2 sm:mb-3 relative z-10"
+                  className="flex items-start justify-between mb-1.5 sm:mb-2 relative z-10 flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
@@ -233,7 +228,7 @@ export function GameCard({
                   <div className="text-xl sm:text-2xl md:text-3xl flex-shrink-0">
                     {activity.emoji}
                   </div>
-                  <div className="flex gap-1 sm:gap-1.5 flex-wrap">
+                  <div className="flex gap-1 flex-wrap flex-shrink-0 ml-2">
                     <span className="category-pill-modern text-responsive-xs text-white">
                       {getTimeEmoji(activity.bestTime)}
                     </span>
@@ -252,10 +247,9 @@ export function GameCard({
                   </div>
                 </motion.div>
 
-                {/* Enhanced Title */}
+                {/* Compact Title */}
                 <motion.h3
-                  className="text-card-title-enhanced font-bold relative z-10 line-clamp-2"
-                  style={{ marginBottom: 'var(--spacing-section-gap)' }}
+                  className="text-xs sm:text-sm font-bold mb-1.5 leading-tight relative z-10 line-clamp-2 card-text-compact flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
@@ -263,117 +257,107 @@ export function GameCard({
                   {activity.title}
                 </motion.h3>
 
-                {/* Enhanced Location & Duration */}
+                {/* Compact Location & Duration */}
                 <motion.div
-                  className="text-card-meta-enhanced relative z-10"
-                  style={{
-                    marginBottom: 'var(--spacing-section-gap)',
-                    gap: 'var(--spacing-card-gap)'
-                  }}
+                  className="text-xs opacity-90 mb-1.5 space-y-1 relative z-10 flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                 >
-                  <div className="info-section-enhanced card-section flex items-center gap-2 mb-2">
-                    <span className="info-icon icon-location text-base transition-transform duration-300">📍</span>
-                    <span className="font-semibold text-card-meta-enhanced truncate text-white">{activity.location}</span>
+                  <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
+                    <span className="text-sm">📍</span>
+                    <span className="font-medium text-xs card-text-tight truncate max-w-32 sm:max-w-40">{activity.location}</span>
                   </div>
-                  <div className="info-section-enhanced card-section flex items-center gap-2">
-                    <span className="info-icon icon-clock text-base transition-transform duration-300">⏱️</span>
-                    <span className="font-semibold text-card-meta-enhanced text-white">{formatDuration(activity.duration)}</span>
+                  <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
+                    <span className="text-sm">⏱️</span>
+                    <span className="font-medium text-xs card-text-tight">{formatDuration(activity.duration)}</span>
                   </div>
                 </motion.div>
 
-                {/* Enhanced Description with expand/collapse */}
+                {/* Compact Description with expand/collapse */}
                 <motion.div
-                  className="relative z-10"
-                  style={{ marginBottom: 'var(--spacing-section-gap)' }}
+                  className="mb-1.5 sm:mb-2 relative z-10 flex-1 min-h-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
                 >
                   <motion.p
                     className={cn(
-                      "text-card-body-enhanced cursor-pointer",
-                      !isDescriptionExpanded && "line-clamp-3"
+                      "text-xs card-text-compact opacity-95 cursor-pointer break-words",
+                      !isDescriptionExpanded && "line-clamp-2"
                     )}
                     onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
                   >
                     {activity.description}
                   </motion.p>
-                  {activity.description.length > 120 && !isDescriptionExpanded && (
-                    <button
-                      className="text-card-meta-enhanced text-white/70 hover:text-white/90 mt-2 font-medium transition-colors duration-200"
+                  {activity.description.length > 80 && !isDescriptionExpanded && (
+                    <motion.button
+                      className="text-xs text-white/60 hover:text-white/80 mt-1 font-medium"
                       onClick={() => setIsDescriptionExpanded(true)}
+                      whileHover={{ scale: 1.05 }}
                     >
                       Read more...
-                    </button>
+                    </motion.button>
                   )}
                 </motion.div>
 
-                {/* Enhanced Local Secret with Premium Design */}
+                {/* Compact Local Secret */}
                 <motion.div
-                  className="local-secret-premium cursor-pointer hover:scale-[1.01] transition-all duration-300 mt-auto flex-shrink-0"
+                  className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg p-2 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
                   onClick={() => setIsSecretExpanded(!isSecretExpanded)}
-                  style={{
-                    maxHeight: 'clamp(3.5rem, 12vw, 5rem)', // Strict height constraint
-                    overflow: 'hidden'
-                  }}
                 >
-                  {/* Animated golden border */}
-                  <div className="local-secret-border"></div>
-
-                  {/* Content container with overflow protection */}
-                  <div
-                    className="local-secret-content"
-                    style={{
-                      maxHeight: '100%',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    <div className="flex items-start gap-2">
-                      <span className="text-amber-600 text-base mt-0.5 flex-shrink-0">
-                        💡
-                      </span>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <div className="local-secret-title text-xs font-bold text-amber-900">
-                            LOCAL SECRET
-                          </div>
-                          <span
-                            className="text-amber-700 text-xs flex-shrink-0 transition-transform duration-300"
-                            style={{ transform: isSecretExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                          >
-                            ▼
-                          </span>
+                  <div className="flex items-start gap-1.5">
+                    <motion.span
+                      className="text-yellow-300 text-sm mt-0.5 flex-shrink-0"
+                      animate={{
+                        rotate: [0, 5, -5, 0],
+                        scale: [1, 1.1, 1]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse"
+                      }}
+                    >
+                      💡
+                    </motion.span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="text-xs font-bold text-yellow-300 tracking-wide uppercase">
+                          Local Secret
                         </div>
-                        <p
-                          className={cn(
-                            "local-secret-text text-xs leading-tight font-semibold text-amber-900",
-                            !isSecretExpanded && "line-clamp-2"
-                          )}
-                          style={{
-                            opacity: isSecretExpanded ? 1 : 0.95,
-                            textShadow: '0 1px 2px rgba(255, 255, 255, 0.5)',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis'
-                          }}
+                        <motion.span
+                          className="text-yellow-300/70 text-xs flex-shrink-0"
+                          animate={{ rotate: isSecretExpanded ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
                         >
-                          {activity.localSecret}
-                        </p>
-                        {!isSecretExpanded && activity.localSecret.length > 60 && (
-                          <div className="text-xs text-amber-800 mt-1 font-medium">
-                            Tap for more...
-                          </div>
-                        )}
+                          ▼
+                        </motion.span>
                       </div>
+                      <motion.p
+                        className={cn(
+                          "text-xs card-text-compact text-white/95 font-medium break-words",
+                          !isSecretExpanded && "line-clamp-1"
+                        )}
+                        animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {activity.localSecret}
+                      </motion.p>
+                      {!isSecretExpanded && activity.localSecret.length > 50 && (
+                        <motion.div
+                          className="text-xs text-yellow-300/60 mt-0.5 font-medium"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          Tap to expand...
+                        </motion.div>
+                      )}
                     </div>
-
-                    {/* Decorative corner accent */}
-                    <div className="absolute top-0 right-0 w-4 h-4 bg-gradient-to-bl from-yellow-400/30 to-transparent rounded-bl-md" />
                   </div>
                 </motion.div>
               </div>
