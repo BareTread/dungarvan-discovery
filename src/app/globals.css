@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Enhanced Dark theme colors */
+  /* Clean Dark theme colors */
   --background: 0 0% 3.9%;
   --foreground: 0 0% 98%;
   --card-bg: 0 0% 9%;
@@ -9,64 +9,47 @@
   --primary: 262.1 83.3% 57.8%;
   --secondary: 47.9 95.8% 53.1%;
 
-  /* Enhanced Category gradients with depth */
-  --adventure: linear-gradient(135deg, #3B82F6 0%, #1E40AF 50%, #06B6D4 100%);
-  --coastal: linear-gradient(135deg, #06B6D4 0%, #0284C7 50%, #0EA5E9 100%);
-  --foodie: linear-gradient(135deg, #F97316 0%, #EA580C 50%, #EF4444 100%);
-  --heritage: linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #EC4899 100%);
-  --hidden: linear-gradient(135deg, #EC4899 0%, #DB2777 50%, #F43F5E 100%);
-  --culture: linear-gradient(135deg, #10B981 0%, #059669 50%, #14B8A6 100%);
+  /* Simplified Category gradients */
+  --adventure: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+  --coastal: linear-gradient(135deg, #06B6D4 0%, #0284C7 100%);
+  --foodie: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  --heritage: linear-gradient(135deg, #A855F7 0%, #9333EA 100%);
+  --hidden: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+  --culture: linear-gradient(135deg, #10B981 0%, #059669 100%);
 
-  /* Enhanced shadow system */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --shadow-glow: 0 0 20px rgb(139 92 246 / 0.3);
-  --shadow-glow-intense: 0 0 40px rgb(139 92 246 / 0.4), 0 0 80px rgb(139 92 246 / 0.2);
+  /* Clean shadow system */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
 
-  /* Expert Typography Scale - Refined Proportions */
-  --font-size-card-title: clamp(1rem, 3.2vw, 1.25rem);
-  --font-size-card-meta: clamp(0.75rem, 2.2vw, 0.9rem);
-  --font-size-card-body: clamp(0.85rem, 2.6vw, 1rem);
+  /* Simplified Typography Scale */
+  --font-size-card-title: 1.125rem;
+  --font-size-card-meta: 0.875rem;
+  --font-size-card-body: 0.95rem;
   --line-height-tight: 1.25;
   --line-height-relaxed: 1.6;
   --line-height-comfortable: 1.45;
 
-  /* Premium Typography Variables */
-  --letter-spacing-tight: -0.025em;
-  --letter-spacing-normal: -0.01em;
-  --letter-spacing-wide: 0.025em;
+  /* Clean Spacing System */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 4rem;
 
-  /* Enhanced Spacing System - Better Text Breathing Room */
-  --spacing-card-padding: clamp(1rem, 4vw, 1.5rem);
-  --spacing-card-gap: clamp(0.375rem, 1vw, 0.75rem);
-  --spacing-section-gap: clamp(0.5rem, 1.5vw, 1rem);
+  /* Fixed Card Dimensions */
+  --card-width: 280px;
+  --card-height: 400px;
+  --card-width-mobile: 260px;
+  --card-height-mobile: 360px;
 
-  /* Enhanced Card Dimensions - More Compact and Mobile Optimized */
-  --card-width-sm: clamp(9rem, 24vw, 11rem);
-  --card-height-sm: clamp(14rem, 36vw, 17rem);
-  --card-width-md: clamp(11rem, 28vw, 14rem);
-  --card-height-md: clamp(15rem, 38vw, 18rem);
-
-  /* Expert Animation Easing Curves */
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Single Animation Easing */
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-magnetic: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Premium Color Palette */
-  --color-accent-primary: hsl(262, 83%, 58%);
-  --color-accent-secondary: hsl(316, 73%, 52%);
-  --color-accent-tertiary: hsl(213, 94%, 68%);
+  /* Essential Colors */
   --color-text-primary: hsl(0, 0%, 98%);
   --color-text-secondary: hsl(215, 25%, 75%);
   --color-text-muted: hsl(215, 15%, 65%);
-  --color-surface-elevated: hsla(220, 13%, 8%, 0.8);
-  --color-surface-glass: hsla(220, 13%, 15%, 0.4);
 }
 
 @theme inline {
@@ -85,18 +68,11 @@
 
 body {
   background:
-    radial-gradient(circle at 15% 40%, rgba(139, 92, 246, 0.4) 0%, transparent 60%),
-    radial-gradient(circle at 85% 20%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 70% 90%, rgba(59, 130, 246, 0.25) 0%, transparent 55%),
-    radial-gradient(ellipse 150% 100% at 50% 0%, rgba(139, 92, 246, 0.2) 0%, transparent 70%),
-    radial-gradient(ellipse 120% 80% at 20% 100%, rgba(236, 72, 153, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 60% at 80% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
-    linear-gradient(135deg, #0f0c29 0%, #24243e 25%, #2d1b69 50%, #1a1a3e 75%, #0f0c29 100%);
+    radial-gradient(circle at 50% 50%, #1a1a3e 0%, #0f0f23 100%),
+    #0f0f23;
   color: hsl(var(--foreground));
   font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01', 'ss02';
-  font-variant-numeric: oldstyle-nums;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -104,21 +80,27 @@ body {
   position: relative;
 }
 
-/* Enhanced Card System - Optimized for Performance */
+/* Clean Card System */
+.game-card {
+  width: var(--card-width);
+  height: var(--card-height);
+  transition: transform 0.3s var(--ease-smooth);
+}
+
+@media (max-width: 768px) {
+  .game-card {
+    width: var(--card-width-mobile);
+    height: var(--card-height-mobile);
+  }
+}
+
+/* Simple card flip animation */
 .card-flip {
   transform-style: preserve-3d;
-  perspective: 1200px;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  perspective: 1000px;
+  transition: transform 0.6s var(--ease-smooth);
 }
 
-/* Smooth flip transition with spring easing */
-.card-flip.flipping {
-  transition: transform 0.8s var(--ease-smooth);
-}
-
-/* Flipped state - stays flipped */
 .card-flip.flipped {
   transform: rotateY(180deg);
 }
@@ -137,98 +119,45 @@ body {
   transform: rotateY(180deg);
 }
 
-/* Simplified hover effects - prevent glitching */
-.card-flip:not(.flipped):not(.flipping):hover {
-  transform: translateY(-4px) !important;
-  transition: transform 0.2s ease !important;
+/* Simple hover effect */
+.game-card:hover {
+  transform: translateY(-4px);
 }
 
-/* Enhanced Button System */
+/* Clean Button System */
 .btn-magnetic {
   position: relative;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s var(--ease-smooth);
   background: linear-gradient(135deg,
     rgba(139, 92, 246, 0.9) 0%,
     rgba(236, 72, 153, 0.9) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px) saturate(180%);
-}
-
-.btn-magnetic::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.05) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  backdrop-filter: blur(20px);
 }
 
 .btn-magnetic:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow:
-    0 20px 40px rgba(139, 92, 246, 0.3),
-    0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn-magnetic:hover::before {
-  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-magnetic:active {
-  transform: translateY(-1px) scale(1.01);
+  transform: translateY(0);
 }
 
-/* Simplified glow system - no pseudo-elements to prevent conflicts */
-.card-glow {
-  position: relative;
-  transition: box-shadow 0.3s ease;
-}
-
-.card-glow:hover {
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-}
-
-/* Premium shadow system with glass morphism */
+/* Clean shadow system */
 .shadow-elegant {
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 10px 20px rgba(0, 0, 0, 0.2),
-    0 20px 40px rgba(0, 0, 0, 0.15),
-    0 8px 32px -8px rgba(0, 0, 0, 0.18),
-    0 4px 16px -4px rgba(0, 0, 0, 0.12),
-    0 2px 8px -2px rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(255, 255, 255, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-md);
 }
 
 .shadow-elegant-hover {
-  box-shadow:
-    0 32px 64px -12px rgba(0, 0, 0, 0.25),
-    0 20px 32px -8px rgba(0, 0, 0, 0.15),
-    0 12px 20px -6px rgba(0, 0, 0, 0.10),
-    0 0 0 1px rgba(255, 255, 255, 0.10),
-    0 0 40px rgba(139, 92, 246, 0.30),
-    0 0 80px rgba(139, 92, 246, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-lg);
 }
 
 .shadow-elegant-selected {
   box-shadow:
-    0 40px 80px -16px rgba(0, 0, 0, 0.40),
-    0 24px 48px -12px rgba(0, 0, 0, 0.20),
-    0 16px 32px -8px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.15),
-    0 0 60px rgba(251, 191, 36, 0.50),
-    0 0 120px rgba(251, 191, 36, 0.30),
-    0 0 200px rgba(251, 191, 36, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    var(--shadow-lg),
+    0 0 40px rgba(251, 191, 36, 0.3);
 }
 
 /* Glass morphism utilities */
@@ -467,38 +396,16 @@ body {
   /* Disabled to prevent glitching */
 }
 
-/* Force stable rendering - prevent glitching */
-* {
-  -webkit-transform-style: flat !important;
-  transform-style: flat !important;
-  -webkit-backface-visibility: hidden !important;
-  backface-visibility: hidden !important;
-  will-change: auto !important;
-}
-
-/* Only allow 3D transforms on card flip containers */
+/* Clean performance optimizations */
 .card-flip {
-  -webkit-transform-style: preserve-3d !important;
-  transform-style: preserve-3d !important;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
-/* Disable ALL problematic animations that cause flashing and conflicts */
-.animate-float,
-.animate-pulse-glow,
-.animate-shimmer,
-.animate-bounce-subtle,
-.animate-aurora,
-.animate-breathe,
-.animate-gentle-glow,
-.animate-magnetic-hover {
-  animation: none !important;
-  transition: none !important;
-}
-
-/* Simplified hover effects only */
+/* Simple hover effect */
 .animate-magnetic-hover:hover {
-  transform: translateY(-1px) !important;
-  transition: transform 0.2s ease !important;
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
 }
 
 /* Accessibility: Respect reduced motion preferences */
@@ -1067,110 +974,33 @@ button, a, [role="button"] {
    COMPREHENSIVE DESIGN IMPROVEMENTS
    =================================== */
 
-/* Enhanced animated background with mesh gradient */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(at 20% 80%, #5B2C6F 0%, transparent 50%),
-    radial-gradient(at 80% 20%, #1B4F72 0%, transparent 50%),
-    radial-gradient(at 40% 40%, #6C3483 0%, transparent 50%),
-    radial-gradient(at 90% 90%, #2E86AB 0%, transparent 50%);
-  animation: meshMove 20s ease-in-out infinite;
-  z-index: 0;
-  pointer-events: none;
-}
-
-@keyframes meshMove {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-20px, -20px) scale(1.1); }
-  66% { transform: translate(20px, -10px) scale(0.9); }
-}
-
-/* Enhanced mystery card stack effect */
+/* Clean mystery card styling */
 .mystery-card-wrapper {
   position: relative;
-  transform-style: preserve-3d;
-  perspective: 1000px;
 }
 
-.mystery-card-shadow-1,
-.mystery-card-shadow-2 {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  z-index: -1;
-}
-
-.mystery-card-shadow-1 {
-  transform: translateZ(-10px) translateY(6px) scale(0.96);
-  opacity: 0.7;
-}
-
-.mystery-card-shadow-2 {
-  transform: translateZ(-20px) translateY(12px) scale(0.92);
-  opacity: 0.5;
-}
-
-/* Enhanced mystery card styling */
-.mystery-card {
+.mystery-card-premium {
   background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-md);
 }
 
-/* Golden title animation */
+/* Clean golden title */
 .golden-title {
-  background: linear-gradient(
-    135deg,
-    #FFD700 0%,
-    #FFED4B 20%,
-    #FFD700 40%,
-    #FFA500 60%,
-    #FFD700 80%,
-    #FFED4B 100%
-  );
-  background-size: 300% 300%;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: goldShine 3s linear infinite;
-  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
-  letter-spacing: -0.02em;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
 }
 
-@keyframes goldShine {
-  to { background-position: 200% center; }
-}
-
-/* Revealed card glassmorphism enhancement */
+/* Clean revealed card styling */
 .revealed-card-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 184, 217, 0.85) 0%,
-    rgba(0, 119, 182, 0.85) 100%
-  );
+  background: linear-gradient(135deg, rgba(0, 184, 217, 0.9) 0%, rgba(0, 119, 182, 0.9) 100%);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 8px 32px rgba(0, 184, 217, 0.37),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-  margin: 1rem 0;
-  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-md);
   border-radius: 1rem;
-  max-width: 100%;
 }
 
 /* Subtle animated gradient overlay for revealed cards */
@@ -1221,45 +1051,21 @@ body::before {
   filter: drop-shadow(0 0 4px currentColor);
 }
 
-/* Complete Local Secret redesign */
+/* Clean Local Secret styling */
 .local-secret-premium {
   position: relative;
   margin-top: auto;
-  margin-bottom: 0;
   flex-shrink: 0;
-  max-height: clamp(4rem, 15vw, 6rem);
+  border-radius: 0.75rem;
   overflow: hidden;
-}
-
-.local-secret-border {
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
-  border-radius: 0.875rem;
-  opacity: 0.8;
-  animation: goldRotate 8s linear infinite;
-}
-
-@keyframes goldRotate {
-  to {
-    background: linear-gradient(
-      495deg,
-      #FFD700,
-      #FFA500,
-      #FFD700
-    );
-  }
 }
 
 .local-secret-content {
-  position: relative;
   background: linear-gradient(135deg, #FFF8DC 0%, #F5E6A3 100%);
   border-radius: 0.75rem;
-  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem);
+  padding: var(--spacing-sm);
   border: 1px solid rgba(255, 215, 0, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  max-height: 100%;
-  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .local-secret-title {
@@ -1269,20 +1075,13 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .local-secret-text {
   color: #1a1a1a;
   font-weight: 600;
   line-height: 1.4;
-  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.875rem;
 }
 
 /* Modern category pills with micro-interactions */
@@ -1576,309 +1375,27 @@ body::before {
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* Enhanced Local Secret Styling */
-.local-secret-premium {
-  position: relative;
-  margin-top: auto;
-  flex-shrink: 0;
-  border-radius: 0.75rem;
-  overflow: hidden;
-}
-
-.local-secret-border {
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-  border-radius: 0.75rem;
-  opacity: 0.9;
-  animation: subtle-pulse 3s ease-in-out infinite;
-}
-
-@keyframes subtle-pulse {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 1; }
-}
-
-.local-secret-content {
-  position: relative;
-  background: linear-gradient(135deg, #FFF8DC 0%, #F5E6A3 100%);
-  border-radius: 0.625rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  overflow: hidden;
-}
-
-/* Enhanced Mystery Card Shadows */
-.mystery-card-shadow-1,
-.mystery-card-shadow-2 {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0f0f1e 100%);
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  z-index: -1;
-}
-
-.mystery-card-shadow-1 {
-  transform: translateZ(-5px) translateY(4px) scale(0.97);
-  opacity: 0.8;
-}
-
-.mystery-card-shadow-2 {
-  transform: translateZ(-10px) translateY(8px) scale(0.94);
-  opacity: 0.6;
-}
-
-/* Comprehensive Mobile Optimizations */
-@media (max-width: 640px) {
-  .card-fan-item {
-    transform-origin: center center !important;
+/* Clean mobile optimizations */
+@media (max-width: 768px) {
+  .game-card {
+    width: var(--card-width-mobile);
+    height: var(--card-height-mobile);
   }
 
-  .celebration-gradient {
-    margin-top: clamp(15rem, 35vw, 20rem) !important;
-    padding-top: clamp(6rem, 15vw, 10rem) !important;
-  }
-
-  .game-card-selected {
-    margin-bottom: clamp(12rem, 30vw, 16rem) !important;
-  }
-
-  /* Ensure minimum touch targets */
-  .card-interactive,
-  button,
-  [role="button"] {
+  button, [role="button"] {
     min-height: 44px;
     min-width: 44px;
   }
 }
 
-@media (max-width: 480px) {
-  /* Extra small mobile adjustments */
-  .mystery-card-premium {
-    padding: clamp(0.5rem, 2vw, 0.75rem) !important;
-  }
-
-  .local-secret-content {
-    padding: 0.5rem 0.75rem !important;
-    max-height: 3rem !important;
-  }
-}
-
-/* Critical Performance Optimizations */
-.game-card-enhanced,
-.card-fan-item,
-.mystery-card-premium {
-  will-change: transform, opacity, filter;
-  backface-visibility: hidden;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .local-secret-content {
-    background: #FFFFFF !important;
-    color: #000000 !important;
-    border: 2px solid #000000 !important;
-  }
-
-  .text-amber-900 {
-    color: #000000 !important;
-  }
-}
-
-/* Reduced motion support */
+/* Accessibility and reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .golden-title,
-  .celebration-gradient,
-  .revealing-text,
-  .dice,
-  .shimmer-overlay,
-  .card-fan-item,
-  .game-card-enhanced,
-  .subtle-pulse {
-    animation: none !important;
-    transition: none !important;
-  }
-
-  .category-pill-modern::before {
-    transition: none !important;
-  }
-
-  /* Maintain functionality without animations */
-  .card-fan-item:hover,
-  .game-card-enhanced:hover {
-    transform: none !important;
-    filter: brightness(1.1) !important;
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* Improved Local Secret Styling */
-.local-secret-premium {
-  position: relative;
-  margin-top: auto;
-  flex-shrink: 0;
-  border-radius: 0.75rem;
-  overflow: hidden;
-}
 
-.local-secret-border {
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-  border-radius: 0.75rem;
-  opacity: 0.9;
-  animation: subtle-pulse 3s ease-in-out infinite;
-}
 
-@keyframes subtle-pulse {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 1; }
-}
-
-.local-secret-content {
-  position: relative;
-  background: linear-gradient(135deg, #FFF8DC 0%, #F5E6A3 100%);
-  border-radius: 0.625rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  overflow: hidden;
-}
-
-/* Enhanced Mystery Card Shadows */
-.mystery-card-shadow-1,
-.mystery-card-shadow-2 {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0f0f1e 100%);
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  z-index: -1;
-}
-
-.mystery-card-shadow-1 {
-  transform: translateZ(-5px) translateY(4px) scale(0.97);
-  opacity: 0.8;
-}
-
-.mystery-card-shadow-2 {
-  transform: translateZ(-10px) translateY(8px) scale(0.94);
-  opacity: 0.6;
-}
-
-/* Enhanced Card Depth and Polish */
-.shadow-elegant {
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 10px 20px rgba(0, 0, 0, 0.15),
-    0 20px 40px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.shadow-elegant-hover {
-  box-shadow:
-    0 8px 16px rgba(0, 0, 0, 0.15),
-    0 20px 40px rgba(0, 0, 0, 0.2),
-    0 40px 80px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 0 40px rgba(139, 92, 246, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-.shadow-elegant-selected {
-  box-shadow:
-    0 12px 24px rgba(0, 0, 0, 0.2),
-    0 30px 60px rgba(0, 0, 0, 0.25),
-    0 60px 120px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.15),
-    0 0 60px rgba(251, 191, 36, 0.5),
-    0 0 120px rgba(251, 191, 36, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .golden-title,
-  .celebration-gradient,
-  .revealing-text,
-  .dice,
-  .shimmer-overlay,
-  .card-fan-item,
-  .game-card-enhanced {
-    animation: none !important;
-    transition: none !important;
-  }
-
-  .category-pill-modern::before {
-    transition: none !important;
-  }
-}
-
-/* URGENT: Force larger card sizes on mobile for final cards */
-@media (max-width: 640px) {
-  .focus-ring {
-    min-width: 280px !important;
-    min-height: 360px !important;
-    width: 280px !important;
-    height: 360px !important;
-  }
-
-  /* Ensure text scales properly with larger cards */
-  .focus-ring .text-lg {
-    font-size: 1.25rem !important;
-  }
-
-  .focus-ring .text-base {
-    font-size: 1.1rem !important;
-  }
-
-  .focus-ring .text-sm {
-    font-size: 1rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .focus-ring {
-    min-width: 260px !important;
-    min-height: 340px !important;
-    width: 260px !important;
-    height: 340px !important;
-  }
-
-  /* Slightly smaller text for very small screens */
-  .focus-ring .text-lg {
-    font-size: 1.15rem !important;
-  }
-
-  .focus-ring .text-base {
-    font-size: 1rem !important;
-  }
-}
-
-/* Enhanced spacing for larger cards */
-@media (max-width: 640px) {
-  .focus-ring .revealed-card-glass {
-    padding: clamp(1rem, 4vw, 1.5rem) !important;
-  }
-
-  .focus-ring .space-y-3 > * + * {
-    margin-top: 1rem !important;
-  }
-
-  .focus-ring .mb-3 {
-    margin-bottom: 1rem !important;
-  }
-}
-
-/* Ensure proper line heights for readability */
-.focus-ring .leading-tight {
-  line-height: 1.3 !important;
-}
-
-.focus-ring .leading-relaxed {
-  line-height: 1.6 !important;
-}

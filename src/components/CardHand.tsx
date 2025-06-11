@@ -117,27 +117,17 @@ export function CardHand({
         {gamePhase === 'complete' && selectedIndex !== null ? (
           // Final Layout: Selected card prominent, others smaller below
           <div className="flex flex-col items-center max-w-7xl mx-auto px-2 md:px-4">
-            {/* Selected Card Container with Proper Spacing */}
+            {/* Selected Card Container */}
             <motion.div
               layout
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="w-full flex justify-center"
-              style={{
-                marginBottom: 'clamp(10rem, 25vw, 15rem)', // Increased spacing to prevent overlap
-                paddingBottom: 'clamp(4rem, 10vw, 6rem)', // Additional padding
-                overflow: 'visible'
-              }}
+              className="w-full flex justify-center mb-8"
             >
               <motion.div
                 initial={{ scale: 1.05 }}
                 animate={{ scale: 1.0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="relative z-20"
-                style={{
-                  overflow: 'visible',
-                  maxWidth: 'min(400px, 90vw)', // Constrain card width
-                  width: '100%'
-                }}
               >
                 <GameCard
                   activity={cards[selectedIndex]}
@@ -151,7 +141,7 @@ export function CardHand({
               </motion.div>
             </motion.div>
 
-            {/* Success Message with Guaranteed Separation */}
+            {/* Success Message */}
             <motion.div
               initial={{ opacity: 0, y: 30, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -160,13 +150,7 @@ export function CardHand({
                 duration: 0.8,
                 ease: [0.175, 0.885, 0.32, 1.275]
               }}
-              className="text-center w-full relative z-10"
-              style={{
-                marginTop: 'clamp(12rem, 30vw, 18rem)', // Increased spacing for success message
-                marginBottom: 'clamp(4rem, 10vw, 6rem)',
-                paddingTop: 'clamp(5rem, 12vw, 8rem)', // Extra padding
-                clear: 'both'
-              }}
+              className="text-center w-full relative z-10 my-8"
             >
               <motion.h3
                 className="celebration-gradient text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 leading-tight px-4"
@@ -197,19 +181,14 @@ export function CardHand({
               </motion.p>
             </motion.div>
 
-            {/* Other Cards (Enhanced size for better content visibility) */}
+            {/* Other Cards */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}
-              className="text-center w-full px-2"
-              style={{
-                marginTop: 'clamp(3rem, 6vw, 4rem)', // Increased spacing for larger cards
-                paddingTop: 'clamp(1.5rem, 4vw, 2.5rem)',
-                paddingBottom: 'clamp(2rem, 5vw, 3rem)' // Bottom padding for better layout
-              }}
+              className="text-center w-full px-2 mt-6"
             >
-              <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-7xl mx-auto px-4">
+              <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto px-4">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -217,42 +196,27 @@ export function CardHand({
                     <motion.div
                       key={card.id}
                       initial={{
-                        scale: 0.2,
+                        scale: 0.8,
                         opacity: 0,
-                        rotateY: 180,
-                        y: 50,
-                        filter: "blur(4px)"
+                        y: 20
                       }}
                       animate={{
-                        scale: 1.0, // Normal scale since base card is now much larger
+                        scale: 0.8,
                         opacity: 0.9,
-                        rotateY: 0,
-                        y: 0,
-                        filter: "blur(0px)"
+                        y: 0
                       }}
                       transition={{
                         delay: 1.4 + (index * 0.1),
-                        duration: 0.8,
-                        ease: [0.175, 0.885, 0.32, 1.275],
-                        filter: { duration: 0.6 }
+                        duration: 0.6,
+                        ease: "easeOut"
                       }}
-                      className="transform-gpu flex-shrink-0 relative"
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.03)',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        borderRadius: '8px',
-                        padding: '2px'
-                        // Removed size restrictions - let cards be full size
-                      }}
+                      className="transform-gpu"
                       whileHover={{
-                        scale: 1.02, // Subtle hover for larger cards
+                        scale: 0.85,
                         opacity: 1,
-                        y: -6,
-                        rotateX: 1,
-                        filter: "brightness(1.08) saturate(1.08)",
+                        y: -4,
                         transition: {
-                          duration: 0.3,
-                          ease: [0.175, 0.885, 0.32, 1.275]
+                          duration: 0.3
                         }
                       }}
                     >
@@ -272,9 +236,9 @@ export function CardHand({
             </motion.div>
           </div>
         ) : (
-          // Enhanced Initial Layout: 5 cards in premium fan formation
+          // Initial Layout: 5 cards in fan formation
           <motion.div
-            className="flex justify-center items-center max-w-6xl mx-auto px-2 sm:px-4"
+            className="flex justify-center items-center max-w-6xl mx-auto px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -282,68 +246,59 @@ export function CardHand({
             <div
               className="relative flex items-center justify-center"
               style={{
-                minHeight: 'clamp(350px, 60vh, 450px)', // Increased height for better mobile experience
-                paddingBottom: 'clamp(2rem, 8vw, 4rem)' // Bottom padding for thumb reach
+                minHeight: '450px',
+                paddingBottom: '2rem'
               }}
             >
               {cards.map((card, index) => {
-                // Calculate premium fan positioning with mobile optimization
+                // Calculate fan positioning
                 const totalCards = cards.length;
                 const centerIndex = Math.floor(totalCards / 2);
                 const offsetFromCenter = index - centerIndex;
 
-                // Enhanced responsive spacing and rotation
-                const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-                const isTablet = typeof window !== 'undefined' && window.innerWidth < 1024;
-                const xOffset = offsetFromCenter * (isMobile ? 25 : isTablet ? 30 : 40);
-                const rotation = offsetFromCenter * (isMobile ? 2 : isTablet ? 4 : 6);
-                const yOffset = Math.abs(offsetFromCenter) * (isMobile ? 1 : isTablet ? 2 : 3);
+                // Simple responsive spacing and rotation
+                const xOffset = offsetFromCenter * 35;
+                const rotation = offsetFromCenter * 5;
+                const yOffset = Math.abs(offsetFromCenter) * 10;
                 const zIndex = totalCards - Math.abs(offsetFromCenter);
 
                 return (
                   <motion.div
                     key={card.id}
-                    className="absolute card-fan-item"
+                    className="absolute"
                     style={{
-                      zIndex: zIndex,
-                      minHeight: '44px',
-                      minWidth: '44px'
+                      zIndex: zIndex
                     }}
                     initial={{
                       opacity: 0,
-                      scale: 0.7,
-                      x: index * 120,
-                      y: 60,
-                      rotate: 0,
-                      filter: "blur(8px)"
+                      scale: 0.8,
+                      x: index * 60,
+                      y: 30,
+                      rotate: 0
                     }}
                     animate={{
                       opacity: 1,
-                      scale: isMobile ? 1.0 : isTablet ? 0.95 : 0.85, // Enhanced touch targets
+                      scale: 1,
                       x: xOffset,
                       y: yOffset,
-                      rotate: rotation,
-                      filter: "blur(0px)"
+                      rotate: rotation
                     }}
                     transition={{
-                      delay: index * 0.12,
-                      duration: 0.9,
-                      ease: [0.175, 0.885, 0.32, 1.275],
-                      filter: { duration: 0.6 }
+                      delay: index * 0.1,
+                      duration: 0.6,
+                      ease: "easeOut"
                     }}
                     whileHover={{
-                      scale: isMobile ? 1.05 : isTablet ? 1.08 : 1.1,
+                      scale: 1.05,
                       zIndex: 50,
-                      y: yOffset - (isMobile ? 15 : isTablet ? 20 : 25),
+                      y: yOffset - 20,
                       rotate: 0,
-                      filter: "brightness(1.1) saturate(1.1)",
                       transition: {
-                        duration: 0.4,
-                        ease: [0.175, 0.885, 0.32, 1.275]
+                        duration: 0.3
                       }
                     }}
                     whileTap={{
-                      scale: isMobile ? 0.95 : isTablet ? 0.98 : 1.0,
+                      scale: 0.95,
                       transition: { duration: 0.1 }
                     }}
                   >
