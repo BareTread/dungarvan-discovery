@@ -91,7 +91,7 @@ export function CardHand({
                 />
               </motion.div>
 
-              <p className="text-slate-400 mt-8 mb-4">Here's what you didn't choose:</p>
+              <p className="text-slate-400 mt-8 mb-4">Here&apos;s what you didn&apos;t choose:</p>
 
               {/* Other Cards */}
               <div className="flex flex-wrap justify-center items-center gap-4 mt-4 relative z-10">
@@ -136,18 +136,27 @@ export function CardHand({
                   custom={index}
                   variants={cardDropIn}
                   initial="hidden"
-                  animate="visible"
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    x: offsetFromCenter * 40,
+                    rotate: rotation,
+                    zIndex: hoveredIndex === index ? 10 : totalCards - Math.abs(offsetFromCenter),
+                    transition: {
+                      delay: index * 0.1,
+                      duration: 0.5,
+                      ease: [0.175, 0.885, 0.32, 1.275],
+                    },
+                  }}
                   exit={{ opacity: 0, scale: 0.5 }}
                   onHoverStart={() => onHoverCard(index)}
                   onHoverEnd={() => onHoverCard(null)}
                   onClick={() => canSelectCard(index) && onSelectCard(index)}
                   className="absolute cursor-pointer"
-                  style={{ transformOrigin: 'bottom center' }}
-                  animate={{
-                    x: offsetFromCenter * 40,
+                  style={{
+                    transformOrigin: 'bottom center',
                     y: yOffset,
-                    rotate: rotation,
-                    zIndex: hoveredIndex === index ? 10 : totalCards - Math.abs(offsetFromCenter),
                   }}
                   whileHover={{
                     y: yOffset - 20,

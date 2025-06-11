@@ -46,7 +46,7 @@ export function CardDealer() {
           Dungarvan Discovery
         </h1>
         <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-          Discover hidden gems, local secrets, and unforgettable experiences in Ireland's Ancient East.
+          Discover hidden gems, local secrets, and unforgettable experiences in Ireland&apos;s Ancient East.
         </p>
       </motion.header>
 
@@ -66,7 +66,7 @@ export function CardDealer() {
               <div className="text-6xl mb-6 motion-safe:animate-bounce">🎴</div>
               <h2 className="text-3xl font-bold text-white mb-4">Ready for an Adventure?</h2>
               <p className="text-slate-300 mb-8 max-w-md mx-auto text-lg">
-                We'll deal you 5 cards from over 60 amazing experiences. Choose one and let serendipity guide your day!
+                We&apos;ll deal you 5 cards from over 60 amazing experiences. Choose one and let serendipity guide your day!
               </p>
               <Button
                 onClick={dealNewHand}
@@ -127,7 +127,7 @@ export function CardDealer() {
                 onClick={resetGame}
                 variant="outline"
                 size="lg"
-                className="bg-background/50"
+                className="bg-slate-900/50"
                 aria-label="Start over"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
