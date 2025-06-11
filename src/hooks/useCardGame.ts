@@ -60,7 +60,7 @@ export function useCardGame() {
     }
   }, [gameState.gamePhase]);
 
-  const canSelectCard = (index: number): boolean => gameState.gamePhase === 'selecting';
+  const canSelectCard = (_index: number): boolean => gameState.gamePhase === 'selecting';
 
   return {
     gameState, isDealing, hasCards: gameState.dealtCards.length > 0,
