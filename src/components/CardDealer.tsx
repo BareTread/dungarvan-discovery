@@ -47,25 +47,35 @@ export function CardDealer() {
           {!hasCards && gameState.gamePhase === 'welcome' ? (
             <motion.div
               key="welcome"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial="hidden"
+              animate="visible"
               exit={{ opacity: 0, scale: 0.9 }}
-              className="flex flex-col items-center p-8 rounded-xl glass-morphism"
+              variants={{
+                hidden: { opacity: 0, scale: 0.9 },
+                visible: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+                }
+              }}
+              className="flex flex-col items-center p-6 sm:p-8 rounded-xl bg-black/30 backdrop-blur-lg shadow-2xl border border-white/10"
             >
-              <div className="text-6xl mb-6">🎴</div>
-              <h2 className="text-3xl font-bold text-white mb-4">Ready for an Adventure?</h2>
-              <p className="text-slate-300 mb-8 max-w-md mx-auto text-lg">
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-6xl sm:text-7xl mb-6">🎴</motion.div>
+              <motion.h2 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready for an Adventure?</motion.h2>
+              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-slate-200 mb-8 max-w-md mx-auto text-lg sm:text-xl">
                 We&apos;ll deal you 5 cards. Choose one and let serendipity guide your day!
-              </p>
-              <Button
-                onClick={dealNewHand}
-                disabled={isDealing}
-                size="lg"
-                className="font-semibold text-lg"
-              >
-                <Shuffle className={`mr-2 h-5 w-5 ${isDealing ? 'motion-safe:animate-spin' : ''}`} />
-                {isDealing ? 'Dealing...' : 'Deal the Cards'}
-              </Button>
+              </motion.p>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                <Button
+                  onClick={dealNewHand}
+                  disabled={isDealing}
+                  size="lg"
+                  className="font-semibold text-lg px-8 py-3"
+                >
+                  <Shuffle className={`mr-2 h-5 w-5 ${isDealing ? 'motion-safe:animate-spin' : ''}`} />
+                  {isDealing ? 'Dealing...' : 'Deal the Cards'}
+                </Button>
+              </motion.div>
             </motion.div>
           ) : (
             <CardHand

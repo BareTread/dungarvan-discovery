@@ -56,7 +56,7 @@ export function CardHand({ cards, selectedIndex, flipStates, hoveredIndex, onSel
       </AnimatePresence>
 
       <motion.div
-        className="relative h-[450px] w-[800px] flex items-center justify-center"
+        className="relative w-[90%] max-w-[800px] h-[60vh] max-h-[450px] flex items-center justify-center"
         variants={handContainerVariants} initial="initial" animate="animate"
         onAnimationComplete={onDealingComplete}
       >
