@@ -104,7 +104,6 @@ body {
 }
 
 .revealed-card-content {
-  padding: 1.25rem;
   background: var(--gradient);
 }
 
