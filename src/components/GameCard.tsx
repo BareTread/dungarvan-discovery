@@ -207,9 +207,13 @@ export function GameCard({
             }}
           >
             <div className="flex flex-col h-full relative overflow-hidden">
-              {/* Scrollable content area with improved spacing */}
-              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide space-y-1.5 sm:space-y-2 max-h-full"
-                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              {/* Scrollable content area with optimized spacing */}
+              <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide space-y-1 sm:space-y-1.5 max-h-full"
+                   style={{
+                     scrollbarWidth: 'none',
+                     msOverflowStyle: 'none',
+                     paddingBottom: '0.5rem' // Extra bottom padding for content
+                   }}>
                 {/* Subtle background pattern */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none">
                   <div className="absolute inset-0" style={{
@@ -247,9 +251,9 @@ export function GameCard({
                   </div>
                 </motion.div>
 
-                {/* Compact Title */}
+                {/* Enhanced Title */}
                 <motion.h3
-                  className="text-xs sm:text-sm font-bold mb-1.5 leading-tight relative z-10 line-clamp-2 card-text-compact flex-shrink-0"
+                  className="text-sm sm:text-base font-bold mb-1.5 leading-tight relative z-10 line-clamp-2 card-text-compact flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
@@ -257,24 +261,24 @@ export function GameCard({
                   {activity.title}
                 </motion.h3>
 
-                {/* Compact Location & Duration */}
+                {/* Enhanced Location & Duration */}
                 <motion.div
-                  className="text-xs opacity-90 mb-1.5 space-y-1 relative z-10 flex-shrink-0"
+                  className="text-sm opacity-90 mb-1.5 space-y-1 relative z-10 flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                 >
                   <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
                     <span className="text-sm">📍</span>
-                    <span className="font-medium text-xs card-text-tight truncate max-w-32 sm:max-w-40">{activity.location}</span>
+                    <span className="font-medium text-sm card-text-tight truncate max-w-36 sm:max-w-48">{activity.location}</span>
                   </div>
                   <div className="flex items-center gap-1.5 bg-white/10 rounded-md px-2 py-1 backdrop-blur-sm">
                     <span className="text-sm">⏱️</span>
-                    <span className="font-medium text-xs card-text-tight">{formatDuration(activity.duration)}</span>
+                    <span className="font-medium text-sm card-text-tight">{formatDuration(activity.duration)}</span>
                   </div>
                 </motion.div>
 
-                {/* Compact Description with expand/collapse */}
+                {/* Enhanced Description with expand/collapse */}
                 <motion.div
                   className="mb-1.5 sm:mb-2 relative z-10 flex-1 min-h-0"
                   initial={{ opacity: 0, y: 10 }}
@@ -283,16 +287,16 @@ export function GameCard({
                 >
                   <motion.p
                     className={cn(
-                      "text-xs card-text-compact opacity-95 cursor-pointer break-words",
-                      !isDescriptionExpanded && "line-clamp-2"
+                      "text-sm card-text-compact opacity-95 cursor-pointer break-words leading-relaxed",
+                      !isDescriptionExpanded && "line-clamp-3"
                     )}
                     onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
                   >
                     {activity.description}
                   </motion.p>
-                  {activity.description.length > 80 && !isDescriptionExpanded && (
+                  {activity.description.length > 100 && !isDescriptionExpanded && (
                     <motion.button
-                      className="text-xs text-white/60 hover:text-white/80 mt-1 font-medium"
+                      className="text-sm text-white/60 hover:text-white/80 mt-1 font-medium"
                       onClick={() => setIsDescriptionExpanded(true)}
                       whileHover={{ scale: 1.05 }}
                     >
@@ -301,13 +305,16 @@ export function GameCard({
                   )}
                 </motion.div>
 
-                {/* Compact Local Secret */}
+                {/* Enhanced Local Secret */}
                 <motion.div
-                  className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg p-2 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer flex-shrink-0"
+                  className="bg-gradient-to-r from-white/15 to-white/10 rounded-lg p-2.5 backdrop-blur-sm border border-white/20 relative overflow-hidden cursor-pointer flex-shrink-0"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
                   onClick={() => setIsSecretExpanded(!isSecretExpanded)}
+                  style={{
+                    minHeight: '3rem' // Ensure minimum height for content
+                  }}
                 >
                   <div className="flex items-start gap-1.5">
                     <motion.span
@@ -326,11 +333,11 @@ export function GameCard({
                     </motion.span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
-                        <div className="text-xs font-bold text-yellow-300 tracking-wide uppercase">
+                        <div className="text-sm font-bold text-yellow-300 tracking-wide uppercase">
                           Local Secret
                         </div>
                         <motion.span
-                          className="text-yellow-300/70 text-xs flex-shrink-0"
+                          className="text-yellow-300/70 text-sm flex-shrink-0"
                           animate={{ rotate: isSecretExpanded ? 180 : 0 }}
                           transition={{ duration: 0.3 }}
                         >
@@ -339,17 +346,17 @@ export function GameCard({
                       </div>
                       <motion.p
                         className={cn(
-                          "text-xs card-text-compact text-white/95 font-medium break-words",
-                          !isSecretExpanded && "line-clamp-1"
+                          "text-sm card-text-compact text-white/95 font-medium break-words leading-relaxed",
+                          !isSecretExpanded && "line-clamp-2"
                         )}
                         animate={{ opacity: isSecretExpanded ? 1 : 0.9 }}
                         transition={{ duration: 0.3 }}
                       >
                         {activity.localSecret}
                       </motion.p>
-                      {!isSecretExpanded && activity.localSecret.length > 50 && (
+                      {!isSecretExpanded && activity.localSecret.length > 60 && (
                         <motion.div
-                          className="text-xs text-yellow-300/60 mt-0.5 font-medium"
+                          className="text-sm text-yellow-300/60 mt-1 font-medium"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.2 }}

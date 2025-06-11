@@ -197,18 +197,19 @@ export function CardHand({
               </motion.p>
             </motion.div>
 
-            {/* Other Cards (Smaller, in a compact horizontal row) */}
+            {/* Other Cards (Enhanced size for better content visibility) */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}
               className="text-center w-full px-2"
               style={{
-                marginTop: 'clamp(2rem, 5vw, 3rem)', // Additional spacing buffer
-                paddingTop: 'clamp(1rem, 3vw, 2rem)'
+                marginTop: 'clamp(3rem, 6vw, 4rem)', // Increased spacing for larger cards
+                paddingTop: 'clamp(1.5rem, 4vw, 2.5rem)',
+                paddingBottom: 'clamp(2rem, 5vw, 3rem)' // Bottom padding for better layout
               }}
             >
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex gap-1.5 sm:gap-2 md:gap-3 justify-center max-w-5xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 justify-center max-w-6xl mx-auto px-4">
                 {cards.map((card, index) => {
                   if (index === selectedIndex) return null;
 
@@ -223,7 +224,7 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 0.55,
+                        scale: 0.75, // Increased from 0.55 to 0.75 for better content visibility
                         opacity: 0.9,
                         rotateY: 0,
                         y: 0,
@@ -240,13 +241,14 @@ export function CardHand({
                         background: 'rgba(255, 255, 255, 0.03)',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
                         borderRadius: '8px',
-                        padding: '1px',
-                        minWidth: 'clamp(80px, 20vw, 120px)' // Responsive min width
+                        padding: '2px',
+                        minWidth: 'clamp(120px, 25vw, 180px)', // Increased min width for better content fit
+                        minHeight: 'clamp(180px, 35vw, 270px)' // Ensure minimum height
                       }}
                       whileHover={{
-                        scale: 0.6,
+                        scale: 0.85, // Increased hover scale to match new base scale
                         opacity: 1,
-                        y: -4,
+                        y: -6,
                         rotateX: 2,
                         filter: "brightness(1.05) saturate(1.05)",
                         transition: {
