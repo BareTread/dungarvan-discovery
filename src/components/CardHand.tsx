@@ -224,7 +224,7 @@ export function CardHand({
                         filter: "blur(4px)"
                       }}
                       animate={{
-                        scale: 1.0, // Full size - no scaling down for final cards
+                        scale: 1.0, // Normal scale since base card is now much larger
                         opacity: 0.9,
                         rotateY: 0,
                         y: 0,

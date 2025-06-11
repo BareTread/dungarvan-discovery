@@ -1817,3 +1817,22 @@ body::before {
     transition: none !important;
   }
 }
+
+/* URGENT: Force larger card sizes on mobile for final cards */
+@media (max-width: 640px) {
+  .focus-ring {
+    min-width: 280px !important;
+    min-height: 360px !important;
+    width: 280px !important;
+    height: 360px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .focus-ring {
+    min-width: 260px !important;
+    min-height: 340px !important;
+    width: 260px !important;
+    height: 340px !important;
+  }
+}
