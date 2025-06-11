@@ -12,7 +12,7 @@ interface CardHandProps {
   canSelectCard: (index: number) => boolean;
   onSelectCard: (index: number) => void;
   onHoverCard: (index: number | null) => void;
-  gamePhase: 'selecting' | 'revealing' | 'complete';
+  gamePhase: 'welcome' | 'selecting' | 'revealing' | 'complete';
 }
 
 export function CardHand({

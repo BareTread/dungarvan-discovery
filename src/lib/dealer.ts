@@ -12,7 +12,7 @@ export class CardDealer {
       this.reset();
     }
 
-    let availableCards = activities.filter(activity => !this.usedCards.has(activity.id));
+    const availableCards = activities.filter(activity => !this.usedCards.has(activity.id));
 
     // Shuffle the available cards
     availableCards.sort(() => Math.random() - 0.5);
@@ -63,8 +63,17 @@ export function formatDuration(duration: string): string {
   return duration.replace('-', '–');
 }
 
-export const getTimeEmoji = (bestTime?: Activity['bestTime']) => ({ dawn: '🌅', morning: '🌄', afternoon: '☀️', sunset: '🌇', night: '🌙' }[bestTime || ''] || '⏰');
+export const getTimeEmoji = (bestTime?: Activity['bestTime']) => {
+  const emojis = { dawn: '🌅', morning: '🌄', afternoon: '☀️', sunset: '🌇', night: '🌙' };
+  return bestTime ? emojis[bestTime] : '⏰';
+};
 
-export const getDifficultyEmoji = (difficulty?: Activity['difficulty']) => ({ easy: '🟢', moderate: '🟡', challenging: '🔴' }[difficulty || ''] || '⚪️');
+export const getDifficultyEmoji = (difficulty?: Activity['difficulty']) => {
+  const emojis = { easy: '🟢', moderate: '🟡', challenging: '🔴' };
+  return difficulty ? emojis[difficulty] : '⚪️';
+};
 
-export const getCostEmoji = (cost?: Activity['cost']) => ({ free: 'Free', low: '€', medium: '€€', high: '€€€' }[cost || ''] || '');
+export const getCostEmoji = (cost?: Activity['cost']) => {
+  const emojis = { free: 'Free', low: '€', medium: '€€', high: '€€€' };
+  return cost ? emojis[cost] : '';
+};
