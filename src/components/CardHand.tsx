@@ -281,18 +281,24 @@ export function CardHand({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="relative flex items-center justify-center" style={{ minHeight: 'clamp(300px, 50vw, 400px)' }}>
+            <div
+              className="relative flex items-center justify-center"
+              style={{
+                minHeight: 'clamp(350px, 60vh, 450px)', // Increased height for better mobile experience
+                paddingBottom: 'clamp(2rem, 8vw, 4rem)' // Bottom padding for thumb reach
+              }}
+            >
               {cards.map((card, index) => {
-                // Calculate premium fan positioning
+                // Calculate premium fan positioning with mobile optimization
                 const totalCards = cards.length;
                 const centerIndex = Math.floor(totalCards / 2);
                 const offsetFromCenter = index - centerIndex;
 
-                // Enhanced spacing and rotation for premium fan effect
-                const xOffset = offsetFromCenter * 40; // Optimized spacing
-                const rotation = offsetFromCenter * 8; // More pronounced rotation for visual appeal
-                const yOffset = Math.abs(offsetFromCenter) * 4; // Subtle arc effect
-                const zIndex = totalCards - Math.abs(offsetFromCenter); // Center cards higher
+                // Mobile-first responsive spacing and rotation
+                const xOffset = offsetFromCenter * Math.min(40, window?.innerWidth ? window.innerWidth * 0.08 : 40);
+                const rotation = offsetFromCenter * 6; // Reduced rotation for mobile stability
+                const yOffset = Math.abs(offsetFromCenter) * 3; // Reduced for tighter mobile layout
+                const zIndex = totalCards - Math.abs(offsetFromCenter);
 
                 return (
                   <motion.div
@@ -311,7 +317,7 @@ export function CardHand({
                     }}
                     animate={{
                       opacity: 1,
-                      scale: 0.85, // Increased for better touch targets (140px * 0.85 = 119px minimum)
+                      scale: window?.innerWidth && window.innerWidth < 768 ? 0.9 : 0.85, // Larger on mobile for 44px+ touch targets
                       x: xOffset,
                       y: yOffset,
                       rotate: rotation,
@@ -324,15 +330,19 @@ export function CardHand({
                       filter: { duration: 0.6 }
                     }}
                     whileHover={{
-                      scale: 1.1, // Increased hover scale for better interaction feedback
+                      scale: window?.innerWidth && window.innerWidth < 768 ? 1.05 : 1.1, // Optimized hover for mobile
                       zIndex: 50,
-                      y: yOffset - 25,
+                      y: yOffset - (window?.innerWidth && window.innerWidth < 768 ? 15 : 25), // Reduced lift on mobile
                       rotate: 0,
                       filter: "brightness(1.1) saturate(1.1)",
                       transition: {
                         duration: 0.4,
                         ease: [0.175, 0.885, 0.32, 1.275]
                       }
+                    }}
+                    whileTap={{
+                      scale: window?.innerWidth && window.innerWidth < 768 ? 0.95 : 1.0, // Touch feedback
+                      transition: { duration: 0.1 }
                     }}
                   >
                     <GameCard
