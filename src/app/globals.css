@@ -118,7 +118,10 @@ body {
 
 /* Mystery Card Front */
 .mystery-card-front {
-  @apply bg-card border border-card-border rounded-xl shadow-lg;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--card-border));
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   background-image:
     radial-gradient(ellipse 80% 80% at 50% -20%, rgba(139, 92, 246, 0.15), transparent),
     radial-gradient(ellipse 50% 100% at 50% 110%, rgba(236, 72, 153, 0.1), transparent);
@@ -126,31 +129,43 @@ body {
 
 /* Revealed Card Back */
 .revealed-card-back {
-  @apply bg-card/80 border border-card-border/80 rounded-xl shadow-2xl p-4;
+  background-color: hsla(var(--card), 0.8);
+  border: 1px solid hsla(var(--card-border), 0.8);
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 /* Local Secret Section */
 .local-secret {
-  @apply mt-auto p-3 rounded-lg;
+  margin-top: auto;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
   background: linear-gradient(135deg, hsl(46, 100%, 85%), hsl(42, 90%, 75%));
   color: hsl(38, 60%, 20%);
   border: 1px solid hsl(46, 100%, 80%);
 }
 
 .local-secret h3 {
-  @apply font-bold uppercase tracking-wider text-xs;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
   color: hsl(38, 60%, 25%);
 }
 
 .local-secret p {
-  @apply text-sm font-medium leading-snug;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.375;
 }
 
 /* Accessibility: Focus Rings */
 *:focus-visible {
-  @apply outline-none ring-2 ring-offset-2 ring-ring ring-offset-background;
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--background));
   border-radius: var(--radius);
 }
 
