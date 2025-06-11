@@ -10,7 +10,9 @@ export function CardDealer() {
   const {
     gameState,
     dealNewHand,
+    finishDealing,
     selectCard,
+    finishRevealing,
     resetGame,
     setHoveredCard,
     canSelectCard,
@@ -75,6 +77,8 @@ export function CardDealer() {
               onSelectCard={selectCard}
               onHoverCard={setHoveredCard}
               gamePhase={gameState.gamePhase}
+              onDealingComplete={finishDealing}
+              onRevealComplete={finishRevealing}
             />
           )}
         </AnimatePresence>

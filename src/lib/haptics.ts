@@ -2,7 +2,7 @@
  * Haptic feedback utilities for enhanced mobile experience
  */
 
-export type HapticPattern = 'light' | 'medium' | 'heavy' | 'selection' | 'impact' | 'notification';
+export type HapticPattern = 'light' | 'medium' | 'heavy' | 'selection' | 'impact' | 'notification' | 'success';
 
 // Extend Navigator interface for haptic feedback
 interface NavigatorWithHaptics extends Navigator {
@@ -42,6 +42,9 @@ export function triggerHaptic(pattern: HapticPattern = 'light'): void {
         case 'notification':
           nav.hapticFeedback.notificationOccurred('success');
           break;
+        case 'success':
+          nav.hapticFeedback.notificationOccurred('success');
+          break;
         default:
           nav.hapticFeedback.impactOccurred('light');
       }
@@ -59,6 +62,7 @@ export function triggerHaptic(pattern: HapticPattern = 'light'): void {
     selection: [10, 10, 10],
     impact: 30,
     notification: [50, 50, 50],
+    success: [50, 50, 50],
   };
 
   try {
